@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-theme.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-forms.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
+    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.css">
 
     <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
 
@@ -70,6 +71,7 @@
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-api.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/jquery.validate.min.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-login.js"></script>
+<script src="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.js"></script>
 
 
 <!-- Imported scripts on this page -->
@@ -85,5 +87,7 @@
 <!-- Demo Settings -->
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-demo.js"></script>
 
+  @yield('js')  
+    @stack('js')
 </body>
 </html>

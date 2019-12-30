@@ -49,13 +49,13 @@
                     </a>
                 </li>
                 <li class="has-sub">
-                    <a href="index.html">
+                    <a href="#">
                         <i class="entypo-tools"></i>
                         <span class="title">Master ACL</span>
                     </a>
                     <ul>
                         <li>
-                            <a href="index.html">
+                            <a href="{{url('/user')}}">
                                 <span class="title">Users</span>
                             </a>
                         </li>
