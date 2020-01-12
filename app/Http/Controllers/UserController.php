@@ -22,11 +22,11 @@ class UserController extends Controller
 
     protected function view($view, $data = [])
     {
-     return view($this->viewDir.".".$view, $data);
- }
+       return view($this->viewDir.".".$view, $data);
+   }
 
- public function index()
- {
+   public function index()
+   {
         //
     return $this->view('index');
 }

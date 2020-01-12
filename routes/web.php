@@ -51,3 +51,6 @@ Route::resource('data', 'DataController');
 Route::get('user/load-data','UserController@loadData');
 Route::resource('user', 'UserController');
 
+Route::get('permission/load-data','PermissionController@loadData');
+Route::resource('permission', 'PermissionController');
+
