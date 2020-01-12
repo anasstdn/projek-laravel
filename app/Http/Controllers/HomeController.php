@@ -35,6 +35,7 @@ class HomeController extends Controller
     public function loadData()
     {
        $GLOBALS['nomor']=\Request::input('start',1)+1;
+       $tahun=\Request::input('tahun');
        // $dataList = RawDatum::select(\DB::raw('MONTH(tgl_transaksi) as bulan,sum(pasir) as pasir, sum(gendol) as gendol, sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
        // ->whereYear('tgl_transaksi',date('2019'))
        // ->groupBy('bulan')
@@ -63,11 +64,11 @@ class HomeController extends Controller
 
     })
 
-     ->addColumn('jan',function($data){
+     ->addColumn('jan',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',1)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -76,11 +77,11 @@ class HomeController extends Controller
         return null;
     }
     })
-    ->addColumn('feb',function($data){
+    ->addColumn('feb',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',2)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -89,11 +90,11 @@ class HomeController extends Controller
         return null;
     }
     })
-    ->addColumn('mar',function($data){
+    ->addColumn('mar',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',3)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -102,11 +103,11 @@ class HomeController extends Controller
         return null;
     }
     })
-     ->addColumn('apr',function($data){
+     ->addColumn('apr',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',4)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -115,11 +116,11 @@ class HomeController extends Controller
         return null;
     }
     })
-     ->addColumn('mei',function($data){
+     ->addColumn('mei',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',5)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -128,11 +129,11 @@ class HomeController extends Controller
         return null;
     }
 })
-      ->addColumn('jun',function($data){
+      ->addColumn('jun',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',6)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -141,11 +142,11 @@ class HomeController extends Controller
         return null;
     }
 })
-       ->addColumn('jul',function($data){
+       ->addColumn('jul',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',7)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -154,11 +155,11 @@ class HomeController extends Controller
         return null;
     }
 })
-        ->addColumn('aug',function($data){
+        ->addColumn('aug',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',8)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -167,11 +168,11 @@ class HomeController extends Controller
         return null;
     }
 })
-         ->addColumn('sep',function($data){
+         ->addColumn('sep',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',9)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -180,11 +181,11 @@ class HomeController extends Controller
         return null;
     }
 })
-          ->addColumn('okt',function($data){
+          ->addColumn('okt',function($data) use($tahun){ 
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',10)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -193,11 +194,11 @@ class HomeController extends Controller
         return null;
     }
 })
-           ->addColumn('nov',function($data){
+           ->addColumn('nov',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',11)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
@@ -206,11 +207,11 @@ class HomeController extends Controller
         return null;
     }
 })
-            ->addColumn('des',function($data){
+            ->addColumn('des',function($data) use($tahun){
       if(isset($data)){
         $jum=RawDatum::select(\DB::raw('sum('.$data.') as total'))
         ->whereMonth('tgl_transaksi',12)
-        ->whereYear('tgl_transaksi',date('2019'))
+        ->whereYear('tgl_transaksi',$tahun)
         ->first();
         // dd($jum);
         $total=isset($jum) && !empty($jum->total)?$jum->total:0;
