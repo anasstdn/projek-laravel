@@ -36,6 +36,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home/load-data','HomeController@loadData');
+Route::resource('home', 'HomeController');
 
 // Auth::routes();
 

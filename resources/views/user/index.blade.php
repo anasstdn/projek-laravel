@@ -3,58 +3,58 @@
 @section('content')
 {{-- {{dd('aaaa')}} --}}
 {{-- <div class="container"> --}}
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-gradient" data-collapsed="0">
-                <div class="panel-heading">
-                    <div class="panel-title">Users</div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-gradient" data-collapsed="0">
+        <div class="panel-heading">
+          <div class="panel-title">Users</div>
 
-                    <div class="panel-options">
-                        <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
-                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                        <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                        <a href="#" data-rel="close"><i class="entypo-cancel"></i></a>
-                    </div>
-                </div>
+          <div class="panel-options">
+            <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+            <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+            <a href="#" data-rel="close"><i class="entypo-cancel"></i></a>
+          </div>
+        </div>
 
-                <div class="panel-body">
-                    <div class="panel-body">
-                       <table class="table table-bordered datatable" id="table-1">
+        <div class="panel-body">
+          <div class="panel-body">
+           <table class="table table-bordered datatable" id="table-1">
             <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Verified</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Verified</th>
+              </tr>
             </thead>
             
-        </table>
-               </div>
-           </div>
-       </div>
-   </div>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{-- </div> --}}
 @endsection
 
 @push('js')
 <script>
-      var user;
-    $(document).ready(function(){
-            user=$('#table-1').DataTable({
-        stateSave: true,
-        processing : true,
-        serverSide : true,
+  var user;
+  $(document).ready(function(){
+    user=$('#table-1').DataTable({
+      stateSave: true,
+      processing : true,
+      serverSide : true,
         // pageLength:20,
-      ajax : {
-                url:"{{ url('user/load-data') }}",
-                data: function (d) {
+        ajax : {
+          url:"{{ url('user/load-data') }}",
+          data: function (d) {
 
-        }
-            },
-      columns: [
+          }
+        },
+        columns: [
         { data: 'nomor', name: 'nomor',searchable:false,orderable:false },
         { data: 'username', name: 'username' },
         { data: 'name', name: 'name' },
@@ -88,10 +88,10 @@
           lengthMenu: "_MENU_",
           search: "_INPUT_",
           paginate : {
-              first :     '{{ "<" }}' ,
-              last :      '{{ ">" }}' ,
-              next :      '{{ ">>" }}',
-              previous :  '{{ "<<" }}'
+            first :     '{{ "<" }}' ,
+            last :      '{{ ">" }}' ,
+            next :      '{{ ">>" }}',
+            previous :  '{{ "<<" }}'
           }
         },
         aoColumnDefs: [{
@@ -102,8 +102,8 @@
         aLengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
         // sDom: '<"dt-panelmenu clearfix"Bfr>t<"dt-panelfooter clearfix"ip>',
         // buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
-    });
-    });
+      });
+  });
 
 </script>
 @endpush
