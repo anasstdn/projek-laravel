@@ -9,6 +9,9 @@ use DataTables;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Schema;
 use App\Models\RawDatum;
+use DatePeriod;
+use DateTime;
+use DateInterval;
 
 class HomeController extends Controller
 {
@@ -30,6 +33,63 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function getChart()
+    {
+        $tahun=\Request::input('tahun',null);
+        $dates = getDatesFromRange(''.$tahun.'-01-01', ''.$tahun.'-12-31');
+        $arr_pasir=[];
+        $arr_gendol=[];
+        $arr_abu=[];
+        $arr_split2=[];
+        $arr_split1=[];
+        $arr_lpa=[];
+        foreach($dates as $a)
+        {
+           $sum=RawDatum::select(\DB::raw('sum(pasir) as pasir'))
+        ->where('tgl_transaksi',$a)->first();
+        
+        array_push($arr_pasir,(isset($sum->pasir) && $sum->pasir!==null)?$sum->pasir:0);
+
+        $sum1=RawDatum::select(\DB::raw('sum(gendol) as gendol'))
+        ->where('tgl_transaksi',$a)->first(); 
+
+        array_push($arr_gendol,(isset($sum1->gendol) && $sum1->gendol!==null)?$sum1->gendol:0);
+
+        $sum2=RawDatum::select(\DB::raw('sum(abu) as abu'))
+        ->where('tgl_transaksi',$a)->first(); 
+
+        array_push($arr_abu,(isset($sum2->abu) && $sum2->abu!==null)?$sum2->abu:0);
+
+         $sum3=RawDatum::select(\DB::raw('sum(split2_3) as split2_3'))
+        ->where('tgl_transaksi',$a)->first(); 
+
+        array_push($arr_split2,(isset($sum3->split2_3) && $sum3->split2_3!==null)?$sum3->split2_3:0);
+
+         $sum4=RawDatum::select(\DB::raw('sum(split1_2) as split1_2'))
+        ->where('tgl_transaksi',$a)->first(); 
+
+        array_push($arr_split1,(isset($sum4->split1_2) && $sum4->split1_2!==null)?$sum4->split1_2:0);
+
+        $sum5=RawDatum::select(\DB::raw('sum(lpa) as lpa'))
+        ->where('tgl_transaksi',$a)->first(); 
+
+        array_push($arr_lpa,(isset($sum5->lpa) && $sum5->lpa!==null)?$sum5->lpa:0);
+        }
+        
+        $data=array(
+            'dates'=>$dates,
+            'pasir'=>$arr_pasir,
+            'gendol'=>$arr_gendol,
+            'abu'=>$arr_abu,
+            'split2'=>$arr_split2,
+            'split1'=>$arr_split1,
+            'lpa'=>$arr_lpa,
+        );
+        // dd($data);
+        echo json_encode($data);
+        // return \Response::json($data);
     }
 
     public function loadData()
