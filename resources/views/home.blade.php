@@ -234,7 +234,8 @@
             fontFamily : "arial"
         },
         axisX: {
-        valueFormatString: "MMM YYYY"
+        valueFormatString: "MMM YYYY",
+        maximum:new Date(parseInt($('#tahun').val()),11,31)
     },
     toolTip: {
         shared: true
@@ -309,7 +310,7 @@
     ]
     });
     chart.render();
-    updateChart();
+    // updateChart();
     });
   }
 
