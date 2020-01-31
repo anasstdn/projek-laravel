@@ -75,7 +75,7 @@
                     <h3>Invalid login</h3>
                     <p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
                 </div>
-
+               
                 {{-- <form method="post" role="form" id="form_login"> --}}
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}

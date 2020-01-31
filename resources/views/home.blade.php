@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+  .ajax-loader{
+    position:fixed;
+    top:0px;
+    right:0px;
+    width:100%;
+    height:auto;
+    background-color:#A9A9A9;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:10000000;
+    opacity: 0.7;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+  }
+
+</style>
 {{-- <div class="container"> --}}
   {{--   <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -27,6 +43,17 @@
             </div>
         </div>
     </div> --}}
+     <div class="ajax-loader">
+                    <div class="col-md-12">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                {{-- <span class="sr-only">40% Complete (success)</span> --}}
+                            </div>
+                        </div> 
+                        <div id="status" style="font-size:8pt;font-family: sans-serif;color: white">Loading...Please Wait</div>  
+                    </div>
+                </div>
+
     <div class="row">
             <div class="col-sm-12">
                 <div class="well">
@@ -186,7 +213,7 @@
         // buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
       });
 
-    $('#tahun').on('change',function(){
+    $('#tahun').bind('click change',function(){
         tahun.ajax.reload(null,false);
         graph();
     })
@@ -200,34 +227,40 @@
   function graph()
   {
 
-    $.getJSON("{{url('home/get-chart')}}",{tahun:$('#tahun').val()}, function(data) { 
-        // $.each(data, function(key, value){
-            // console.log(new Date(2019,01,01));
-            // console.log(data);
-            for(i=0;i<data.dates.length;i++)
-            {
-                // console.log(data.dates[1]);
-                // console.log(data.pasir[1]);
-                // var d=;
-                // console.log(parseInt(value[i].slice(0,4))); 
-                // console.log(parseInt(value[0].slice(5,7))); 
-                // console.log(parseInt(value[0].slice(8,10))); 
-                // console.log(value[i]);
-                dataPoints.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.pasir[i]});
+      $('.ajax-loader').fadeIn();
+    $("#status").html("Loading...Please Wait!");
+    $.ajax({
+      url: '{{url('home/get-chart')}}',
+      type: 'GET',
+      data: {tahun:$('#tahun').val()},
+      xhr: function () {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress",
+          uploadProgressHandler,
+          false
+          );
+        xhr.addEventListener("load", loadHandler, false);
+        xhr.addEventListener("error", errorHandler, false);
+        xhr.addEventListener("abort", abortHandler, false);
 
-                dataPoints1.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.gendol[i]});
+        return xhr;
+      },
+      success:function(data){
+        for(i=0;i<data.dates.length;i++)
+        {
+            dataPoints.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.pasir[i]});
 
-                dataPoints2.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.abu[i]});
+            dataPoints1.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.gendol[i]});
 
-                 dataPoints3.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split2[i]});
+            dataPoints2.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.abu[i]});
 
-                 dataPoints4.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split1[i]});
+            dataPoints3.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split2[i]});
 
-                  dataPoints5.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.lpa[i]});
+            dataPoints4.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split1[i]});
 
-            }
-        // });
+            dataPoints5.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.lpa[i]});
 
+        }
         chart = new CanvasJS.Chart("chartContainer",{
         title:{
             text:"Grafik Penjualan Tahun "+$('#tahun').val()+"",
@@ -311,7 +344,38 @@
     });
     chart.render();
     // updateChart();
+      },
+      error:function (xhr, status, error){
+        alert(xhr.responseText);
+      },
     });
+
+  }
+
+  function uploadProgressHandler(event) {
+    // $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
+    var percent = (event.loaded / event.total) * 100;
+    var progress = Math.round(percent);
+    $("#percent").html(progress + "%");
+    $(".progress-bar").css("width", progress + "%");
+    $("#status").html(progress + "% uploaded... please wait");
+  }
+
+  function loadHandler(event) {
+    $("#status").html('Load Completed');
+    setTimeout(function(){
+      $('.ajax-loader').fadeOut()
+      $("#percent").html("0%");
+      $(".progress-bar").css("width", "100%");
+    }, 500);
+  }
+
+  function errorHandler(event) {
+    $("#status").html("Upload Failed");
+  }
+
+  function abortHandler(event) {
+    $("#status").html("Upload Aborted");
   }
 
   function updateChart() {

@@ -88,7 +88,8 @@ class HomeController extends Controller
             'lpa'=>$arr_lpa,
         );
         // dd($data);
-        echo json_encode($data);
+        // echo json_encode($data);
+        return \Response::json($data);  
         // return \Response::json($data);
     }
 
