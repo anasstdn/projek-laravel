@@ -12,6 +12,7 @@ use App\Models\RawDatum;
 use DatePeriod;
 use DateTime;
 use DateInterval;
+date_default_timezone_set("Asia/Jakarta");
 
 class HomeController extends Controller
 {

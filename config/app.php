@@ -167,6 +167,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Pusher\Laravel\PusherServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -177,7 +178,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -232,6 +233,7 @@ return [
         'Laratrust' => Laratrust\LaratrustFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Pusher' => Pusher\Laravel\Facades\Pusher::class
 
     ],
 

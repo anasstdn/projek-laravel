@@ -54,106 +54,44 @@
 		<ul class="user-info pull-left pull-right-xs pull-none-xsm">
 			
 			<!-- Raw Notifications -->
-					{{-- <li class="notifications dropdown">
+{{-- 				 <li class="notifications dropdown dropdown-notifications">
+                    <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                        <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
+                    </a>
+
+                    <div class="dropdown-container">
+                        <div class="dropdown-toolbar">
+                            <div class="dropdown-toolbar-actions">
+                                <a href="#">Mark all as read</a>
+                            </div>
+                            <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
+                        </div>
+                        <ul class="dropdown-menu-list scroller">
+                        </ul> --}}
+{{--                         <div class="dropdown-footer text-center">
+                            <a href="#">View All</a>
+                        </div> --}}
+  {{--                   </div>
+                </li>
+ --}}
+                	<li class="notifications dropdown">
 		
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<i class="entypo-attention"></i>
-							<span class="badge badge-info">6</span>
+							<i  data-count="0" class="entypo-attention"></i>
+							<span class="badge badge-info">0</span>
 						</a>
 		
 						<ul class="dropdown-menu">
 							<li class="top">
 								<p class="small">
 									<a href="#" class="pull-right">Mark all Read</a>
-									You have <strong>3</strong> new notifications.
+									You have <strong class="info">0</strong> new notifications.
 								</p>
 							</li>
 							
 							<li>
 								<ul class="dropdown-menu-list scroller">
-									<li class="unread notification-success">
-										<a href="#">
-											<i class="entypo-user-add pull-right"></i>
-											
-											<span class="line">
-												<strong>New user registered</strong>
-											</span>
-											
-											<span class="line small">
-												30 seconds ago
-											</span>
-										</a>
-									</li>
-									
-									<li class="unread notification-secondary">
-										<a href="#">
-											<i class="entypo-heart pull-right"></i>
-											
-											<span class="line">
-												<strong>Someone special liked this</strong>
-											</span>
-											
-											<span class="line small">
-												2 minutes ago
-											</span>
-										</a>
-									</li>
-									
-									<li class="notification-primary">
-										<a href="#">
-											<i class="entypo-user pull-right"></i>
-											
-											<span class="line">
-												<strong>Privacy settings have been changed</strong>
-											</span>
-											
-											<span class="line small">
-												3 hours ago
-											</span>
-										</a>
-									</li>
-									
-									<li class="notification-danger">
-										<a href="#">
-											<i class="entypo-cancel-circled pull-right"></i>
-											
-											<span class="line">
-												John cancelled the event
-											</span>
-											
-											<span class="line small">
-												9 hours ago
-											</span>
-										</a>
-									</li>
-									
-									<li class="notification-info">
-										<a href="#">
-											<i class="entypo-info pull-right"></i>
-											
-											<span class="line">
-												The server is status is stable
-											</span>
-											
-											<span class="line small">
-												yesterday at 10:30am
-											</span>
-										</a>
-									</li>
-									
-									<li class="notification-warning">
-										<a href="#">
-											<i class="entypo-rss pull-right"></i>
-											
-											<span class="line">
-												New comments waiting approval
-											</span>
-											
-											<span class="line small">
-												last week
-											</span>
-										</a>
-									</li>
+	
 								</ul>
 							</li>
 							
@@ -162,7 +100,7 @@
 							</li>
 						</ul>
 		
-					</li> --}}
+					</li>
 					
 					<!-- Message Notifications -->
 					{{-- <li class="notifications dropdown">

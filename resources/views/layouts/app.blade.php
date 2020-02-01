@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.css">
 
     <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://skywalkapps.github.io/bootstrap-notifications/stylesheets/bootstrap-notifications.css">
 
     <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     
@@ -74,6 +75,7 @@
 <script src="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.js"></script>
 
 
+
 <!-- Imported scripts on this page -->
     <script src="{{asset('neon/')}}/html/neon/assets/js/fileinput.js"></script>
     <script src="{{asset('neon/')}}/html/neon/assets/js/dropzone/dropzone.js"></script>
@@ -86,6 +88,65 @@
 
 <!-- Demo Settings -->
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-demo.js"></script>
+<script src="{{asset('js/')}}/moment.js"></script>
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+
+<script type="text/javascript">
+    var notificationsWrapper   = $('.notifications');
+    var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+    var notificationsCountElem = notificationsToggle.find('i[data-count]');
+    var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+    var notifications          = notificationsWrapper.find('ul.dropdown-menu-list');
+
+
+    // Enable pusher logging - don't include this in production
+     Pusher.logToConsole = true;
+
+    var pusher = new Pusher('985705c222cb4b13a227', {
+        cluster: 'ap3',
+        forceTLS: true
+    });
+
+    // Subscribe to the channel we specified in our Laravel Event
+    var channel = pusher.subscribe('{{Auth::user()->id}}');
+
+    // Bind a function to a Event (the full Laravel class)
+    channel.bind('send-message', function(data) {
+        console.log(data);
+        var existingNotifications = notifications.html();
+        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+        var newNotificationHtml = `
+          <li class="notification-info">
+          <a href="#">
+          <i class="pull-right"><img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="25x25" style="width: 25px; height: 25px;"></i>
+
+          <span class="line">
+          `+data.title+`
+          </span>
+
+          <span class="line small">
+          `+data.content+`
+          </span>
+          </a>
+          </li>
+        `;
+        notifications.html(newNotificationHtml + existingNotifications);
+
+        notificationsCount += 1;
+        notificationsCountElem.attr('data-count', notificationsCount);
+        notificationsWrapper.find('.info').text(notificationsCount);
+        notificationsWrapper.find('.badge-info').text(notificationsCount);
+        notificationsWrapper.show();
+    });
+
+    function dateToHowManyAgo(stringDate){
+        var dateTime = new Date(stringDate);
+        const timestamp = moment(dateTime, 'ddd MMM DD YYYY HH:mm:ss GMT Z').fromNow();
+        return timestamp;
+}
+
+
+</script>
 
   @yield('js')  
     @stack('js')

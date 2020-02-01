@@ -24,6 +24,13 @@
 
 Route::get('/user/verify/{token}','Auth\RegisterController@verifyUser');
 
+Route::get('/send', 'SendMessageController@index')->name('send');
+Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMessage');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
     // return view('welcome');
     if (Auth::check()) {

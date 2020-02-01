@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <style>
   .ajax-loader{
     position:fixed;
@@ -143,7 +144,7 @@
 @endsection
 
 @push('js')
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <script>
   var tahun;
       let i;
