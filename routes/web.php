@@ -42,10 +42,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('home/load-data','HomeController@loadData');
-Route::get('home/get-chart','HomeController@getChart');
-Route::resource('home', 'HomeController');
+Route::group( ['prefix'=>'home','middleware' => ['role:superadministrator|administrator']], function() {
+	Route::get('/', 'HomeController@index');
+	Route::get('/load-data','HomeController@loadData');
+	Route::get('/get-chart','HomeController@getChart');
+	Route::get('/get-notif', 'HomeController@getNotif');
+	Route::resource('home', 'HomeController');
+});
 
 // Auth::routes();
 
@@ -55,6 +58,9 @@ Route::resource('home', 'HomeController');
 Route::get('downloadData/{type}', 'DataController@downloadData');
 Route::post('data-importData', 'DataController@importData');
 Route::resource('data', 'DataController');
+
+Route::get('peramalan/forecast', 'PeramalanController@forecasting');
+Route::resource('peramalan', 'PeramalanController');
 
 
 

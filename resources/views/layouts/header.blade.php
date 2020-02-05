@@ -77,8 +77,7 @@
                 	<li class="notifications dropdown">
 		
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<i  data-count="0" class="entypo-attention"></i>
-							<span class="badge badge-info">0</span>
+							<i  data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
 						</a>
 		
 						<ul class="dropdown-menu">
@@ -363,14 +362,14 @@
 					<li class="sep"></li>
 					
 					
-					<li>
+	{{-- 				<li>
 						<a href="#" data-toggle="chat" data-collapse-sidebar="1">
 							<i class="entypo-chat"></i>
 							Chat
 							
 							<span class="badge badge-success chat-notifications-badge is-hidden">0</span>
 						</a>
-					</li>
+					</li> --}}
 					
 					<li class="sep"></li>
 					

@@ -3,12 +3,14 @@
 return [
     'role_structure' => [
         'superadministrator' => [
+            'home' => 'r',
             'users' => 'c,r,u,d',
             'acl' => 'c,r,u,d',
             'profile' => 'r,u',
             'data' => 'c,r,u,d',
         ],
         'administrator' => [
+            'home' => 'r',
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],

@@ -128,5 +128,5 @@ class PermissionController extends Controller
                // })
                ->make(true);
        }
-    }
+    
 }

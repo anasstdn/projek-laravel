@@ -71,6 +71,12 @@
                         </li>
                     </ul>
                 </li>
+                    <li>
+                    <a href="{{url('/peramalan')}}">
+                        <i class="entypo-chart-line"></i>
+                        <span class="title">Peramalan</span>
+                    </a>
+                </li>
                 
             </li>
         </ul>

@@ -12,6 +12,9 @@ use App\Models\RawDatum;
 use DatePeriod;
 use DateTime;
 use DateInterval;
+
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 date_default_timezone_set("Asia/Jakarta");
 
 class HomeController extends Controller
@@ -24,6 +27,10 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:read-home', ['only' => ['index','create','loadData','getNotif','getChart']]);
+        // $this->middleware('permission:home-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:home-update', ['only' => ['edit','update']]);
+        // $this->middleware('permission:home-delete', ['only' => ['delete']]);
     }
 
     /**
@@ -312,5 +319,13 @@ class HomeController extends Controller
 
      ->make(true);
  }
+
+  public function getNotif()
+  {
+    $get=Notification::where('user_id',Auth::user()->id)->get();
+    $data=array('data'=>$get);
+    // echo json_encode($data);
+     return \Response::json($data);  
+  }
 
 }

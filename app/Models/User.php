@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $remember_token
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * 
+ * @property Collection|Notification[] $notifications
  *
  * @package App\Models
  */
@@ -45,4 +48,9 @@ class User extends Model
 		'verified',
 		'remember_token'
 	];
+
+	public function notifications()
+	{
+		return $this->hasMany(Notification::class);
+	}
 }
