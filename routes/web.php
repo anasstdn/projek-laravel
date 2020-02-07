@@ -65,7 +65,14 @@ Route::resource('peramalan', 'PeramalanController');
 
 
 Route::get('user/load-data','UserController@loadData');
-Route::resource('user', 'UserController');
+Route::get('user/json','UserController@json');
+Route::get('user/activate/{id}','UserController@activate');
+Route::get('user/update/{id}','UserController@update');
+Route::get('user/deactivate/{id}','UserController@deactivate');
+Route::get('user/{id}/reset','UserController@reset');
+Route::resource('user','UserController');
+Route::delete('user/{id}/restore','UserController@restore');
+
 
 Route::get('permission/load-data','PermissionController@loadData');
 Route::resource('permission', 'PermissionController');

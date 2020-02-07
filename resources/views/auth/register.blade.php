@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-theme.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-forms.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
+    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/skins/green.css">
 
     <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
 

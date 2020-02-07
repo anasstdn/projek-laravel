@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-forms.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.css">
+    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/skins/green.css">
 
     <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://skywalkapps.github.io/bootstrap-notifications/stylesheets/bootstrap-notifications.css">
@@ -66,13 +67,13 @@
 <!-- Bottom scripts (common) -->
 <script src="{{asset('neon/')}}/html/neon/assets/js/gsap/TweenMax.min.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+<script src="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/bootstrap.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/joinable.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/resizeable.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-api.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/jquery.validate.min.js"></script>
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-login.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.js"></script>
 
 
 
@@ -203,6 +204,19 @@ $(document).ready(function(){
 
 
 
+</script>
+<script type="text/javascript">
+function show_modal(url) { // clear error string
+    $.ajax({
+      url:url,
+      dataType: 'text',
+      success: function(data) {
+        $("#formModal").html(data);
+        $("#formModal").modal('show');
+        // todo:  add the html to the dom...
+    }
+});
+};
 </script>
 
   @yield('js')  

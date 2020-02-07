@@ -33,4 +33,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\verifyUser');
     }
+
+    public function pk(){
+      return $this->{$this->primaryKey};
+    }
 }

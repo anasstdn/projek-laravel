@@ -10,7 +10,7 @@
                         <img src="{{asset('neon/')}}/html/neon/assets/images/logo@2x.png" width="120" alt="" />
                     </a> --}}
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <p style="font-size:20pt">{{ config('app.name', 'Laravel') }}</p>
+                        <p style="font-size:20pt;color:white">{{ config('app.name', 'Laravel') }}</p>
                     </a>
                 </div>
 

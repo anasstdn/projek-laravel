@@ -8,7 +8,6 @@
       <div class="panel panel-gradient" data-collapsed="0">
         <div class="panel-heading">
           <div class="panel-title">Users</div>
-
           <div class="panel-options">
             <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
             <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
@@ -27,6 +26,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Verified</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             
@@ -36,6 +36,8 @@
     </div>
   </div>
 </div>
+ <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
+ </div>
 {{-- </div> --}}
 @endsection
 
@@ -74,7 +76,7 @@
         // { data: 'password', name: 'password' },
         // { data: 'remember_token', name: 'remember_token' },
         // { data: 'created_at', name: 'created_at' },
-        // { data: 'action', name: 'action', orderable: false, searchable: false },
+        { data: 'action', name: 'action', orderable: false, searchable: false },
         ],
         language: {
           lengthMenu : '{{ "Menampilkan _MENU_ data" }}',
@@ -104,6 +106,7 @@
         // buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
       });
   });
+
 
 </script>
 @endpush
