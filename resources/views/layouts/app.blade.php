@@ -36,6 +36,61 @@
 
 
 </head>
+    <style>
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #4CAF50;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+
+</style>
 <body class="page-body page-fade gray" data-url="http://neon.dev">
 
 <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
@@ -78,9 +133,11 @@
 
 
 <!-- Imported scripts on this page -->
+    <script src="{{asset('neon/')}}/html/neon/assets/js/toastr.js"></script>
     <script src="{{asset('neon/')}}/html/neon/assets/js/fileinput.js"></script>
     <script src="{{asset('neon/')}}/html/neon/assets/js/dropzone/dropzone.js"></script>
     <script src="{{asset('neon/')}}/html/neon/assets/js/neon-chat.js"></script>
+    <script src="{{asset('neon/')}}/html/neon/assets/js/icheck/icheck.min.js"></script>
 
 
 <!-- JavaScripts initializations and stuff -->
@@ -217,6 +274,75 @@ function show_modal(url) { // clear error string
     }
 });
 };
+
+function toastr_notif(message,type)
+{
+    if(type=='sukses')
+    {
+        var opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        
+        toastr.success(message, "Berhasil", opts);
+    }
+    else
+    {
+        var opts = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        toastr.warning(message, 'Peringatan', opts);
+    }
+}
+
+function uploadProgressHandler(event) {
+    // $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
+    var percent = (event.loaded / event.total) * 100;
+    var progress = Math.round(percent);
+    $("#percent").html(progress + "%");
+    $(".progress-bar").css("width", progress + "%");
+    $("#status").html(progress + "% uploaded... please wait");
+}
+
+function loadHandler(event) {
+    $("#status").html('Load Completed');
+    setTimeout(function(){
+      $('.ajax-loader').fadeOut()
+      $("#percent").html("0%");
+      $(".progress-bar").css("width", "100%");
+  }, 500);
+}
+
+function errorHandler(event) {
+    $("#status").html("Send Data Failed");
+}
+
+function abortHandler(event) {
+    $("#status").html("Send Data Aborted");
+}
+
 </script>
 
   @yield('js')  

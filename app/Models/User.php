@@ -53,4 +53,8 @@ class User extends Model
 	{
 		return $this->hasMany(Notification::class);
 	}
+
+	  public function roleUser(){
+        return $this->hasOne('App\Models\RoleUser','user_id');
+    }
 }

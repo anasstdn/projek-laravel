@@ -48,6 +48,8 @@ class UserController extends Controller
     public function create()
     {
         //
+      $role=\App\Role::select(\DB::raw("*"))->get();
+      return $this->view('form',compact('role'));
     }
 
     /**
@@ -82,7 +84,8 @@ class UserController extends Controller
     {
         //
         $user=User::find($id);
-        return $this->view('form',compact('user'));
+        $role=\App\Role::select(\DB::raw("*"))->get();
+        return $this->view('form',compact('user','role'));
     }
 
     /**
@@ -179,5 +182,187 @@ class UserController extends Controller
 
        ->make(true);
    }
+
+   public function cekUsername(Request $request)
+   {
+    $all_data=$request->all();
+    // dd($all_data['mode']);
+    switch($all_data['mode'])
+    {
+      case 'add':
+      $cek_username=User::where('username','like','%'.$all_data['username'].'%')->first();
+      break;
+      case 'edit':
+      $cek_username=User::where(function($q) use ($all_data){
+        $q->where('username','like','%'.$all_data['username'].'%')
+        ->where('id','<>',$all_data['id']);
+      })
+      ->first();
+      break;
+    }
+    // dd($cek_username);
+    if($cek_username==true)
+    {
+      $data=array(
+        'status'=>false,
+        'msg'=>'Username sudah digunakan user lain'
+      );
+    }
+    else
+    {
+      $data=array('status'=>true,
+      'msg'=>'Username tersedia'
+    );
+    }
+
+    return \Response::json($data);
+   }
+
+    public function cekEmail(Request $request)
+   {
+    $all_data=$request->all();
+    // dd($all_data['mode']);
+    switch($all_data['mode'])
+    {
+      case 'add':
+      $cek_username=User::where('email','like','%'.$all_data['email'].'%')->first();
+      break;
+      case 'edit':
+      $cek_username=User::where(function($q) use ($all_data){
+        $q->where('email','like','%'.$all_data['email'].'%')
+        ->where('id','<>',$all_data['id']);
+      })
+      ->first();
+      break;
+    }
+    // dd($cek_username);
+    if($cek_username==true)
+    {
+      $data=array(
+        'status'=>false,
+        'msg'=>'Email sudah digunakan user lain'
+      );
+    }
+    else
+    {
+      $data=array('status'=>true,
+      'msg'=>'Email tersedia'
+    );
+    }
+
+    return \Response::json($data);
+   }
+
+   public function sendData(Request $request)
+   {
+    $all_data=$request->all();
+    // dd($all_data);
+    DB::beginTransaction();
+    try {
+      switch($all_data['mode'])
+      {
+        case 'add':
+            $user  = array(
+             'name' =>$all_data['nama'] ,
+             'username' =>$all_data['username'] ,
+             'email' =>$all_data['email'] ,
+             'password' =>bcrypt($all_data['password']) ,
+                   // 'jenis_kelamin' =>isset($all_data['jenis_kelamin'])?$all_data['jenis_kelamin']:'' ,
+             'jenis_kelamin' =>'L' ,
+             'verified'=>$all_data['verified'],
+           );
+
+            $user=User::create($user);
+
+            $role=array(
+             'role_id'=>intval($all_data['roles']),
+             'user_id'=>$user->id,
+             'user_type'=>'App\User'
+            );
+
+            // dd($role);
+
+            $roleUser = DB::table('role_user')->insert($role);
+
+            if($user==true && $roleUser==true)
+            {
+              $data=array(
+                'status'=>true,
+                'msg'=>'Data berhasil disimpan'
+              );
+            }
+            else
+            {
+               $data=array(
+                'status'=>false,
+                'msg'=>'Data gagal disimpan'
+              );
+            }
+        break;
+        case 'edit':
+            $user=User::find($all_data['id']);
+            // dd($all_data);
+            if(!empty($all_data['password']))
+            {
+                $dataUser  = array(
+                 'name' =>$all_data['nama'] ,
+                 'username' =>$all_data['username'] ,
+                 'email' =>$all_data['email'] ,
+                 'password' =>bcrypt($all_data['password']) ,
+                       // 'jenis_kelamin' =>isset($all_data['jenis_kelamin'])?$all_data['jenis_kelamin']:'' ,
+                 'jenis_kelamin' =>'L' ,
+                 'verified'=>$all_data['verified'],
+               );
+            }
+            else
+            {
+                $dataUser  = array(
+                 'name' =>$all_data['nama'] ,
+                 'username' =>$all_data['username'] ,
+                 'email' =>$all_data['email'] ,
+                 // 'password' =>bcrypt($all_data['password']) ,
+                       // 'jenis_kelamin' =>isset($all_data['jenis_kelamin'])?$all_data['jenis_kelamin']:'' ,
+                 'jenis_kelamin' =>'L' ,
+                 'verified'=>$all_data['verified'],
+               );
+            }
+            $act=$user->update($dataUser);
+
+            $delRoleUser=RoleUser::where('user_id',$all_data['id'])->forceDelete();
+
+            $role=array(
+             'role_id'=>intval($all_data['roles']),
+             'user_id'=>$user->id,
+             'user_type'=>'App\User'
+            );
+
+            // dd($role);
+
+            $roleUser = DB::table('role_user')->insert($role);
+
+            if($user==true && $roleUser==true)
+            {
+              $data=array(
+                'status'=>true,
+                'msg'=>'Data berhasil diupdate'
+              );
+            }
+            else
+            {
+               $data=array(
+                'status'=>false,
+                'msg'=>'Data gagal disimpan'
+              );
+            }
+        break;
+      }
+     
+    } catch (Exception $e) {
+      echo 'Message' .$e->getMessage();
+      DB::rollback();
+    }
+    DB::commit();
+    return \Response::json($data);
+  }
     
 }

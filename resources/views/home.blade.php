@@ -381,28 +381,28 @@
 
   function updateChart() {
    $.getJSON("{{url('home/get-chart')}}",{tahun:$('#tahun').val()}, function(data) {
-           for(i=0;i<data.dates.length;i++)
-            {
-                // console.log(data.dates[1]);
-                // console.log(data.pasir[1]);
-                // var d=;
-                // console.log(parseInt(value[i].slice(0,4))); 
-                // console.log(parseInt(value[0].slice(5,7))); 
-                // console.log(parseInt(value[0].slice(8,10))); 
-                // console.log(value[i]);
-                dataPoints.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.pasir[i]});
+       for(i=0;i<data.dates.length;i++)
+        {
+            // console.log(data.dates[1]);
+            // console.log(data.pasir[1]);
+            // var d=;
+            // console.log(parseInt(value[i].slice(0,4))); 
+            // console.log(parseInt(value[0].slice(5,7))); 
+            // console.log(parseInt(value[0].slice(8,10))); 
+            // console.log(value[i]);
+            dataPoints.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.pasir[i]});
 
-                dataPoints1.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.gendol[i]});
+            dataPoints1.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.gendol[i]});
 
-                dataPoints2.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.abu[i]});
+            dataPoints2.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.abu[i]});
 
-                 dataPoints3.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split2[i]});
+             dataPoints3.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split2[i]});
 
-                 dataPoints4.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split1[i]});
+             dataPoints4.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.split1[i]});
 
-                  dataPoints5.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.lpa[i]});
+              dataPoints5.push({x:new Date(parseInt(data.dates[i].slice(0,4)),parseInt(data.dates[i].slice(5,7))-1,parseInt(data.dates[i].slice(8,10))),y:data.lpa[i]});
 
-            }
+        }
       chart.render();
       setTimeout(function(){updateChart()}, 500);
    });

@@ -70,6 +70,9 @@ Route::get('user/activate/{id}','UserController@activate');
 Route::get('user/update/{id}','UserController@update');
 Route::get('user/deactivate/{id}','UserController@deactivate');
 Route::get('user/{id}/reset','UserController@reset');
+Route::match(['get','post'],'user/cek-username','UserController@cekUsername');
+Route::match(['get','post'],'user/cek-email','UserController@cekEmail');
+Route::match(['get','post'],'user/send-data','UserController@sendData');
 Route::resource('user','UserController');
 Route::delete('user/{id}/restore','UserController@restore');
 

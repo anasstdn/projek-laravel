@@ -40,17 +40,23 @@ class PeramalanController extends Controller
     public function forecasting()
     {
     	$date_from=date('2019-01-02');
-    	$date_to=date('2019-01-20');
-    	$data_penjualan=RawDatum::select(DB::raw('tgl_transaksi,sum(pasir) as pasir,sum(gendol) as gendol,sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
+    	$date_to=date('2019-06-20');
+    	$data_penjualan=RawDatum::select(DB::raw('WEEK(tgl_transaksi) as minggu,sum(pasir) as pasir,sum(gendol) as gendol,sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
     	->where('tgl_transaksi','>=',$date_from)
     	->where('tgl_transaksi','<=',$date_to)
-    	->groupby('tgl_transaksi')
+    	// ->groupby('tgl_transaksi')
+        ->groupBy(DB::raw('WEEK(tgl_transaksi)'))
     	->get();
+        // dd($data_penjualan);
 
-    	$periode=$this->getPeriode($date_from,$date_to);
-    	$total=$this->getTotal($periode,$data_penjualan);
-    	$result=$this->arrses($data_penjualan,$periode,$total,$date_to);
-    	dd($result);
+        $minggu=$this->week_between_two_dates($date_from,$date_to);
+        // dd($minggu);
+
+    	// $periode=$this->getPeriode($date_from,$date_to);
+    	$total=$this->getTotal($minggu,$data_penjualan);
+        // dd($total);
+    	$result=$this->arrses($data_penjualan,$minggu,$total,$date_to);
+        dd($result);
     }
 
     private function arrses($data_penjualan,$periode,$total,$date_to)
@@ -111,7 +117,7 @@ class PeramalanController extends Controller
         			'percentage_error'          => $PE[$bestBetaIndex][$i]
         		];
         	} else {
-        		$nextPeriode = date('Y-m-d', strtotime("+1 day", strtotime(date($date_to))));
+        		$nextPeriode = date('W', strtotime("+1 week", strtotime(date($date_to))));
         		$hasil[$i] = [
         			'periode'                   => $nextPeriode,
         			'aktual'                    => 0,
@@ -127,13 +133,27 @@ class PeramalanController extends Controller
         return $hasil;
     }
 
+
+    public static function week_between_two_dates($start_date, $end_date)
+    {
+           $p = new DatePeriod(
+            new DateTime($start_date), 
+            new DateInterval('P1W'), 
+            new DateTime($end_date)
+        );
+           foreach ($p as $w) {
+            $minggu[]=$w->format('W');
+        }
+        return $minggu;
+    }
+
     public static function getTotal($periode,$data)
     {
         $array = array();
         for($i=0; $i<count($periode); $i++) {
             for($j=0; $j<count($data); $j++) {
-            	// dd($data[$j]['tgl_transaksi']);
-                if($periode[$i] == Carbon::parse($data[$j]['tgl_transaksi'])->format('Y-m-d')){
+            	// dd($data[$j]['minggu']+1);
+                if($periode[$i] == ($data[$j]['minggu']+1)){
                     $array[$i] = floatval($data[$j]['abu']);
                     break;
                 }else{
