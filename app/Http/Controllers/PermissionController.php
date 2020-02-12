@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Datatables;
+use DataTables;
 use Carbon\Carbon;
 
 class PermissionController extends Controller
@@ -107,17 +107,31 @@ class PermissionController extends Controller
                ->addColumn('nomor',function($kategori){
                    return $GLOBALS['nomor']++;
                })
-                 ->addColumn('created_at',function($data){
-          if(isset($data->created_at)){
-            $tanggal=Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at);
-        // dd($tanggal->format('d-m-Y'));
-            return $tanggal->format('d-m-Y');
-                //   return $data->tanggal_lahir;
-          }else{
-            return null;
-          }
-        })
-               // ->addColumn('action', function ($data) {
+
+               ->addColumn('name',function($data){
+                if(isset($data->name)){
+                  return $data->name;
+                }else{
+                  return null;
+                }
+              })
+
+               ->addColumn('display_name',function($data){
+                if(isset($data->display_name)){
+                  return $data->display_name;
+                }else{
+                  return null;
+                }
+              })
+
+                 ->addColumn('description',function($data){
+                if(isset($data->description)){
+                  return $data->description;
+                }else{
+                  return null;
+                }
+              })
+   // ->addColumn('action', function ($data) {
                //     $edit=url("permission/".$data->pk())."/edit";
                //     $delete=url("permission/".$data->pk());
                //   $content = '';

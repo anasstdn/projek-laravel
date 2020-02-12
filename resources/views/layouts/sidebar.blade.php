@@ -10,7 +10,8 @@
                         <img src="{{asset('neon/')}}/html/neon/assets/images/logo@2x.png" width="120" alt="" />
                     </a> --}}
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <p style="font-size:20pt;color:white">{{ config('app.name', 'Laravel') }}</p>
+                        {{-- <p style="font-size:20pt;color:white">{{ config('app.name', 'Laravel') }}</p> --}}
+                        <p style="font-size:20pt;color:white">Laravel</p>
                     </a>
                 </div>
 
@@ -60,7 +61,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="dashboard-2.html">
+                            <a href="{{url('/permission')}}">
                                 <span class="title">Permissions</span>
                             </a>
                         </li>

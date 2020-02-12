@@ -109,7 +109,70 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+      $data=array(
+        'id'=>$id,
+        'url'=>url('user/delete'),
+      );
+      return view('delete-view',$data);
     }
+
+    public function delete(Request $request)
+    {
+      $all_data=$request->all();
+      // dd($all_data);
+      $user=User::find($all_data['id']);
+      $act=false;
+      try {
+       $act=$user->forceDelete();
+       $delRoleUser=RoleUser::where('user_id',$all_data['id'])->forceDelete();
+     } catch (\Exception $e) {
+       $user=User::find($user->pk());
+       $act=$user->delete();
+       $delRoleUser=RoleUser::where('user_id',$all_data['id'])->delete();
+     }
+
+       if($act==true && $delRoleUser==true)
+       {
+          $data=array(
+            'status'=>true,
+            'msg'=>'Data berhasil dihapus'
+          );
+       }
+       else
+       {
+          $data=array(
+            'status'=>false,
+            'msg'=>'Data gagal dihapus'
+          );
+       }
+
+       return \Response::json($data);
+   }
+
+   public function reset(Request $request, $kode)
+   {
+      $user=User::find($kode);
+
+      $dat=array(
+        'password'=>bcrypt('12345678'),
+      );
+
+      $reset=$user->update($dat);
+
+      if($reset==true)
+      {
+          $data=array('status'=>true,
+            'msg'=>'Password berhasil direset'
+        );
+      }
+      else
+      {
+          $data=array('status'=>false,
+            'msg'=>'Password gagal direset'
+        );
+      }
+      echo json_encode($data);
+   }
 
 
     public function loadData()
@@ -169,12 +232,12 @@ class UserController extends Controller
     })
        ->addColumn('action', function ($data) use ($config) {
         $edit=url("user/".$data->id)."/edit";
-         $delete=url("user/".$data->id);
+         $delete=url("user/".$data->id)."/destroy";
          $reset=url("user/".$data->id)."/reset";
          $content = '';
     
           $content .= "<a onclick='show_modal(\"$edit\")' class='btn btn-xs btn-primary' data-toggle='tooltip' data-original-title='Edit' title='Edit'><i class='entypo-pencil' aria-hidden='true'></i>Edit</a>";
-          $content .= " <a onclick='hapus(\"$delete\")' class='btn btn-xs btn-danger' data-toggle='tooltip' data-original-title='Remove' title='Remove'><i class='entypo-trash' aria-hidden='true'></i>Delete</a>";
+          $content .= " <a onclick='delete_data(\"$delete\")' class='btn btn-xs btn-danger' data-toggle='tooltip' data-original-title='Remove' title='Remove'><i class='entypo-trash' aria-hidden='true'></i>Delete</a>";
           $content .= " <a onclick='reset(\"$reset\")' class='btn btn-xs btn-orange' data-toggle='tooltip' data-original-title='Reset Password' title='Reset Password'><i class='entypo-arrows-ccw' aria-hidden='true'></i>Reset Password</a>";
       
       return $content;

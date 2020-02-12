@@ -10,7 +10,7 @@
 
     <link rel="icon" href="{{asset('neon/')}}/html/neon/assets/images/favicon.ico">
 
-    <title>Laravel 5.5 Project</title>
+    <title>Laravel Forecast</title>
 
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/font-icons/entypo/css/entypo.css">
@@ -107,11 +107,11 @@
         
         <!-- lets do some work here... -->
         <!-- Footer -->
-        {{-- <footer class="main">
+        <footer class="main">
             
-            &copy; 2015 <strong>Neon</strong> Admin Theme by <a href="http://laborator.co" target="_blank">Laborator</a>
+            <center>Laravel Forecast <strong>v.1.0.0</strong> by Anas Setyadin<br/><strong>Copyright &copy; 2020</strong></center>
         
-        </footer> --}}
+        </footer>
     </div>
 
     
@@ -270,6 +270,18 @@ function show_modal(url) { // clear error string
       success: function(data) {
         $("#formModal").html(data);
         $("#formModal").modal('show');
+        // todo:  add the html to the dom...
+    }
+});
+};
+
+function delete_data(url) { // clear error string
+    $.ajax({
+      url:url,
+      dataType: 'text',
+      success: function(data) {
+        $("#formModal1").html(data);
+        $("#formModal1").modal('show');
         // todo:  add the html to the dom...
     }
 });

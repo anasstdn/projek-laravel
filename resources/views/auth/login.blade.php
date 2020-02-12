@@ -50,7 +50,7 @@
 
                 <a href="#" class="logo">
                     {{-- <img src="{{asset('neon/')}}/html/neon/assets/images/logo@2x.png" width="120" alt="" /> --}}
-                    <p style="font-size:20pt">Laravel</p>
+                    <p style="font-size:20pt">Laravel Forecast</p>
                 </a>
 
                 {{-- <p class="description">Dear user, log in to access the admin area!</p> --}}
