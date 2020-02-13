@@ -22,7 +22,9 @@ class RoleController extends Controller
     public function __construct()
     {
     	$this->middleware('auth');
-    	// $this->middleware('permission:read-roles');
+    	$this->middleware('permission:read-role', ['only' => ['index','loadData']]);
+    	$this->middleware('permission:create-role', ['only' => ['hakmenus','createpermissionrole']]);
+    	$this->middleware('permission:update-role', ['only' => ['hakmenus','createpermissionrole']]);
     }
 
     public function index()

@@ -52,8 +52,7 @@
           </div>
         </div>
 
-        <div class="panel-body">
-          
+        <div class="panel-body">        
           <div class="panel-body">
             <div class="table-responsive">
            <table class="table table-bordered datatable" id="table-1">

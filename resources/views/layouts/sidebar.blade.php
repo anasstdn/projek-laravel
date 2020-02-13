@@ -36,19 +36,23 @@
             <ul id="main-menu" class="main-menu">
                 <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                 <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                
+                @if(\Auth::user()->can('read-home-menu'))
                 <li>
                     <a href="{{url('/home')}}">
                         <i class="entypo-home"></i>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
+                @endif
+                @if(\Auth::user()->can('read-data-menu'))
                  <li>
                     <a href="{{url('/data')}}">
                         <i class="entypo-database"></i>
                         <span class="title">Import / Export from DB</span>
                     </a>
                 </li>
+                @endif
+                @if(\Auth::user()->can('read-acl-menu'))
                 <li class="has-sub">
                     <a href="#">
                         <i class="entypo-tools"></i>
@@ -72,12 +76,14 @@
                         </li>
                     </ul>
                 </li>
-                    <li>
+                @endif
+           
+             {{--        <li>
                     <a href="{{url('/peramalan')}}">
                         <i class="entypo-chart-line"></i>
                         <span class="title">Peramalan</span>
                     </a>
-                </li>
+                </li> --}}
                 
             </li>
         </ul>
