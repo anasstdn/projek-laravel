@@ -8,6 +8,8 @@ return [
             'acl' => 'c,r,u,d',
             'profile' => 'r,u',
             'data' => 'c,r,u,d',
+            'user' => 'c,r,u,d',
+            'permission' => 'r',
         ],
         'administrator' => [
             'home' => 'r',

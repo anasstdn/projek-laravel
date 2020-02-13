@@ -24,6 +24,12 @@ class PermissionController extends Controller
        return view($this->viewDir.".".$view, $data);
    }
 
+   public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:read-permission', ['only' => ['index','loadData']]);
+    }
+
     public function index()
     {
         //

@@ -83,3 +83,11 @@ Route::get('permission/load-data','PermissionController@loadData');
 Route::resource('permission','PermissionController');
 Route::delete('permission/{id}/restore','PermissionController@restore');
 
+Route::post('role/createpermissionrole', ['as' => 'role.createpermissionrole', 'uses' => 'RoleController@createpermissionrole']);
+
+Route::get('role/load-data', 'RoleController@loadData');
+Route::get('permission-role/get/{id}/menu', 'RoleController@hakmenus');
+Route::get('role/permission-role/get/{id}/menu', 'RoleController@hakmenus');
+Route::resource('role', 'RoleController');
+Route::delete('role/{id}/restore', 'RoleController@restore');
+

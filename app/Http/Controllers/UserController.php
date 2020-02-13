@@ -28,10 +28,10 @@ class UserController extends Controller
    public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('permission:read-home', ['only' => ['index','create','loadData','getNotif','getChart']]);
-        // $this->middleware('permission:home-create', ['only' => ['create','store']]);
-        // $this->middleware('permission:home-update', ['only' => ['edit','update']]);
-        // $this->middleware('permission:home-delete', ['only' => ['delete']]);
+        $this->middleware('permission:read-user', ['only' => ['index','loadData']]);
+        $this->middleware('permission:create-user', ['only' => ['create','sendData','cekUsername','cekEmail']]);
+        $this->middleware('permission:update-user', ['only' => ['edit','sendData','cekUsername','cekEmail','reset']]);
+        $this->middleware('permission:delete-user', ['only' => ['destroy','delete']]);
     }
 
    public function index()

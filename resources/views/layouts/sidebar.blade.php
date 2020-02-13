@@ -66,7 +66,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="dashboard-3.html">
+                            <a href="{{url('/role')}}">
                                 <span class="title">Roles</span>
                             </a>
                         </li>

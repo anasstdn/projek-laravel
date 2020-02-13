@@ -109,7 +109,7 @@
         <!-- Footer -->
         <footer class="main">
             
-            <center>Laravel Forecast <strong>v.1.0.0</strong> by Anas Setyadin<br/><strong>Copyright &copy; 2020</strong></center>
+            <center>Laravel Forecast <strong>v.1.0.2</strong> by Anas Setyadin<br/><strong>Copyright &copy; 2020</strong></center>
         
         </footer>
     </div>
@@ -263,6 +263,20 @@ $(document).ready(function(){
 
 </script>
 <script type="text/javascript">
+
+  @if ($errors->any())
+      @foreach ($errors->all() as $error)
+      toastr_notif("{!! $error !!}","gagal");
+      @endforeach
+      @endif
+      @if(Session::get('messageType'))
+      toastr_notif("{!! Session::get('message') !!}","{!! Session::get('messageType') !!}");
+      <?php
+      Session::forget('messageType');
+      Session::forget('message');
+      ?>
+  @endif
+
 function show_modal(url) { // clear error string
     $.ajax({
       url:url,
@@ -286,6 +300,18 @@ function delete_data(url) { // clear error string
     }
 });
 };
+
+// function notification( message,type ) {
+//   if( type == 'success' ) {
+//         toastr.success(message,'<i>Success</i>');
+//     } else if( type == 'error' ) {
+//         toastr.error(message,'error');
+//     } else if( type == 'warning' ) {
+//         toastr.warning(message,'Warning');
+//     } else {
+//         toastr.info(message,'Information');
+//     }
+// };
 
 function toastr_notif(message,type)
 {

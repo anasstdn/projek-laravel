@@ -10,7 +10,7 @@
 
     <link rel="icon" href="{{asset('neon/')}}/html/neon/assets/images/favicon.ico">
 
-    <title>Laravel 5.5 Project</title>
+    <title>Laravel Forecast</title>
 
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/font-icons/entypo/css/entypo.css">
