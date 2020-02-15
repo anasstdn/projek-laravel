@@ -14,12 +14,14 @@ return [
                 'user' => 'c,r,u,d',
                 'permission' => 'r',
                 'role'=>'c,r,u',
+            'peramalan-menu'=>'r',
         ],
         'administrator' => [
             'home-menu'=>'r',
                 'home' => 'r',
             'data-menu'=>'r',
                 'data' => 'c,r,u,d',
+            'peramalan-menu'=>'r',
             // 'users' => 'c,r,u,d',
             // 'profile' => 'r,u'
         ],
@@ -31,6 +33,7 @@ return [
         'manager'=>[
             'home-menu'=>'r',
                 'home' => 'r',
+            'peramalan-menu'=>'r',
             // 'data-menu'=>'r',
             //     'data' => 'c,r,u,d',
         ],

@@ -32,12 +32,19 @@ class PeramalanController extends Controller
         // $this->middleware('permission:home-delete', ['only' => ['delete']]);
     }
 
+    public $viewDir = "forecast";
+
+    protected function view($view, $data = [])
+    {
+       return view($this->viewDir.".".$view, $data);
+   }
+
     public function index()
     {
-    	 return view('forecast/index');
+    	 return $this->view('index');
     }
 
-    public function forecasting()
+    public function forecastingArrses(Request $request)
     {
     	$date_from=date('2019-01-02');
     	$date_to=date('2019-06-20');
@@ -56,7 +63,8 @@ class PeramalanController extends Controller
     	$total=$this->getTotal($minggu,$data_penjualan);
         // dd($total);
     	$result=$this->arrses($data_penjualan,$minggu,$total,$date_to);
-        dd($result);
+        
+        return \Response::json($result); 
     }
 
     private function arrses($data_penjualan,$periode,$total,$date_to)
@@ -133,6 +141,99 @@ class PeramalanController extends Controller
         return $hasil;
     }
 
+    public function forecastingDes(Request $request)
+    {
+        $date_from=date('2019-01-02');
+        $date_to=date('2019-06-20');
+        $data_penjualan=RawDatum::select(DB::raw('WEEK(tgl_transaksi) as minggu,sum(pasir) as pasir,sum(gendol) as gendol,sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
+        ->where('tgl_transaksi','>=',$date_from)
+        ->where('tgl_transaksi','<=',$date_to)
+        // ->groupby('tgl_transaksi')
+        ->groupBy(DB::raw('WEEK(tgl_transaksi)'))
+        ->get();
+        // dd($data_penjualan);
+
+        $minggu=$this->week_between_two_dates($date_from,$date_to);
+        // dd($minggu);
+
+        // $periode=$this->getPeriode($date_from,$date_to);
+        $total=$this->getTotal($minggu,$data_penjualan);
+        // dd($total);
+        $result=$this->des($data_penjualan,$minggu,$total,$date_to);
+        // dd($result);
+        return \Response::json($result); 
+    }
+
+    private function des($data_penjualan,$periode,$total,$date_to)
+    {
+        // dd($total);
+        $no = 0;
+        $data = array();
+        $jumlah = 0;
+        $perediksiData = array();
+        $prediksi=array();
+
+        $raw=array();
+
+        $m = 0;
+        $n = 0;
+
+        foreach($periode as $i => $minggu)
+        {
+            $data=array(
+                'minggu'=>$i+1,
+                'total'=>$total[$i],
+            );
+            array_push($raw,$data);
+        }
+
+        $a = 0.5;
+        $xt = $raw[0]['total'];
+        $s1lalu = 0;
+        $s2lalu = 0;
+        $priode = 0;
+
+        foreach($raw as $i => $val)
+        {
+            if($i==0)
+            {
+                $s1=$val['total'];
+                $s2=$val['total'];
+            }
+            else
+            {
+                $s1 = ($a * $val['total']) + ((1-$a) * $s1lalu);
+                $s2 = ($a * $s1) + ((1-$a) * $s2lalu);
+            }
+
+            $nilaiA = (2 * $s1) - $s2;
+            $nilaiB = ($a / (1-$a)) * ($s1-$s2);
+
+            $prediksi = $nilaiA + $nilaiB;
+
+            $data=array(
+                'minggu'=>$periode[$i],
+                'aktual'=>$val['total'],
+                'prediksi'=>$prediksi,
+                's1'=>$s1,
+                's2'=>$s2,
+                's1lalu'=>$s1lalu,
+                's2lalu'=>$s2lalu,
+                'nilaiA'=>$nilaiA,
+                'nilaiB'=>$nilaiB,
+            );
+
+            array_push($perediksiData,$data);
+            if (!empty($total[$i])) {
+                $xt = $total[$i];
+                $s1lalu = $s1;
+                $s2lalu = $s2;
+            }
+        }
+        // dd($perediksiData);
+        return $perediksiData;
+    }
+
 
     public static function week_between_two_dates($start_date, $end_date)
     {
@@ -186,8 +287,4 @@ class PeramalanController extends Controller
         return $array;
     }
 
-    private function des()
-    {
-
-    }
 }

@@ -77,14 +77,14 @@
                     </ul>
                 </li>
                 @endif
-           
-             {{--        <li>
+                @if(\Auth::user()->can('read-peramalan-menu'))
+                <li>
                     <a href="{{url('/peramalan')}}">
                         <i class="entypo-chart-line"></i>
                         <span class="title">Peramalan</span>
                     </a>
-                </li> --}}
-                
+                </li>
+                @endif
             </li>
         </ul>
     </li>

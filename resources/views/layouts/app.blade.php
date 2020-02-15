@@ -109,7 +109,7 @@
         <!-- Footer -->
         <footer class="main">
             
-            <center>Laravel Forecast <strong>v.1.0.2</strong> by Anas Setyadin<br/><strong>Copyright &copy; 2020</strong></center>
+            <center>Laravel Forecast <strong>v.1.0.3</strong> by Anas Setyadin<br/><strong>Copyright &copy; 2020</strong></center>
         
         </footer>
     </div>

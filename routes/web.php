@@ -59,7 +59,8 @@ Route::get('downloadData/{type}', 'DataController@downloadData');
 Route::post('data-importData', 'DataController@importData');
 Route::resource('data', 'DataController');
 
-Route::get('peramalan/forecast', 'PeramalanController@forecasting');
+Route::get('peramalan/forecast', 'PeramalanController@forecastingArrses');
+Route::get('peramalan/forecast-des', 'PeramalanController@forecastingDes');
 Route::resource('peramalan', 'PeramalanController');
 
 
