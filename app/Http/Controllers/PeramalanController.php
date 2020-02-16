@@ -125,9 +125,9 @@ class PeramalanController extends Controller
         			'percentage_error'          => $PE[$bestBetaIndex][$i]
         		];
         	} else {
-        		$nextPeriode = date('W', strtotime("+1 week", strtotime(date($date_to))));
+        		// $nextPeriode = date('W', strtotime("+1 week", strtotime(date($date_to))));
         		$hasil[$i] = [
-        			'periode'                   => $nextPeriode,
+        			'periode'                   => $periode[$i-1]+1,
         			'aktual'                    => 0,
         			'peramalan'                 => $F[$bestBetaIndex][$i],
         			'galat'                     => 0,
@@ -164,7 +164,7 @@ class PeramalanController extends Controller
         return \Response::json($result); 
     }
 
-    private function des($data_penjualan,$periode,$total,$date_to)
+     private function des($data_penjualan,$periode,$total,$date_to)
     {
         // dd($total);
         $no = 0;
@@ -172,6 +172,7 @@ class PeramalanController extends Controller
         $jumlah = 0;
         $perediksiData = array();
         $prediksi=array();
+        $PE=array();
 
         $raw=array();
 
@@ -193,36 +194,79 @@ class PeramalanController extends Controller
         $s2lalu = 0;
         $priode = 0;
 
-        foreach($raw as $i => $val)
+    
+        // foreach($raw as $i => $val)
+        for($i=0;$i<=count($raw);$i++)
         {
             if($i==0)
             {
-                $s1=$val['total'];
-                $s2=$val['total'];
+                $s1=$raw[$i]['total'];
+                $s2=$raw[$i]['total'];
             }
             else
             {
-                $s1 = ($a * $val['total']) + ((1-$a) * $s1lalu);
-                $s2 = ($a * $s1) + ((1-$a) * $s2lalu);
+                if($i<count($raw))
+                {
+                    $s1 = ($a * $raw[$i]['total']) + ((1-$a) * $s1lalu);
+                    $s2 = ($a * $s1) + ((1-$a) * $s2lalu);
+                }      
             }
 
             $nilaiA = (2 * $s1) - $s2;
             $nilaiB = ($a / (1-$a)) * ($s1-$s2);
 
-            $prediksi = $nilaiA + $nilaiB;
+            $prediksi[$i+1] = $nilaiA + $nilaiB;
 
-            $data=array(
+
+            if($i==0)
+            {
+                $PE[$i] =0;
+                 $data=array(
                 'minggu'=>$periode[$i],
-                'aktual'=>$val['total'],
-                'prediksi'=>$prediksi,
+                'aktual'=>$raw[$i]['total'],
+                'prediksi'=>0,
+                's1'=>$s1,
+                's2'=>$s2,
+                's1lalu'=>$s1lalu,
+                's2lalu'=>$s2lalu,
+                'nilaiA'=>$nilaiA,
+                'nilaiB'=>0,
+                'error'=>$PE[$i],
+            );
+            }
+            else if($i!==0 && $i<count($raw))
+            {
+                $PE[$i] = $raw[$i]['total'] == 0 ? 0 : abs((($raw[$i]['total'] - $prediksi[$i]) / $raw[$i]['total']) * 100);
+                 $data=array(
+                'minggu'=>$periode[$i],
+                'aktual'=>$raw[$i]['total'],
+                'prediksi'=>$prediksi[$i],
                 's1'=>$s1,
                 's2'=>$s2,
                 's1lalu'=>$s1lalu,
                 's2lalu'=>$s2lalu,
                 'nilaiA'=>$nilaiA,
                 'nilaiB'=>$nilaiB,
+                'error'=>$PE[$i],
             );
-
+            }
+            else
+            {
+               $PE[$i] =0;
+               $data=array(
+                'minggu'=>$periode[$i-1]+1,
+                'aktual'=>0,
+                'prediksi'=>$prediksi[$i],
+                's1'=>0,
+                's2'=>0,
+                's1lalu'=>0,
+                's2lalu'=>0,
+                'nilaiA'=>0,
+                'nilaiB'=>0,
+                'error'=>$PE[$i],
+            ); 
+            }
+           
             array_push($perediksiData,$data);
             if (!empty($total[$i])) {
                 $xt = $total[$i];
@@ -230,9 +274,10 @@ class PeramalanController extends Controller
                 $s2lalu = $s2;
             }
         }
-        // dd($perediksiData);
+   
         return $perediksiData;
     }
+
 
 
     public static function week_between_two_dates($start_date, $end_date)

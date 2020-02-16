@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/skins/green.css">
+    {{-- <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/daterangepicker/daterangepicker-bs3.css"> --}}
 
     <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://skywalkapps.github.io/bootstrap-notifications/stylesheets/bootstrap-notifications.css">
@@ -148,6 +149,7 @@
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-demo.js"></script>
 <script src="{{asset('js/')}}/moment.js"></script>
 <script src="{{asset('js/')}}/echo.js"></script>
+{{-- <script src="{{asset('neon/')}}/html/neon/assets/js/daterangepicker/daterangepicker.js"></script> --}}
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
 <script type="text/javascript">

@@ -38,6 +38,42 @@
       <div id="status" style="font-size:8pt;font-family: sans-serif;color: white">Loading...Please Wait</div>  
     </div>
   </div>
+    <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-gradient" data-collapsed="0">
+        <div class="panel-heading">
+          <div class="panel-title pull-left">Filter Pencarian <span><i class="entypo-search"></i></span>
+          </div>  
+          <div class="panel-options">
+            {{-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> --}}
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+            {{-- <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> --}}
+            {{-- <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> --}}
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel-body">
+            <div class="col-md-12 row" style="margin-bottom: 1em">
+              <label class="col-md-2">Tanggal</label>
+              <div class="col-md-4">
+                <div class="daterange daterange-inline" data-format="D-MMMM-YYYY" data-start-date="{{date('d-M-Y')}}" data-end-date="{{date('d-M-Y')}}">
+                    <i class="entypo-calendar"></i>
+                    <span>{{date('d-M-Y')}} - {{date('d-M-Y')}}</span>
+              </div>
+            </div>
+          </div>
+            <div class="col-md-12 row">
+              <label class="col-md-2">Produk</label>
+              <div class="col-md-4">
+                <input class="form-control" >
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-gradient" data-collapsed="0">
@@ -101,6 +137,7 @@
                 <th>Smoothing Kedua (St'')</th>
                 <th>Konstanta (at)</th>
                 <th>Slope (bt)</th>
+                <th>Prosentase Error</th>
                 <th>Nilai Peramalan (at + bt)</th>
               </tr>
             </thead>  
@@ -197,6 +234,7 @@
           <td>'+value.s2+'</td>\n\
           <td>'+value.nilaiA+'</td>\n\
           <td>'+value.nilaiB+' %</td>\n\
+           <td>'+value.error+' %</td>\n\
           <td>'+value.prediksi+'</td>\n\
           </tr>';
           $('#des').append(html);
