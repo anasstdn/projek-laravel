@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.css">
     <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/skins/green.css">
+    <link rel="stylesheet" href="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.css">
     {{-- <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/daterangepicker/daterangepicker-bs3.css"> --}}
 
     <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
@@ -89,6 +90,73 @@
     transform: scale(1);
 }
 
+  .boxes {
+  margin: auto;
+/*  padding: 50px;
+  background: #484848;*/
+}
+
+/*Checkboxes styles*/
+input[type="checkbox"] { display: none; }
+
+input[type="checkbox"] + label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  font: 12px/20px 'Open Sans', Arial, sans-serif;
+  color: #4CAF50;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+input[type="checkbox"] + label:last-child { margin-bottom: 0; }
+
+input[type="checkbox"] + label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #4CAF50;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*.gray{
+  background: linear-gradient(45deg,#4CAF50,#9df980);
+}*/
+
+.page-body.gray .page-container .main-content,
+.page-body.gray .page-container {
+  background: linear-gradient(45deg,#cedbce,#ffffff);
+}
+
+footer.main{
+  position:absolute;
+  width:95%;
+  bottom:0;
+  color:#4caf50;
+  /*background: linear-gradient(45deg,#c2ffae,#e4ffdb);*/
+}
+
 
 
 </style>
@@ -144,6 +212,7 @@
 <!-- JavaScripts initializations and stuff -->
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-custom.js"></script>
 
+<script src="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 
 <!-- Demo Settings -->
 <script src="{{asset('neon/')}}/html/neon/assets/js/neon-demo.js"></script>

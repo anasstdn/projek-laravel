@@ -12,6 +12,7 @@ use App\Models\RawDatum;
 use DatePeriod;
 use DateTime;
 use DateInterval;
+use Carbon\Carbon;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,43 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function card(Request $request)
+    {
+        if(\Auth::user()->can('read-card-admin') || \Auth::user()->can('read-card-manager'))
+        {
+          $total_transaksi=RawDatum::select(\DB::raw('count(id) as total'))->first();
+
+          $total_transaksi_bulan_ini=RawDatum::select(\DB::raw('count(id) as total'))
+          ->whereMonth('tgl_transaksi',date('m'))
+          ->whereYear('tgl_transaksi',date('Y'))
+          ->first();
+
+          Carbon::setWeekStartsAt(Carbon::MONDAY);
+          Carbon::setWeekEndsAt(Carbon::SATURDAY);
+          // dd(Carbon::now()->startOfWeek()->addWeeks('-1')->format('Y-m-d'));
+
+           $pasir_minggu_ini=RawDatum::select(\DB::raw('sum(pasir) as total'))
+          ->whereBetween('tgl_transaksi', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])
+          ->first();
+
+          $pasir_minggu_lalu=RawDatum::select(\DB::raw('sum(pasir) as total'))
+          ->whereBetween('tgl_transaksi', [Carbon::now()->startOfWeek()->addWeeks('-1')->format('Y-m-d'), Carbon::now()->endOfWeek()->addWeeks('-1')->format('Y-m-d')])
+          ->first();
+
+
+          $data=array(
+            'total_transaksi'=>isset($total_transaksi)?$total_transaksi->total:0,
+            'total_transaksi_bulan_ini'=>isset($total_transaksi_bulan_ini)?$total_transaksi_bulan_ini->total:0,
+            'pasir_minggu_ini'=>isset($pasir_minggu_ini) && $pasir_minggu_ini->total!==null?$pasir_minggu_ini->total:0,
+            'pasir_minggu_lalu'=>isset($pasir_minggu_lalu) && $pasir_minggu_lalu->total!==null?$pasir_minggu_lalu->total:0
+          );
+        }
+
+        return \Response::json($data);
+    }
+
+
 
     public function getChart()
     {
@@ -328,4 +366,6 @@ class HomeController extends Controller
      return \Response::json($data);  
   }
 
+
 }
+

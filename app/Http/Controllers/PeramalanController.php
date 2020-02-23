@@ -46,8 +46,21 @@ class PeramalanController extends Controller
 
     public function forecastingArrses(Request $request)
     {
-    	$date_from=date('2019-01-02');
-    	$date_to=date('2019-06-20');
+        // dd($request->all());
+        $all_data=$request->all();
+        if($all_data['mode']=='year')
+        {
+           $date_from=date('Y-m-d',strtotime('-1 year'));
+           $date_to=date('Y-m-d');
+        }
+        else
+        {
+           $date_from=date('Y-m-d',strtotime($all_data['date_start']));
+           $date_to=date('Y-m-d',strtotime($all_data['date_end']));  
+        }
+
+        // dd($date_from);
+
     	$data_penjualan=RawDatum::select(DB::raw('WEEK(tgl_transaksi) as minggu,sum(pasir) as pasir,sum(gendol) as gendol,sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
     	->where('tgl_transaksi','>=',$date_from)
     	->where('tgl_transaksi','<=',$date_to)
@@ -55,12 +68,11 @@ class PeramalanController extends Controller
         ->groupBy(DB::raw('WEEK(tgl_transaksi)'))
     	->get();
         // dd($data_penjualan);
-
         $minggu=$this->week_between_two_dates($date_from,$date_to);
         // dd($minggu);
 
     	// $periode=$this->getPeriode($date_from,$date_to);
-    	$total=$this->getTotal($minggu,$data_penjualan);
+    	$total=$this->getTotal($minggu,$data_penjualan,$produk=$all_data['produk']);
         // dd($total);
     	$result=$this->arrses($data_penjualan,$minggu,$total,$date_to);
         
@@ -125,9 +137,10 @@ class PeramalanController extends Controller
         			'percentage_error'          => $PE[$bestBetaIndex][$i]
         		];
         	} else {
-        		// $nextPeriode = date('W', strtotime("+1 week", strtotime(date($date_to))));
+        		// $nextPeriode = date('W', strtotime(date($date_to)));
+                $nextPeriode = Carbon::parse($date_to)->addWeeks(1)->format('W');
         		$hasil[$i] = [
-        			'periode'                   => $periode[$i-1]+1,
+        			'periode'                   => $nextPeriode,
         			'aktual'                    => 0,
         			'peramalan'                 => $F[$bestBetaIndex][$i],
         			'galat'                     => 0,
@@ -143,8 +156,17 @@ class PeramalanController extends Controller
 
     public function forecastingDes(Request $request)
     {
-        $date_from=date('2019-01-02');
-        $date_to=date('2019-06-20');
+        $all_data=$request->all();
+        if($all_data['mode']=='year')
+        {
+           $date_from=date('Y-m-d',strtotime('-1 year'));
+           $date_to=date('Y-m-d');
+        }
+        else
+        {
+           $date_from=date('Y-m-d',strtotime($all_data['date_start']));
+           $date_to=date('Y-m-d',strtotime($all_data['date_end']));  
+        }
         $data_penjualan=RawDatum::select(DB::raw('WEEK(tgl_transaksi) as minggu,sum(pasir) as pasir,sum(gendol) as gendol,sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
         ->where('tgl_transaksi','>=',$date_from)
         ->where('tgl_transaksi','<=',$date_to)
@@ -157,7 +179,7 @@ class PeramalanController extends Controller
         // dd($minggu);
 
         // $periode=$this->getPeriode($date_from,$date_to);
-        $total=$this->getTotal($minggu,$data_penjualan);
+        $total=$this->getTotal($minggu,$data_penjualan,$produk=$all_data['produk']);
         // dd($total);
         $result=$this->des($data_penjualan,$minggu,$total,$date_to);
         // dd($result);
@@ -194,10 +216,14 @@ class PeramalanController extends Controller
         $s2lalu = 0;
         $priode = 0;
 
+        $alpha=[0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20, 0.21,0.22,0.23,0.24,0.25,0.26,0.27,0.28,0.29,0.30,0.31,0.32,0.33,0.34,0.35,0.36,0.37,0.38,0.39,0.40,0.41,0.42,0.43,0.44,0.45,0.46,0.47,0.48,0.49,0.50,0.51,0.52,0.53,0.54,0.55,0.56,0.57,0.58,0.59,0.60,0.61,0.62,0.63,0.64,0.65,0.66,0.67,0.68,0.69,0.70,0.71,0.72,0.73,0.74,0.75,0.76,0.77,0.78,0.79,0.80,0.81,0.82,0.83,0.84,0.85,0.86,0.87,0.88,0.89,0.90,0.91,0.92,0.93,0.94,0.95,0.96,0.97,0.98,0.99];
+
     
         // foreach($raw as $i => $val)
-        for($i=0;$i<=count($raw);$i++)
+        for ($alp=0;$alp<count($alpha);$alp++)
         {
+          for($i=0;$i<=count($raw);$i++)
+          {
             if($i==0)
             {
                 $s1=$raw[$i]['total'];
@@ -207,75 +233,101 @@ class PeramalanController extends Controller
             {
                 if($i<count($raw))
                 {
-                    $s1 = ($a * $raw[$i]['total']) + ((1-$a) * $s1lalu);
-                    $s2 = ($a * $s1) + ((1-$a) * $s2lalu);
+                    $s1 = ($alpha[$alp] * $raw[$i]['total']) + ((1-$alpha[$alp]) * $s1lalu);
+                    $s2 = ($alpha[$alp] * $s1) + ((1-$alpha[$alp]) * $s2lalu);
                 }      
             }
 
             $nilaiA = (2 * $s1) - $s2;
-            $nilaiB = ($a / (1-$a)) * ($s1-$s2);
+            $nilaiB = ($alpha[$alp] / (1-$alpha[$alp])) * ($s1-$s2);
 
-            $prediksi[$i+1] = $nilaiA + $nilaiB;
+            $prediksi[$alp][$i+1] = $nilaiA + $nilaiB;
 
 
             if($i==0)
             {
-                $PE[$i] =0;
-                 $data=array(
-                'minggu'=>$periode[$i],
-                'aktual'=>$raw[$i]['total'],
-                'prediksi'=>0,
-                's1'=>$s1,
-                's2'=>$s2,
-                's1lalu'=>$s1lalu,
-                's2lalu'=>$s2lalu,
-                'nilaiA'=>$nilaiA,
-                'nilaiB'=>0,
-                'error'=>$PE[$i],
-            );
+                $PE[$alp][$i] =0;
             }
             else if($i!==0 && $i<count($raw))
             {
-                $PE[$i] = $raw[$i]['total'] == 0 ? 0 : abs((($raw[$i]['total'] - $prediksi[$i]) / $raw[$i]['total']) * 100);
-                 $data=array(
-                'minggu'=>$periode[$i],
-                'aktual'=>$raw[$i]['total'],
-                'prediksi'=>$prediksi[$i],
-                's1'=>$s1,
-                's2'=>$s2,
-                's1lalu'=>$s1lalu,
-                's2lalu'=>$s2lalu,
-                'nilaiA'=>$nilaiA,
-                'nilaiB'=>$nilaiB,
-                'error'=>$PE[$i],
-            );
+                $PE[$alp][$i] = $raw[$i]['total'] == 0 ? 0 : abs((($raw[$i]['total'] - $prediksi[$alp][$i]) / $raw[$i]['total']) * 100);
             }
             else
             {
-               $PE[$i] =0;
-               $data=array(
-                'minggu'=>$periode[$i-1]+1,
+               // $nextPeriode = date('W', strtotime(date($date_to)));
+             $date = new DateTime($date_to);
+               // $nextPeriode = Carbon::parse($date_to)->addWeeks(1)->format('W');
+             $PE[$alp][$i] =0;
+         }
+         // array_push($perediksiData,$data);
+         if (!empty($total[$i])) {
+            $xt = $total[$i];
+            $s1lalu = $s1;
+            $s2lalu = $s2;
+        }
+    }
+    $MAPE[$alp] = array_sum($PE[$alp])/(count($raw) - 1);
+    }
+    // dd($MAPE);
+
+    $bestAlphaIndex = array_search(min($MAPE), $MAPE);
+
+    for($i=0;$i<=count($raw);$i++)
+    {
+        if($i==0)
+            {
+                $perediksiData[$i]=array(
+                    'minggu'=>$periode[$i],
+                    'aktual'=>$raw[$i]['total'],
+                    'prediksi'=>0,
+                    's1'=>$s1,
+                    's2'=>$s2,
+                    's1lalu'=>$s1lalu,
+                    's2lalu'=>$s2lalu,
+                    'nilaiA'=>$nilaiA,
+                    'nilaiB'=>0,
+                    'error'=>$PE[$bestAlphaIndex][$i],
+                    'alpha'=>$alpha[$bestAlphaIndex],
+                );
+            }
+            else if($i!==0 && $i<count($raw))
+            {
+                $perediksiData[$i]=array(
+                    'minggu'=>$periode[$i],
+                    'aktual'=>$raw[$i]['total'],
+                    'prediksi'=>$prediksi[$bestAlphaIndex][$i],
+                    's1'=>$s1,
+                    's2'=>$s2,
+                    's1lalu'=>$s1lalu,
+                    's2lalu'=>$s2lalu,
+                    'nilaiA'=>$nilaiA,
+                    'nilaiB'=>$nilaiB,
+                    'error'=>$PE[$bestAlphaIndex][$i],
+                    'alpha'=>$alpha[$bestAlphaIndex],
+                );
+            }
+            else
+            {
+               // $nextPeriode = date('W', strtotime(date($date_to)));
+             $date = new DateTime($date_to);
+               // $nextPeriode = Carbon::parse($date_to)->addWeeks(1)->format('W');
+             $perediksiData[$i]=array(
+                'minggu'=>$date->modify('+7 day')->format('W'),
                 'aktual'=>0,
-                'prediksi'=>$prediksi[$i],
+                'prediksi'=>$prediksi[$bestAlphaIndex][$i],
                 's1'=>0,
                 's2'=>0,
                 's1lalu'=>0,
                 's2lalu'=>0,
                 'nilaiA'=>0,
                 'nilaiB'=>0,
-                'error'=>$PE[$i],
+                'error'=>$PE[$bestAlphaIndex][$i],
+                'alpha'=>$alpha[$bestAlphaIndex],
             ); 
-            }
-           
-            array_push($perediksiData,$data);
-            if (!empty($total[$i])) {
-                $xt = $total[$i];
-                $s1lalu = $s1;
-                $s2lalu = $s2;
-            }
-        }
+         }
+    }
    
-        return $perediksiData;
+    return $perediksiData;
     }
 
 
@@ -284,7 +336,7 @@ class PeramalanController extends Controller
     {
            $p = new DatePeriod(
             new DateTime($start_date), 
-            new DateInterval('P1W'), 
+            new DateInterval('P7D'), 
             new DateTime($end_date)
         );
            foreach ($p as $w) {
@@ -293,14 +345,26 @@ class PeramalanController extends Controller
         return $minggu;
     }
 
-    public static function getTotal($periode,$data)
+    public static function getTotal($periode,$data,$produk)
     {
         $array = array();
         for($i=0; $i<count($periode); $i++) {
             for($j=0; $j<count($data); $j++) {
             	// dd($data[$j]['minggu']+1);
                 if($periode[$i] == ($data[$j]['minggu']+1)){
-                    $array[$i] = floatval($data[$j]['abu']);
+                    switch($produk)
+                    {
+                        case 'abu':
+                        $array[$i] = floatval($data[$j]['abu']);
+                        break;
+                        case 'split1_2':
+                        $array[$i] = floatval($data[$j]['split1_2']);
+                        break;
+                        case 'pasir':
+                        $array[$i] = floatval($data[$j]['pasir']);
+                        break;
+                    }
+                    
                     break;
                 }else{
                     $array[$i] = 0;
@@ -330,6 +394,12 @@ class PeramalanController extends Controller
         // }
 
         return $array;
+    }
+
+    public function test(Request $request)
+    {
+        dd('aaaaa');
+        return 'hahaha';
     }
 
 }

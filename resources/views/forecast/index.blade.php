@@ -27,6 +27,12 @@
     filter: alpha(opacity=40); /* For IE8 and earlier */
   }
 
+  .ui-datepicker {
+   background: #333;
+   border: 1px solid #555;
+   color: #EEE;
+}
+
   </style>
   <div class="ajax-loader" style="display: none">
     <div class="col-md-12">
@@ -55,18 +61,48 @@
         <div class="panel-body">
           <div class="panel-body">
             <div class="col-md-12 row" style="margin-bottom: 1em">
-              <label class="col-md-2">Tanggal</label>
-              <div class="col-md-4">
-                <div class="daterange daterange-inline" data-format="D-MMMM-YYYY" data-start-date="{{date('d-M-Y')}}" data-end-date="{{date('d-M-Y')}}">
-                    <i class="entypo-calendar"></i>
-                    <span>{{date('d-M-Y')}} - {{date('d-M-Y')}}</span>
+              <label class="col-md-2">Select By</label>
+              <div class="col-md-2">
+                <div class="boxes">    
+                  <input type="checkbox" class="check" id="year" value="year" checked>
+                  <label id="year_notif" for="year">1 Tahun Terakhir</label>      
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="boxes">      
+                  <input type="checkbox" class="check" id="date" value="date">
+                  <label id="date_notif" for="date">Range Tanggal</label>
+                </div>
               </div>
             </div>
+            <div class="col-md-12 row" style="margin-bottom: 1em">
+              <label class="col-md-2">Tanggal</label>
+              <div class="col-md-4">
+            <div class="input-group input-large input-daterange" >
+                {{-- <input type="text" class="form-control tanggal-picker" id="date_from" value="{{ date('d-m-Y') }}"> --}}
+                <input type="text" class="form-control form-control-sm" style="width:150px;" id="date_start" value="{{ date("d-m-Y") }}" name="date_start" />
+                <input type="text" class="form-control" id="date_from2" value="{{ date('d-m-Y') }}" style="display:none;">
+                          <span class="input-group-addon form-control-sm" style="color:#4CAF50">sd</span>
+                        <input type="text" class="form-control form-control-sm" style="width:150px;" value="{{ date('d-m-Y', strtotime("+1 month")) }}" id="date_end" name="date_end" />
+                        <input type="text" class="form-control" id="date_to2" value="{{ date('d-m-Y', strtotime("+1 month")) }}" style="display:none;">
+                </div>
+            </div>
           </div>
-            <div class="col-md-12 row">
+            <div class="col-md-12 row" style="margin-bottom: 1em">
               <label class="col-md-2">Produk</label>
               <div class="col-md-4">
-                <input class="form-control" >
+                <select class="form-control" id="produk">
+                  <option value="abu">Abu</option>
+                  <option value="split1_2">Split 1/2</option>
+                  <option value="pasir">Pasir</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 row" style="margin-bottom: 1em">
+              <div class="text-left">
+                <a class="btn btn-md btn-primary" id="cari">Cari</a>
+                &nbsp&nbsp
+                <a class="btn btn-md btn-default" id="reset">Reset</a>
               </div>
             </div>
         </div>
@@ -137,6 +173,7 @@
                 <th>Smoothing Kedua (St'')</th>
                 <th>Konstanta (at)</th>
                 <th>Slope (bt)</th>
+                <th>Alpha</th>
                 <th>Prosentase Error</th>
                 <th>Nilai Peramalan (at + bt)</th>
               </tr>
@@ -158,19 +195,73 @@
 @push('js')
 <script>
   var html;
+  var mode;
   $(document).ready(function(){
-    arrses();
-    des();
+     $('.input-daterange').datepicker({format: "dd-mm-yyyy"}); 
+    
+   
+    checkbox();
+    $(".check").change(function() {
+      $(".check").prop('checked', false);
+      $(this).prop('checked', true);
+
+      
+    });
+
+    $('.check').on('change',function(){
+      checkbox1();
+    })
+
+    $('#cari').click(function(){
+      checkbox();
+    })
+
   })
 
-  function arrses()
+  function checkbox()
+  {
+    if($('#year').is(':checked'))
+    {
+     $('#date_start').attr('readonly',true);
+     $('#date_end').attr('readonly',true);
+     mode='year';
+    }
+    else
+    {
+      $('#date_start').attr('readonly',false);
+     $('#date_end').attr('readonly',false);
+      mode='date';
+    }
+    arrses(mode);
+    des(mode);
+  }
+
+    function checkbox1()
+  {
+    if($('#year').is(':checked'))
+    {
+     $('#date_start').attr('readonly',true);
+     $('#date_end').attr('readonly',true);
+     // mode='year';
+    }
+    else
+    {
+      $('#date_start').attr('readonly',false);
+     $('#date_end').attr('readonly',false);
+      // mode='date';
+    }
+    // arrses(mode);
+    // des(mode);
+  }
+
+  function arrses(mode)
   {
     $('.ajax-loader').fadeIn();
     $("#status").html("Loading...Please Wait!");
     $.ajax({
       url: '{{url('peramalan/forecast')}}',
       type: 'GET',
-      data: {tahun:$('#tahun').val()},
+      data: {mode:mode,date_start:$('#date_start').val(),date_end:$('#date_end').val(),produk:$('#produk').val()},
       xhr: function () {
         var xhr = new window.XMLHttpRequest();
         xhr.upload.addEventListener("progress",
@@ -185,6 +276,7 @@
       },
       success:function(data){
         // console.log(data);
+        $('#arrses tbody').empty();
         $.each(data,function(index,value){
           html='<tr><td>'+value.periode+'</td>\n\
           <td>'+value.aktual+'</td>\n\
@@ -196,7 +288,7 @@
           <td>'+value.peramalan+'</td>\n\
           </tr>';
           $('#arrses').append(html);
-          console.log(value);
+          // console.log(value);
         })
       },
       error:function (xhr, status, error){
@@ -205,14 +297,14 @@
     });
   }
 
-  function des()
+  function des(mode)
   {
     $('.ajax-loader').fadeIn();
     $("#status").html("Loading...Please Wait!");
     $.ajax({
       url: '{{url('peramalan/forecast-des')}}',
       type: 'GET',
-      data: {tahun:$('#tahun').val()},
+      data: {mode:mode,date_start:$('#date_start').val(),date_end:$('#date_end').val(),produk:$('#produk').val()},
       xhr: function () {
         var xhr = new window.XMLHttpRequest();
         xhr.upload.addEventListener("progress",
@@ -227,6 +319,7 @@
       },
       success:function(data){
         // console.log(data);
+        $('#des tbody').empty();
         $.each(data,function(index,value){
           html='<tr><td>'+value.minggu+'</td>\n\
           <td>'+value.aktual+'</td>\n\
@@ -234,11 +327,12 @@
           <td>'+value.s2+'</td>\n\
           <td>'+value.nilaiA+'</td>\n\
           <td>'+value.nilaiB+' %</td>\n\
+            <td>'+value.alpha+'</td>\n\
            <td>'+value.error+' %</td>\n\
           <td>'+value.prediksi+'</td>\n\
           </tr>';
           $('#des').append(html);
-          console.log(value);
+          // console.log(value);
         })
       },
       error:function (xhr, status, error){

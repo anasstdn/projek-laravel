@@ -3,6 +3,7 @@
 return [
     'role_structure' => [
         'superadministrator' => [
+            'card-admin'=>'r',
             'home-menu'=>'r',
                 'home' => 'r',
             // 'users' => 'c,r,u,d',
@@ -17,6 +18,7 @@ return [
             'peramalan-menu'=>'r',
         ],
         'administrator' => [
+            'card-admin'=>'r',
             'home-menu'=>'r',
                 'home' => 'r',
             'data-menu'=>'r',
@@ -31,6 +33,7 @@ return [
         //     // 'profile' => 'r,u'
         // ],
         'manager'=>[
+            'card-manager'=>'r',
             'home-menu'=>'r',
                 'home' => 'r',
             'peramalan-menu'=>'r',

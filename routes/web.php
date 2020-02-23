@@ -47,6 +47,7 @@ Route::group( ['prefix'=>'home','middleware' => ['role:superadministrator|admini
 	Route::get('/load-data','HomeController@loadData');
 	Route::get('/get-chart','HomeController@getChart');
 	Route::get('/get-notif', 'HomeController@getNotif');
+    Route::get('/card', 'HomeController@card');
 	Route::resource('home', 'HomeController');
 });
 
