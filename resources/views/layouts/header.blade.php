@@ -1,398 +1,144 @@
-<div class="row">
-	
-	<!-- Profile Info and Notifications -->
-	<div class="col-md-6 col-sm-8 clearfix">
-		
-		<ul class="user-info pull-left pull-none-xsm">
-			
-			<!-- Profile Info -->
-			<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-				
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<img src="{{asset('neon/')}}/html/neon/assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-					{{ Auth::user()->name }}
-				</a>
-				
-				<ul class="dropdown-menu">
-					
-					<!-- Reverse Caret -->
-					<li class="caret"></li>
-					
-					<!-- Profile sub-links -->
-					<li>
-						<a href="extra-timeline.html">
-							<i class="entypo-user"></i>
-							Edit Profile
-						</a>
-					</li>
-					
-					<li>
-						<a href="mailbox.html">
-							<i class="entypo-mail"></i>
-							Inbox
-						</a>
-					</li>
-					
-					<li>
-						<a href="extra-calendar.html">
-							<i class="entypo-calendar"></i>
-							Calendar
-						</a>
-					</li>
-					
-					<li>
-						<a href="#">
-							<i class="entypo-clipboard"></i>
-							Tasks
-						</a>
-					</li>
-				</ul>
-			</li>
-			
-		</ul>
-		
-		<ul class="user-info pull-left pull-right-xs pull-none-xsm">
-			
-			<!-- Raw Notifications -->
-{{-- 				 <li class="notifications dropdown dropdown-notifications">
-                    <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-                        <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
-                    </a>
-
-                    <div class="dropdown-container">
-                        <div class="dropdown-toolbar">
-                            <div class="dropdown-toolbar-actions">
-                                <a href="#">Mark all as read</a>
-                            </div>
-                            <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
+   <!-- Header -->
+            <header id="page-header">
+                <!-- Header Content -->
+                <div class="content-header">
+                    <!-- Left Section -->
+                    <div class="content-header-section">
+                        <!-- Logo -->
+                        <div class="content-header-item mr-5">
+                            <a class="link-effect font-w600 font-size-xl" href="{{url('/')}}">
+                              <i class="si si-graph text-primary"></i>
+                                <span class="text-dual-primary-dark">Laravel</span><span class="text-primary">Forecast</span>
+                            </a>
                         </div>
-                        <ul class="dropdown-menu-list scroller">
-                        </ul> --}}
-{{--                         <div class="dropdown-footer text-center">
-                            <a href="#">View All</a>
-                        </div> --}}
-  {{--                   </div>
-                </li>
- --}}
-                	<li class="notifications dropdown">
-		
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<i  data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
-						</a>
-		
-						<ul class="dropdown-menu">
-							<li class="top">
-								<p class="small">
-									<a href="#" class="pull-right">Mark all Read</a>
-									You have <strong class="info">0</strong> new notifications.
-								</p>
-							</li>
-							
-							<li>
-								<ul class="dropdown-menu-list scroller">
-	
-								</ul>
-							</li>
-							
-							<li class="external">
-								<a href="#">View all notifications</a>
-							</li>
-						</ul>
-		
-					</li>
-					
-					<!-- Message Notifications -->
-					{{-- <li class="notifications dropdown">
-		
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<i class="entypo-mail"></i>
-							<span class="badge badge-secondary">10</span>
-						</a>
-		
-						<ul class="dropdown-menu">
-							<li>
-								<form class="top-dropdown-search">
-									
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Search anything..." name="s" />
-									</div>
-									
-								</form>
-								
-								<ul class="dropdown-menu-list scroller">
-									<li class="active">
-										<a href="#">
-											<span class="image pull-right">
-												<img src="assets/images/thumb-1@2x.png" width="44" alt="" class="img-circle" />
-											</span>
-											
-											<span class="line">
-												<strong>Luc Chartier</strong>
-												- yesterday
-											</span>
-											
-											<span class="line desc small">
-												This ain’t our first item, it is the best of the rest.
-											</span>
-										</a>
-									</li>
-									
-									<li class="active">
-										<a href="#">
-											<span class="image pull-right">
-												<img src="assets/images/thumb-2@2x.png" width="44" alt="" class="img-circle" />
-											</span>
-											
-											<span class="line">
-												<strong>Salma Nyberg</strong>
-												- 2 days ago
-											</span>
-											
-											<span class="line desc small">
-												Oh he decisively impression attachment friendship so if everything. 
-											</span>
-										</a>
-									</li>
-									
-									<li>
-										<a href="#">
-											<span class="image pull-right">
-												<img src="assets/images/thumb-3@2x.png" width="44" alt="" class="img-circle" />
-											</span>
-											
-											<span class="line">
-												Hayden Cartwright
-												- a week ago
-											</span>
-											
-											<span class="line desc small">
-												Whose her enjoy chief new young. Felicity if ye required likewise so doubtful.
-											</span>
-										</a>
-									</li>
-									
-									<li>
-										<a href="#">
-											<span class="image pull-right">
-												<img src="assets/images/thumb-4@2x.png" width="44" alt="" class="img-circle" />
-											</span>
-											
-											<span class="line">
-												Sandra Eberhardt
-												- 16 days ago
-											</span>
-											
-											<span class="line desc small">
-												On so attention necessary at by provision otherwise existence direction.
-											</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-							
-							<li class="external">
-								<a href="mailbox.html">All Messages</a>
-							</li>
-						</ul>
-		
-					</li> --}}
-					
-					<!-- Task Notifications -->
-					{{-- <li class="notifications dropdown">
-		
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							<i class="entypo-list"></i>
-							<span class="badge badge-warning">1</span>
-						</a>
-		
-						<ul class="dropdown-menu">
-							<li class="top">
-								<p>You have 6 pending tasks</p>
-							</li>
-							
-							<li>
-								<ul class="dropdown-menu-list scroller">
-									<li>
-										<a href="#">
-											<span class="task">
-												<span class="desc">Procurement</span>
-												<span class="percent">27%</span>
-											</span>
-										
-											<span class="progress">
-												<span style="width: 27%;" class="progress-bar progress-bar-success">
-													<span class="sr-only">27% Complete</span>
-												</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<span class="task">
-												<span class="desc">App Development</span>
-												<span class="percent">83%</span>
-											</span>
-											
-											<span class="progress progress-striped">
-												<span style="width: 83%;" class="progress-bar progress-bar-danger">
-													<span class="sr-only">83% Complete</span>
-												</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<span class="task">
-												<span class="desc">HTML Slicing</span>
-												<span class="percent">91%</span>
-											</span>
-											
-											<span class="progress">
-												<span style="width: 91%;" class="progress-bar progress-bar-success">
-													<span class="sr-only">91% Complete</span>
-												</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<span class="task">
-												<span class="desc">Database Repair</span>
-												<span class="percent">12%</span>
-											</span>
-											
-											<span class="progress progress-striped">
-												<span style="width: 12%;" class="progress-bar progress-bar-warning">
-													<span class="sr-only">12% Complete</span>
-												</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<span class="task">
-												<span class="desc">Backup Create Progress</span>
-												<span class="percent">54%</span>
-											</span>
-											
-											<span class="progress progress-striped">
-												<span style="width: 54%;" class="progress-bar progress-bar-info">
-													<span class="sr-only">54% Complete</span>
-												</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<span class="task">
-												<span class="desc">Upgrade Progress</span>
-												<span class="percent">17%</span>
-											</span>
-											
-											<span class="progress progress-striped">
-												<span style="width: 17%;" class="progress-bar progress-bar-important">
-													<span class="sr-only">17% Complete</span>
-												</span>
-											</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-							
-							<li class="external">
-								<a href="#">See all tasks</a>
-							</li>
-						</ul>
-		
-					</li> --}}
-					
-				</ul>
-				
-			</div>
-			
-			
-			<!-- Raw Links -->
-			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-				
-				<ul class="list-inline links-list pull-right">
-					
-					<!-- Language Selector -->
-					<li class="dropdown language-selector">
-						
-						Language: &nbsp;
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-							<img src="{{asset('neon/')}}/html/neon/assets/images/flags/flag-uk.png" width="16" height="16" />
-						</a>
-						
-						<ul class="dropdown-menu pull-right">
-							<li>
-								<a href="#">
-									<img src="{{asset('neon/')}}/html/neon/assets/images/flags/flag-de.png" width="16" height="16" />
-									<span>Deutsch</span>
-								</a>
-							</li>
-							<li class="active">
-								<a href="#">
-									<img src="a{{asset('neon/')}}/html/neon/ssets/images/flags/flag-uk.png" width="16" height="16" />
-									<span>English</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<img src="{{asset('neon/')}}/html/neon/assets/images/flags/flag-fr.png" width="16" height="16" />
-									<span>François</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<img src="{{asset('neon/')}}/html/neon/assets/images/flags/flag-al.png" width="16" height="16" />
-									<span>Shqip</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<img src="{{asset('neon/')}}/html/neon/assets/images/flags/flag-es.png" width="16" height="16" />
-									<span>Español</span>
-								</a>
-							</li>
-						</ul>
-						
-					</li>
-					
-					<li class="sep"></li>
-					
-					
-	{{-- 				<li>
-						<a href="#" data-toggle="chat" data-collapse-sidebar="1">
-							<i class="entypo-chat"></i>
-							Chat
-							
-							<span class="badge badge-success chat-notifications-badge is-hidden">0</span>
-						</a>
-					</li> --}}
-					
-					<li class="sep"></li>
-					
-					<li>
-						<li>
-							<a href="{{ route('logout') }}"
-							onclick="event.preventDefault();
-							document.getElementById('logout-form').submit();">
-							Logout <i class="entypo-logout right"></i>
-						</a>
+                        <!-- END Logo -->
 
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-							{{ csrf_field() }}
-						</form>
-					</li>
-					{{-- 	<a href="extra-login.html">
-							Log Out 
-						</a> --}}
-					</li>
-				</ul>
-				
-			</div>
-			
-		</div>
-		
-		<hr />
+                        <!-- Open Search Section -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                    {{--     <button type="button" class="btn btn-rounded btn-dual-secondary" data-toggle="layout" data-action="header_search_on">
+                            <i class="fa fa-search mr-5"></i> Search
+                        </button> --}}
+                        <!-- END Open Search Section -->
+                    </div>
+                    <!-- END Left Section -->
+
+                    <!-- Right Section -->
+                    <div class="content-header-section d-none d-lg-block">
+                        <!-- Header Navigation -->
+                        <!--
+                        Desktop Navigation, mobile navigation can be found in #sidebar
+
+                        If you would like to use the same navigation in both mobiles and desktops, you can use exactly the same markup inside sidebar and header navigation ul lists
+                        If your sidebar menu includes headings, they won't be visible in your header navigation by default
+                        If your sidebar menu includes icons and you would like to hide them, you can add the class 'nav-main-header-no-icons'
+                        -->
+                        <ul class="nav-main-header">
+                        	@if(\Auth::user()->can('read-home-menu'))
+                            <li>
+                                <a class="" href="{{url('/home')}}"><i class="si si-home"></i>Dashboard</a>
+                            </li>
+                            @endif
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i>Master ACL</a>
+                                <ul>
+                                    <li>
+                                        <a href="{{url('/user')}}">Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/permission')}}">Permission</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/role')}}">Roles</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i>Tools</a>
+                                <ul>
+                                    <li>
+                                        <a href="{{url('/data')}}">Import / Export to DB</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href=""><i class="si si-basket"></i>Sales</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="si si-pie-chart"></i>Chart</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="si si-graph"></i>Forecasting</a>
+                            </li>
+                        </ul>
+
+
+                  
+                        <!-- END Header Navigation -->
+
+                        <!-- Toggle Sidebar -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                            <i class="fa fa-navicon"></i>
+                        </button>
+                        <!-- END Toggle Sidebar -->
+                    </div>
+                    <div class="content-header-section">
+                         <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user d-sm-none"></i>
+                                <span class="d-none d-sm-inline-block">{{ Auth::user()->name }}</span>
+                                <i class="fa fa-angle-down ml-5"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
+                                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="si si-logout mr-5"></i> Sign Out
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Right Section -->
+                </div>
+                <!-- END Header Content -->
+
+                <!-- Header Search -->
+                <div id="page-header-search" class="overlay-header">
+                    <div class="content-header content-header-fullrow">
+                        <form>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <!-- Close Search Section -->
+                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                    <button type="button" class="btn btn-secondary px-15" data-toggle="layout" data-action="header_search_off">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <!-- END Close Search Section -->
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary px-15">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END Header Search -->
+
+                <!-- Header Loader -->
+                <div id="page-header-loader" class="overlay-header bg-primary">
+                    <div class="content-header content-header-fullrow text-center">
+                        <div class="content-header-item">
+                            <i class="fa fa-sun-o fa-spin text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Header Loader -->
+            </header>
+            <!-- END Header -->

@@ -1,28 +1,32 @@
 <!-- Modal 7 (Ajax Modal)-->
 
-<div class="modal-dialog" style="font-family: sans-serif;">
+<div class="modal-dialog modal-lg" role="document" style="font-family: sans-serif;">
 	<div class="modal-content">
 		<form method="post" id="form" action="#" enctype="multipart/form-data">
 			{{ csrf_field() }}
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" style="font-weight: bold">{{isset($user) && $user->exists()?'Edit':'Add'}} Users</h4>
-			</div>
-
-			<input type="hidden" id="mode" value="{{isset($user) && $user->exists()?'edit':'add'}}">
+			 <div class="block block-themed block-transparent mb-0">
+			 	<div class="block-header bg-primary-dark">
+                            <h3 class="block-title">{{isset($user) && $user->exists()?'Edit':'Add'}} Users</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="si si-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="mode" value="{{isset($user) && $user->exists()?'edit':'add'}}">
 			<input type="hidden" id="id" value="{{isset($user) && $user->exists()?$user->id:''}}">
 			<div class="modal-body">
 				<div class="form-group row" style="margin-bottom: 1.429rem;">
 					<label class="col-form-label col-md-3">Nama</label>
 					<div class="col-md-7">
-						<input type="text" class="form-control" id="nama" name="nama" value="{{(isset($user) && $user->exists)?isset($user->name)?$user->name:'':''}}">
+						<input type="text" class="form-control form-control-sm" id="nama" name="nama" value="{{(isset($user) && $user->exists)?isset($user->name)?$user->name:'':''}}">
 						<span class="help-block"></span>
 					</div>
 				</div>
 				<div class="form-group row" style="margin-bottom: 1.429rem;">
 					<label class="col-form-label col-md-3">Username</label>
 					<div class="col-md-7">
-						<input type="text" class="form-control" id="username" name="username" value="{{(isset($user) && $user->exists)?isset($user->username)?$user->username:'':''}}">
+						<input type="text" class="form-control form-control-sm" id="username" name="username" value="{{(isset($user) && $user->exists)?isset($user->username)?$user->username:'':''}}">
 						<span class="help-block"></span>
 					</div>
 					<span class="col-md-1 help-block" id="message"></span>
@@ -30,7 +34,7 @@
 				<div class="form-group row" style="margin-bottom: 1.429rem;">
 					<label class="col-form-label col-md-3">Email</label>
 					<div class="col-md-7">
-						<input type="text" class="form-control" id="email" name="email" value="{{(isset($user) && $user->exists)?isset($user->email)?$user->email:'':''}}">
+						<input type="text" class="form-control form-control-sm" id="email" name="email" value="{{(isset($user) && $user->exists)?isset($user->email)?$user->email:'':''}}">
 						<span class="help-block"></span>
 					</div>
 					<span class="col-md-1 help-block" id="message1"></span>
@@ -38,7 +42,7 @@
 				<div class="form-group row" style="margin-bottom: 1.429rem;">
 					<label class="col-form-label col-md-3">Password</label>
 					<div class="col-md-7">
-						<input type="password" class="form-control" id="password" name="password" value="">
+						<input type="password" class="form-control form-control-sm" id="password" name="password" value="">
 						<span class="help-block"></span>
 					</div>
 				</div>
@@ -52,8 +56,8 @@
 				<div class="form-group row" style="margin-bottom: 1.429rem;">
 					<label class="col-form-label col-md-3">Roles</label>
 					<div class="col-md-7">
-						<select name="roles" id="roles" class="form-control" data-allow-clear="true" data-placeholder="Select roles">
-							<option value="">-Pilih-</option>
+						<select class="select2 form-control" name="roles" id="roles" style="width: 100%;" data-placeholder="Select Roles">
+							<option value="">-Silahkan Pilih-</option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
 							@foreach($role as $r)
 							<option value="{{$r->id}}" {{isset($user->roleUser->role_id) && $user->roleUser->role_id==$r->id?'selected':''}}>{{$r->display_name}}</option>
 							@endforeach
@@ -64,16 +68,33 @@
 
 				<div class="form-group row" style="margin-bottom: 1.429rem;"> <label
 					class="col-form-label col-md-3">Verified</label> <div class="col-md-7">
-						<p> <input type="radio" id="test1" name="verified" value="1" {{isset($user->verified) && $user->verified=='1'?'checked':''}}>
+						{{-- <p> <input type="radio" id="test1" name="verified" value="1" {{isset($user->verified) && $user->verified=='1'?'checked':''}}>
 							<label for="test1">TRUE</label> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input
 							type="radio" id="test2" name="verified" value="0" {{isset($user->verified) && $user->verified=='0'?'checked':''}}> <label
-							for="test2">FALSE</label> </p> 
+							for="test2">FALSE</label> </p>  --}}
+							<div class="col-6">
+                                            <label class="css-control css-control-primary css-radio">
+                                                <input type="radio" class="css-control-input" name="verified" value="1" id="test1" {{isset($user->verified) && $user->verified=='1'?'checked':''}}>
+                                                <span class="css-control-indicator"></span> True
+                                            </label>
+                                            <label class="css-control css-control-primary css-radio">
+                                                <input type="radio" class="css-control-input"  name="verified" value="0" id="test2" {{isset($user->verified) && $user->verified=='0'?'checked':''}}>
+                                                <span class="css-control-indicator"></span> False
+                                            </label>
+                                        </div>
 							<span class="help-block" id="radio_a"></span> </div>
 						</div>
 					</div>
+			 </div>
+		{{-- 	<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" style="font-weight: bold">{{isset($user) && $user->exists()?'Edit':'Add'}} Users</h4>
+			</div> --}}
+
+			
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" id="simpan" class="btn btn-info">Validate</button>
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+						<button type="submit" id="simpan" class="btn btn-info btn-sm">Validate</button>
 					</div>
 				</form>
 			</div>
@@ -84,6 +105,11 @@
 	var email=false;
 	var username=false;
 	$(document).ready(function(){
+		  $(".select2").select2({
+        dropdownParent: $("#form"),
+        width: '100%'
+      });
+
 		$('#form').find('#nama').bind('keyup change',function(){
 			if (!$.trim($(this).val())) 
 			{
@@ -230,9 +256,9 @@
 		$('#form').find('#roles').bind('keyup change',function(){
 			if (!$.trim($(this).val())) 
 			{
-				$(this).next().fadeIn();
-				$(this).next().html('Silahkan isi data');
-				$(this).next().css({"color":"red",
+				$(this).next().next().fadeIn();
+				$(this).next().next().html('Silahkan isi data');
+				$(this).next().next().css({"color":"red",
 					"font-size":"11px",
 					"font-family":"arial"});
 				$(this).css({"border-color": "red", 
@@ -245,9 +271,9 @@
 			}
 			else
 			{
-				$(this).next().fadeOut();
-				$(this).next().html('');
-				$(this).next().css({"color":"red",
+				$(this).next().next().fadeOut();
+				$(this).next().next().html('');
+				$(this).next().next().css({"color":"red",
 					"font-size":"11px",
 					"font-family":"arial"});
 				$(this).css({"border": ""});
@@ -374,9 +400,9 @@
 
 			if($('#roles').val()=='')
 			{
-				$('#roles').next().fadeIn();
-				$('#roles').next().html('Silahkan isi data');
-				$("#roles").next().css({"color":"red",
+				$('#roles').next().next().fadeIn();
+				$('#roles').next().next().html('Silahkan isi data');
+				$("#roles").next().next().css({"color":"red",
 					"font-size":"11px",
 					"font-family":"arial"});
 				$('#roles').css({"border-color": "red", 
@@ -388,9 +414,9 @@
 			}
 			else
 			{
-				$('#roles').next().fadeOut();
-				$('#roles').next().html('');
-				$("#roles").next().css({"color":"red",
+				$('#roles').next().next().fadeOut();
+				$('#roles').next().next().html('');
+				$("#roles").next().next().css({"color":"red",
 					"font-size":"11px",
 					"font-family":"arial"});
 				$('#roles').css({"border": ""});

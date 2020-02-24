@@ -1,220 +1,225 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!doctype html>
+<html lang="en" class="no-focus">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Neon Admin Panel" />
-    <meta name="author" content="" />
+        <title>Laravel Forecast</title>
 
-    <link rel="icon" href="{{asset('neon/')}}/html/neon/assets/images/favicon.ico">
+        <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
 
-    <title>Laravel Forecast</title>
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="Codebase">
+        <meta property="og:description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
 
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/font-icons/entypo/css/entypo.css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-core.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-theme.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-forms.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/skins/green.css">
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{{asset('codebase/')}}/src/assets/media/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{asset('codebase/')}}/src/assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('codebase/')}}/src/assets/media/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
 
-    <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
+        <!-- Stylesheets -->
 
-    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- Fonts and Codebase framework -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
+        <link rel="stylesheet" id="css-main" href="{{asset('codebase/')}}/src/assets/css/codebase.min.css">
 
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+        <!-- END Stylesheets -->
+    </head>
+    <body>
 
-</head>
-<body class="page-body login-page login-form-fall" data-url="http://neon.dev">
+        <!-- Page Container -->
+        <!--
+            Available classes for #page-container:
 
+        GENERIC
 
-    <!-- This is needed when you send requests via Ajax -->
-    <script type="text/javascript">
-        var baseurl = '';
-    </script>
+            'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
 
-    <div class="login-container">
+        SIDEBAR & SIDE OVERLAY
 
-        <div class="login-header login-caret">
+            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+            'sidebar-inverse'                           Dark themed sidebar
 
-            <div class="login-content">
+            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+            'side-overlay-o'                            Visible Side Overlay by default
 
-                <a href="#" class="logo">
-                    {{-- <img src="{{asset('neon/')}}/html/neon/assets/images/logo@2x.png" width="120" alt="" /> --}}
-                    <p style="font-size:20pt">Laravel Forecast</p>
-                </a>
+            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
 
-                {{-- <p class="description">Dear user, log in to access the admin area!</p> --}}
+            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
 
-                <!-- progress bar indicator -->
-                <div class="login-progressbar-indicator">
-                    <h3>43%</h3>
-                    <span>logging in...</span>
+        HEADER
+
+            ''                                          Static Header if no class is added
+            'page-header-fixed'                         Fixed Header
+
+        HEADER STYLE
+
+            ''                                          Classic Header style if no class is added
+            'page-header-modern'                        Modern Header style
+            'page-header-inverse'                       Dark themed Header (works only with classic Header style)
+            'page-header-glass'                         Light themed Header with transparency by default
+                                                        (absolute position, perfect for light images underneath - solid light background on scroll if the Header is also set as fixed)
+            'page-header-glass page-header-inverse'     Dark themed Header with transparency by default
+                                                        (absolute position, perfect for dark images underneath - solid dark background on scroll if the Header is also set as fixed)
+
+        MAIN CONTENT LAYOUT
+
+            ''                                          Full width Main Content if no class is added
+            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+        -->
+        <div id="page-container" class="main-content-boxed">
+
+            <!-- Main Container -->
+            <main id="main-container">
+
+                <!-- Page Content -->
+                <div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo34@2x.jpg');">
+                    <div class="row mx-0 bg-black-op">
+                        <div class="hero-static col-md-6 col-xl-8 d-none d-md-flex align-items-md-end">
+                            <div class="p-30 invisible" data-toggle="appear">
+                                <p class="font-size-h3 font-w600 text-white">
+                                    Made by Anas Setyadin
+                                </p>
+                                <p class="font-italic text-white-op">
+                                    Laravel Forecast Copyright &copy; <span class="">2020</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hero-static col-md-6 col-xl-4 d-flex align-items-center bg-white invisible" data-toggle="appear" data-class="animated fadeInRight">
+                            <div class="content content-full">
+                                <!-- Header -->
+                                <div class="px-30 py-10">
+                                    <a class="link-effect font-w700" href="index.html">
+                                        <i class="si si-graph"></i>
+                                        <span class="font-size-xl text-primary-dark">Laravel</span><span class="font-size-xl">Forecast</span>
+                                    </a>
+                                    <!-- <h1 class="h3 font-w700 mt-30 mb-10">Welcome to Your Dashboard</h1> -->
+                                    <h2 class="h5 font-w400 text-muted mb-0">Please sign in</h2>
+                                </div>
+                                <!-- END Header -->
+
+                                <!-- Sign In Form -->
+                                <!-- jQuery Validation functionality is initialized with .js-validation-signin class in js/pages/op_auth_signin.min.js which was auto compiled from _es6/pages/op_auth_signin.js -->
+                                <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                <form class="js-validation-signin px-30"  action="{{ route('login') }}" method="post">
+
+                                   {{ csrf_field() }}
+                                   @if(session('status'))
+                                   <div class="alert alert-success">
+                                    {{session('status')}}
+                                </div>
+                                @endif
+                                @if(session('warning'))
+                                <div class="alert alert-warning">
+                                    {{session('warning')}}
+                                </div>
+                                @endif
+
+                                    <div class="form-group row {{$errors->has('username') || $errors->has('email')?'has-error':''}}">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="text" class="form-control" id="login" name="login" value="{{ old('username')?:old('email') }}" required="">
+                                                @if ($errors->has('email') || $errors->has('username'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('username')?:$errors->first('email') }}</strong>
+                                                </span>
+                                                @endif
+                                                <label for="login-username">Username</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row {{ $errors->has('password') ? ' has-error' : '' }}">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="password" class="form-control" id="password" name="password" required>
+                                                @if ($errors->has('password'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                                @endif
+                                                <label for="login-password">Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="login-remember-me">Remember Me</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-sm btn-hero btn-alt-primary">
+                                            <i class="si si-login mr-10"></i> Sign In
+                                        </button>
+                                        <div class="mt-30">
+                                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="{{ route('register') }}">
+                                                <i class="fa fa-plus mr-5"></i> Create Account
+                                            </a>
+                                           <!--  <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="{{ route('password.request') }}">
+                                                <i class="fa fa-warning mr-5"></i> Forgot Password
+                                            </a> -->
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END Sign In Form -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <!-- END Page Content -->
 
+            </main>
+            <!-- END Main Container -->
         </div>
+        <!-- END Page Container -->
 
-        <div class="login-progressbar">
-            <div></div>
-        </div>
+        <!--
+            Codebase JS Core
 
-        <div class="login-form">
+            Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
+            to handle those dependencies through webpack. Please check out assets/_es6/main/bootstrap.js for more info.
 
-            <div class="login-content">
+            If you like, you could also include them separately directly from the assets/js/core folder in the following
+            order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
 
-                <div class="form-login-error">
-                    <h3>Invalid login</h3>
-                    <p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
-                </div>
-               
-                {{-- <form method="post" role="form" id="form_login"> --}}
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-                        @if(session('status'))
-                        <div class="alert alert-success">
-                            {{session('status')}}
-                        </div>
-                        @endif
-                        @if(session('warning'))
-                        <div class="alert alert-warning">
-                            {{session('warning')}}
-                        </div>
-                        @endif
+            assets/js/core/jquery.min.js
+            assets/js/core/bootstrap.bundle.min.js
+            assets/js/core/simplebar.min.js
+            assets/js/core/jquery-scrollLock.min.js
+            assets/js/core/jquery.appear.min.js
+            assets/js/core/jquery.countTo.min.js
+            assets/js/core/js.cookie.min.js
+        -->
+        <script src="{{asset('codebase/')}}/src/assets/js/codebase.core.min.js"></script>
 
-                        <div class="form-group {{$errors->has('username') || $errors->has('email')?'has-error':''}}">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="entypo-user"></i>
-                                </div>
+        <!--
+            Codebase JS
 
-                                <div class="col-md-12">
-                                    <input id="login" type="text" placeholder="Username or E-Mail" class="form-control" name="login" value="{{ old('username')?:old('email') }}" required autofocus>
+            Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+            webpack is putting everything together at assets/_es6/main/app.js
+        -->
+        <script src="{{asset('codebase/')}}/src/assets/js/codebase.app.min.js"></script>
 
-                                    @if ($errors->has('email') || $errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username')?:$errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+        <!-- Page JS Plugins -->
+        <script src="{{asset('codebase/')}}/src/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="entypo-key"></i>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input id="password" type="password" placeholder="Password" class="form-control" name="password" required>
-
-                                    @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-
-                     {{--    <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <div class="form-group">
-                            <button type="submit" onclick="show_loading_bar(100);" class="btn btn-primary btn-block btn-login">
-                                <i class="entypo-login"></i>
-                                Login
-                            </button>
-                        </div>
-
-                   {{--      <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                               
-                            </div>
-                        </div> --}}
-
-                        <!-- Implemented in v1.1.4 -->
-
-
-                <!-- 
-                
-                You can also use other social network buttons
-                <div class="form-group">
-                
-                    <button type="button" class="btn btn-default btn-lg btn-block btn-icon icon-left twitter-button">
-                        Login with Twitter
-                        <i class="entypo-twitter"></i>
-                    </button>
-                    
-                </div>
-                
-                <div class="form-group">
-                
-                    <button type="button" class="btn btn-default btn-lg btn-block btn-icon icon-left google-button">
-                        Login with Google+
-                        <i class="entypo-gplus"></i>
-                    </button>
-                    
-                </div> -->
-                
-            </form>
-            
-            
-            <div class="login-bottom-links">
-
-               <a class="btn btn-link" href="{{ route('password.request') }}">
-                Forgot Your Password?</a>
-            <br />
-            <a href="{{ route('register') }}">Register New User</a>
-            {{-- <a href="#">ToS</a>  - <a href="#">Privacy Policy</a> --}}
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- Bottom scripts (common) -->
-<script src="{{asset('neon/')}}/html/neon/assets/js/gsap/TweenMax.min.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/bootstrap.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/joinable.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/resizeable.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-api.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/jquery.validate.min.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-login.js"></script>
-
-
-<!-- JavaScripts initializations and stuff -->
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-custom.js"></script>
-
-
-<!-- Demo Settings -->
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-demo.js"></script>
-
-</body>
+        <!-- Page JS Code -->
+        <script src="{{asset('codebase/')}}/src/assets/js/pages/op_auth_signin.min.js"></script>
+    </body>
 </html>

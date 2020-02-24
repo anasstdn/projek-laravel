@@ -78,48 +78,53 @@ input[type="checkbox"]:checked + label:before {
 }
 
   </style>
-  <div class="ajax-loader" style="display: none">
-    <div class="col-md-12">
-      <div class="progress progress-striped active">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-          {{-- <span class="sr-only">40% Complete (success)</span> --}}
-        </div>
-      </div> 
-      <div id="status" style="font-size:8pt;font-family: sans-serif;color: white">Loading...Please Wait</div>  
+<div class="bg-primary-dark">
+<div class="content content-top">
+<div class="row push">
+<div class="col-md py-10 d-md-flex align-items-md-center text-center">
+<h1 class="text-white mb-0">
+<span class="font-w300">Edit Roles</span>
+<span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
+</h1>
+</div>
+  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
+        <button type="button" class="btn btn-alt-primary">
+            <i class="fa fa-user-plus mr-5"></i> New Account
+        </button>
+      </div> --}}
     </div>
   </div>
-  <div class="row">
-   {{--  <div class="boxes">
-  <input type="checkbox" id="box-1">
-  <label for="box-1">Sustainable typewriter cronut</label>
+</div>
+<!-- END Header -->
 
-  <input type="checkbox" id="box-2" checked>
-  <label for="box-2">Gentrify pickled kale chips </label>
+<!-- Page Content -->
+<div class="bg-white">
+  <!-- Breadcrumb -->
+  <div class="content">
+    <nav class="breadcrumb mb-0">
+      <a class="breadcrumb-item" href="javascript:void(0)">Master ACL</a>
+      <a class="breadcrumb-item" href="javascript:void(0)">Roles</a>
+      <span class="breadcrumb-item active">Edit Roles</span>
+    </nav>
+  </div>
+  <!-- END Breadcrumb -->
 
-  <input type="checkbox" id="box-3">
-  <label for="box-3">Gastropub butcher</label>
-</div> --}}
-{{ Form::model($role,array('route' => array((!$role->exists) ? 'role.createpermissionrole':'role.createpermissionrole',$role->id),
+  <!-- Content -->
+  <div class="content">
+    <!-- Icon Navigation -->
+     <!-- Dynamic Table Full Pagination -->
+                    <div class="block">
+                        {{-- <div class="block-header block-header-default"> --}}
+                         {{-- <a class="btn btn-sm btn-primary data-modal pull-left" style="color: white" id="data-modal" href="#" onclick="show_modal('{{ route('user.create') }}')" ><i class='si si-plus' style="color: white" aria-hidden='true'></i> Add</a> --}}
+                            {{-- <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3> --}}
+                        {{-- </div> --}}
+                        <div class="block-content block-content-full">
+                            <!-- DataTables functionality is initialized with .js-dataTable-full-pagination class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+                   {{ Form::model($role,array('route' => array((!$role->exists) ? 'role.createpermissionrole':'role.createpermissionrole',$role->id),
   'class'=>'','id'=>'role-form','method'=>(!$role->exists) ? 'POST' : 'POST')) }}
 
-    <div class="col-lg-12">
-      <div class="panel panel-gradient" data-collapsed="0">
-        <div class="panel-heading">
-          <div class="panel-title pull-left">Edit Permissions
-          </div>  
-          <div class="panel-options">
-            {{-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> --}}
-            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-            {{-- <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> --}}
-            {{-- <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> --}}
-          </div>
-        </div>
 
-        <div class="panel-body">
-          
-          <div class="panel-body">
-            <div class="table-responsive">
-           <table class="table table-bordered datatable" id="table-1">
+           <table class="table table-bordered table-striped table-vcenter" id="table-1">
             <thead>
               <tr>
                 <th>No</th>
@@ -156,20 +161,20 @@ input[type="checkbox"]:checked + label:before {
             </tbody>
             
           </table>
-          <hr/>
           <div class="text-right">
             <button class="btn btn-primary" id="simpan">Save</button>
           </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
  {{ Form::close() }}
+                        </div>
+                    </div>
+                    <!-- END Dynamic Table Full Pagination -->
+    
+  </div>
+  <!-- END Content -->
 </div>
- <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
+ <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1">
  </div>
- <div class="modal fade" id="formModal1" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
+ <div class="modal fade" id="formModal1" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1">
  </div>
 {{-- </div> --}}
 @endsection

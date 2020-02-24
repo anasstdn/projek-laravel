@@ -1,240 +1,180 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!doctype html>
+<html lang="en" class="no-focus">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Neon Admin Panel" />
-    <meta name="author" content="" />
+        <title>Laravel Forecast</title>
 
-    <link rel="icon" href="{{asset('neon/')}}/html/neon/assets/images/favicon.ico">
+        <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
 
-    <title>Laravel Forecast</title>
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework">
+        <meta property="og:site_name" content="Codebase">
+        <meta property="og:description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
 
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/font-icons/entypo/css/entypo.css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-core.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-theme.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/neon-forms.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/custom.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.css">
-    <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/css/skins/green.css">
-    <link rel="stylesheet" href="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.css">
-    {{-- <link rel="stylesheet" href="{{asset('neon/')}}/html/neon/assets/js/daterangepicker/daterangepicker-bs3.css"> --}}
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{{asset('codebase/')}}/src/assets/media/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{asset('codebase/')}}/src/assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('codebase/')}}/src/assets/media/favicons/apple-touch-icon-180x180.png">
+        <!-- END Icons -->
 
-    <script src="{{asset('neon/')}}/html/neon/assets/js/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://skywalkapps.github.io/bootstrap-notifications/stylesheets/bootstrap-notifications.css">
+        <!-- Stylesheets -->
 
-    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- Fonts and Codebase framework -->
+        <link rel="stylesheet" href="{{asset('codebase/')}}/src/assets/js/plugins/datatables/dataTables.bootstrap4.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
+        <link rel="stylesheet" id="css-main" href="{{asset('codebase/')}}/src/assets/css/codebase.min.css">
 
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+        <link rel="stylesheet" id="css-theme" href="{{asset('codebase/')}}/src/assets/css/themes/corporate.min.css">
+        <link href="{{asset('codebase/')}}/build/toastr.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="{{asset('codebase/')}}/src/assets/js/plugins/select2/css/select2.min.css">
+        <!-- END Stylesheets -->
+    </head>
+    <body>
 
-</head>
-    <style>
-[type="radio"]:checked,
-[type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
-}
-[type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: #666;
-}
-[type="radio"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    border-radius: 100%;
-    background: #fff;
-}
-[type="radio"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: #4CAF50;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-}
-[type="radio"]:not(:checked) + label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-}
-[type="radio"]:checked + label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
+        <!-- Page Container -->
+        <!--
+            Available classes for #page-container:
 
-  .boxes {
-  margin: auto;
-/*  padding: 50px;
-  background: #484848;*/
-}
+        GENERIC
 
-/*Checkboxes styles*/
-input[type="checkbox"] { display: none; }
+            'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
 
-input[type="checkbox"] + label {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 20px;
-  font: 12px/20px 'Open Sans', Arial, sans-serif;
-  color: #4CAF50;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
+        SIDEBAR & SIDE OVERLAY
 
-input[type="checkbox"] + label:last-child { margin-bottom: 0; }
+            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+            'sidebar-inverse'                           Dark themed sidebar
 
-input[type="checkbox"] + label:before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #4CAF50;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: .6;
-  -webkit-transition: all .12s, border-color .08s;
-  transition: all .12s, border-color .08s;
-}
+            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+            'side-overlay-o'                            Visible Side Overlay by default
 
-input[type="checkbox"]:checked + label:before {
-  width: 10px;
-  top: -5px;
-  left: 5px;
-  border-radius: 0;
-  opacity: 1;
-  border-top-color: transparent;
-  border-left-color: transparent;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
 
-/*.gray{
-  background: linear-gradient(45deg,#4CAF50,#9df980);
-}*/
+            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
 
-.page-body.gray .page-container .main-content,
-.page-body.gray .page-container {
-  background: linear-gradient(45deg,#cedbce,#ffffff);
-}
+        HEADER
 
-footer.main{
-  position:absolute;
-  width:95%;
-  bottom:0;
-  color:#4caf50;
-  /*background: linear-gradient(45deg,#c2ffae,#e4ffdb);*/
-}
+            ''                                          Static Header if no class is added
+            'page-header-fixed'                         Fixed Header
+
+        HEADER STYLE
+
+            ''                                          Classic Header style if no class is added
+            'page-header-modern'                        Modern Header style
+            'page-header-inverse'                       Dark themed Header (works only with classic Header style)
+            'page-header-glass'                         Light themed Header with transparency by default
+                                                        (absolute position, perfect for light images underneath - solid light background on scroll if the Header is also set as fixed)
+            'page-header-glass page-header-inverse'     Dark themed Header with transparency by default
+                                                        (absolute position, perfect for dark images underneath - solid dark background on scroll if the Header is also set as fixed)
+
+        MAIN CONTENT LAYOUT
+
+            ''                                          Full width Main Content if no class is added
+            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+        -->
+        <div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed">
 
 
+         @include('layouts.header')
 
-</style>
-<body class="page-body page-fade gray" data-url="http://neon.dev">
+            <!-- Main Container -->
+            <main id="main-container">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+            @yield('content')
 
-<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
-    
-    @include('layouts.sidebar')
+                <!-- Header -->
+             
 
-    <div class="main-content">
-        @include('layouts.header')
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        @yield('content')
-                {{-- <h2>Here starts everything...</h2> --}}
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <footer id="page-footer" class="bg-white opacity-0">
+                <div class="content py-20 font-size-sm clearfix">
+                    <div class="float-right">
+                        by Anas Setyadin</a>
+                    </div>
+                    <div class="float-left">
+                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Laravel Forecast v.1.0.5</a> &copy; <span class="">2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
+
+        <!--
+            Codebase JS Core
+
+            Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
+            to handle those dependencies through webpack. Please check out assets/_es6/main/bootstrap.js for more info.
+
+            If you like, you could also include them separately directly from the assets/js/core folder in the following
+            order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
+
+            assets/js/core/jquery.min.js
+            assets/js/core/bootstrap.bundle.min.js
+            assets/js/core/simplebar.min.js
+            assets/js/core/jquery-scrollLock.min.js
+            assets/js/core/jquery.appear.min.js
+            assets/js/core/jquery.countTo.min.js
+            assets/js/core/js.cookie.min.js
+        -->
+        <script src="{{asset('codebase/')}}/src/assets/js/codebase.core.min.js"></script>
+
+        <!--
+            Codebase JS
+
+            Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+            webpack is putting everything together at assets/_es6/main/app.js
+        -->
+        <script src="{{asset('codebase/')}}/src/assets/js/codebase.app.min.js"></script>
+
+        <!-- Page JS Plugins -->
+        <script src="{{asset('codebase/')}}/src/assets/js/plugins/chartjs/Chart.bundle.min.js"></script>
+        <script src="{{asset('codebase/')}}/src/assets/js/plugins/select2/js/select2.full.min.js"></script>
+        <script src="{{asset('neon/')}}/html/neon/assets/js/toastr.js"></script>
+
+        <!-- Page JS Code -->
+        <script src="{{asset('codebase/')}}/src/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="{{asset('codebase/')}}/src/assets/js/sweetalert.min.js"></script>
+        <script src="{{asset('codebase/')}}/src/assets/js/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page JS Code -->
+        <script src="{{asset('codebase/')}}/src/assets/js/pages/be_tables_datatables.min.js"></script>
         
-        <br />
-        
-        <!-- lets do some work here... -->
-        <!-- Footer -->
-        <footer class="main">
-            
-            <center>Laravel Forecast <strong>v.1.0.3</strong> by Anas Setyadin<br/><strong>Copyright &copy; 2020</strong></center>
-        
-        </footer>
-    </div>
+        <script src="{{asset('codebase/')}}/src/assets/js/pages/db_corporate.min.js"></script>
+        <script src="{{asset('js/')}}/moment.js"></script>
+        <script src="{{asset('js/')}}/echo.js"></script>
+        <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
-    
-    
-</div>
-
-
-<!-- Bottom scripts (common) -->
-<script src="{{asset('neon/')}}/html/neon/assets/js/gsap/TweenMax.min.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/datatables/datatables.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/bootstrap.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/joinable.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/resizeable.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-api.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/jquery.validate.min.js"></script>
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-login.js"></script>
-
-
-
-<!-- Imported scripts on this page -->
-    <script src="{{asset('neon/')}}/html/neon/assets/js/toastr.js"></script>
-    <script src="{{asset('neon/')}}/html/neon/assets/js/fileinput.js"></script>
-    <script src="{{asset('neon/')}}/html/neon/assets/js/dropzone/dropzone.js"></script>
-    <script src="{{asset('neon/')}}/html/neon/assets/js/neon-chat.js"></script>
-    <script src="{{asset('neon/')}}/html/neon/assets/js/icheck/icheck.min.js"></script>
-
-
-<!-- JavaScripts initializations and stuff -->
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-custom.js"></script>
-
-<script src="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-
-<!-- Demo Settings -->
-<script src="{{asset('neon/')}}/html/neon/assets/js/neon-demo.js"></script>
-<script src="{{asset('js/')}}/moment.js"></script>
-<script src="{{asset('js/')}}/echo.js"></script>
-{{-- <script src="{{asset('neon/')}}/html/neon/assets/js/daterangepicker/daterangepicker.js"></script> --}}
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-
-<script type="text/javascript">
-    var notificationsWrapper   = $('.notifications');
-    var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
-    var notificationsCountElem = notificationsToggle.find('i[data-count]');
-    var notificationsCount     = parseInt(notificationsCountElem.data('count'));
-    var notifications          = notificationsWrapper.find('ul.dropdown-menu-list');
+        <script type="text/javascript">
+          var notificationsWrapper   = $('.notifications');
+          var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+          var notificationsCountElem = notificationsToggle.find('i[data-count]');
+          var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+          var notifications          = notificationsWrapper.find('ul.dropdown-menu-list');
 
 
     // Enable pusher logging - don't include this in production
-     Pusher.logToConsole = true;
+    Pusher.logToConsole = true;
 
     var pusher = new Pusher('985705c222cb4b13a227', {
-        cluster: 'ap3',
-        forceTLS: true
+      cluster: 'ap3',
+      forceTLS: true
     });
 
     // Subscribe to the channel we specified in our Laravel Event
@@ -242,34 +182,34 @@ footer.main{
 
     // Bind a function to a Event (the full Laravel class)
     channel.bind('send-message', function(data) {
-        console.log(data);
-        var existingNotifications = notifications.html();
-        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
-        var newNotificationHtml = `
-          <li class="notification-info">
-          <a href="#">
-          <i class="pull-right"><img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="25x25" style="width: 25px; height: 25px;"></i>
+      console.log(data);
+      var existingNotifications = notifications.html();
+      var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+      var newNotificationHtml = `
+      <li class="notification-info">
+      <a href="#">
+      <i class="pull-right"><img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="25x25" style="width: 25px; height: 25px;"></i>
 
-          <span class="line">
-          `+data.title+`
-          </span>
+      <span class="line">
+      `+data.title+`
+      </span>
 
-          <span class="line small">
-          `+data.content+`
-          </span>
-          <span class="line small" id="time_`+notificationsCount+`">
-          `+dateToHowManyAgo(data.timestamp,notificationsCount)+`
-          </span>
-          </a>
-          </li>
-        `;
-        notifications.html(newNotificationHtml + existingNotifications);
+      <span class="line small">
+      `+data.content+`
+      </span>
+      <span class="line small" id="time_`+notificationsCount+`">
+      `+dateToHowManyAgo(data.timestamp,notificationsCount)+`
+      </span>
+      </a>
+      </li>
+      `;
+      notifications.html(newNotificationHtml + existingNotifications);
 
-        notificationsCount += 1;
-        notificationsCountElem.attr('data-count', notificationsCount);
-        notificationsWrapper.find('.info').text(notificationsCount);
-        notificationsWrapper.find('.data-count').text(notificationsCount);
-        notificationsWrapper.show();
+      notificationsCount += 1;
+      notificationsCountElem.attr('data-count', notificationsCount);
+      notificationsWrapper.find('.info').text(notificationsCount);
+      notificationsWrapper.find('.data-count').text(notificationsCount);
+      notificationsWrapper.show();
     });
 
     function get_notification()
@@ -280,55 +220,55 @@ footer.main{
         async : true,
         dataType : 'json',
         success : function(data){
-            for(let i=0;i<data.data.length;i++)
-            {
-                var existingNotifications = notifications.html();
-                var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
-                var newNotificationHtml = `
-                <li class="notification-info">
-                <a href="#">
-                <i class="pull-right"><img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="25x25" style="width: 25px; height: 25px;"></i>
+          for(let i=0;i<data.data.length;i++)
+          {
+            var existingNotifications = notifications.html();
+            var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+            var newNotificationHtml = `
+            <li class="notification-info">
+            <a href="#">
+            <i class="pull-right"><img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="25x25" style="width: 25px; height: 25px;"></i>
 
-                <span class="line">
-                `+data.data[i].title+`
-                </span>
+            <span class="line">
+            `+data.data[i].title+`
+            </span>
 
-                <span class="line small">
-                `+data.data[i].content+`
-                </span>
-                <span class="line small" id="time_`+(i)+`">
-                `+
-                dateToHowManyAgo(data.data[i].created_at,(i))+`
-                </span>
-                </a>
-                </li>
-                `;
-                notifications.html(newNotificationHtml + existingNotifications);
-                notificationsCount += 1;
-                notificationsCountElem.attr('data-count', notificationsCount);
-                notificationsWrapper.find('.info').text(notificationsCount);
-                notificationsWrapper.find('.data-count').text(notificationsCount);
-                notificationsWrapper.show();
-            }
+            <span class="line small">
+            `+data.data[i].content+`
+            </span>
+            <span class="line small" id="time_`+(i)+`">
+            `+
+            dateToHowManyAgo(data.data[i].created_at,(i))+`
+            </span>
+            </a>
+            </li>
+            `;
+            notifications.html(newNotificationHtml + existingNotifications);
+            notificationsCount += 1;
+            notificationsCountElem.attr('data-count', notificationsCount);
+            notificationsWrapper.find('.info').text(notificationsCount);
+            notificationsWrapper.find('.data-count').text(notificationsCount);
+            notificationsWrapper.show();
+          }
         },
         error:function (xhr, status, error){
-            alert(xhr.responseText);
+          alert(xhr.responseText);
         },
-    });
-  }
+      });
+    }
 
     function dateToHowManyAgo(stringDate,id){
-        var dateTime = new Date(stringDate);
-        var timestamp = moment(dateTime, 'ddd MMM DD YYYY HH:mm:ss GMT Z').fromNow();
-        return timestamp;
-}
+      var dateTime = new Date(stringDate);
+      var timestamp = moment(dateTime, 'ddd MMM DD YYYY HH:mm:ss GMT Z').fromNow();
+      return timestamp;
+    }
 
-$(document).ready(function(){
+    $(document).ready(function(){
     // setTimeout(function(){
-       get_notification();
+     get_notification();
     // }, 500);
-   
-})
+
+  })
 
 
 
@@ -336,40 +276,40 @@ $(document).ready(function(){
 <script type="text/javascript">
 
   @if ($errors->any())
-      @foreach ($errors->all() as $error)
-      toastr_notif("{!! $error !!}","gagal");
-      @endforeach
-      @endif
-      @if(Session::get('messageType'))
-      toastr_notif("{!! Session::get('message') !!}","{!! Session::get('messageType') !!}");
-      <?php
-      Session::forget('messageType');
-      Session::forget('message');
-      ?>
+  @foreach ($errors->all() as $error)
+  toastr_notif("{!! $error !!}","gagal");
+  @endforeach
+  @endif
+  @if(Session::get('messageType'))
+  toastr_notif("{!! Session::get('message') !!}","{!! Session::get('messageType') !!}");
+  <?php
+  Session::forget('messageType');
+  Session::forget('message');
+  ?>
   @endif
 
 function show_modal(url) { // clear error string
-    $.ajax({
-      url:url,
-      dataType: 'text',
-      success: function(data) {
-        $("#formModal").html(data);
-        $("#formModal").modal('show');
+  $.ajax({
+    url:url,
+    dataType: 'text',
+    success: function(data) {
+      $("#formModal").html(data);
+      $("#formModal").modal('show');
         // todo:  add the html to the dom...
-    }
-});
+      }
+    });
 };
 
 function delete_data(url) { // clear error string
-    $.ajax({
-      url:url,
-      dataType: 'text',
-      success: function(data) {
-        $("#formModal1").html(data);
-        $("#formModal1").modal('show');
+  $.ajax({
+    url:url,
+    dataType: 'text',
+    success: function(data) {
+      $("#formModal1").html(data);
+      $("#formModal1").modal('show');
         // todo:  add the html to the dom...
-    }
-});
+      }
+    });
 };
 
 // function notification( message,type ) {
@@ -386,44 +326,44 @@ function delete_data(url) { // clear error string
 
 function toastr_notif(message,type)
 {
-    if(type=='sukses')
-    {
-        var opts = {
-            "closeButton": true,
-            "debug": false,
-            "positionClass": "toast-top-right",
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-        
-        toastr.success(message, "Berhasil", opts);
-    }
-    else
-    {
-        var opts = {
-            "closeButton": true,
-            "debug": false,
-            "positionClass": "toast-top-right",
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
+  if(type=='sukses')
+  {
+    var opts = {
+      "closeButton": true,
+      "debug": false,
+      "positionClass": "toast-top-right",
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
 
-        toastr.warning(message, 'Peringatan', opts);
-    }
+    toastr.success(message, "Berhasil", opts);
+  }
+  else
+  {
+    var opts = {
+      "closeButton": true,
+      "debug": false,
+      "positionClass": "toast-top-right",
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
+
+    toastr.warning(message, 'Peringatan', opts);
+  }
 }
 
 function uploadProgressHandler(event) {
@@ -433,28 +373,113 @@ function uploadProgressHandler(event) {
     $("#percent").html(progress + "%");
     $(".progress-bar").css("width", progress + "%");
     $("#status").html(progress + "% uploaded... please wait");
-}
+  }
 
-function loadHandler(event) {
+  function loadHandler(event) {
     $("#status").html('Load Completed');
     setTimeout(function(){
       $('.ajax-loader').fadeOut()
       $("#percent").html("0%");
       $(".progress-bar").css("width", "100%");
-  }, 500);
-}
+    }, 500);
+  }
 
-function errorHandler(event) {
+  function errorHandler(event) {
     $("#status").html("Send Data Failed");
-}
+  }
 
-function abortHandler(event) {
+  function abortHandler(event) {
     $("#status").html("Send Data Aborted");
-}
+  }
 
+var tday=["Sun","Mon","Tue","Wed","Thru","Fri","Sat"];
+var tmonth=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  function GetClock(){
+    var d=new Date();
+    var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
+    var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds();
+    if(nmin<=9) nmin="0"+nmin;
+    if(nsec<=9) nsec="0"+nsec;
+
+    var clocktext=""+tday[nday]+", "+ndate+" "+tmonth[nmonth]+" "+nyear+" "+nhour+":"+nmin+":"+nsec+"";
+    document.getElementById('clockbox').innerHTML=clocktext;
+  }
+
+  GetClock();
+  setInterval(GetClock,1000);
+
+  function hapus(url) { // clear error string
+    var token = $("meta[name='csrf-token']").attr("content");
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+          // swal("Poof! Your imaginary file has been deleted!", {
+          //   icon: "success",
+          // });
+          $.ajax({
+            url : url,
+            type: 'DELETE',
+            headers: {
+              'X-CSRF-TOKEN': token
+            },
+            success:function(){
+              swal('Data Berhasil Dihapus', ' ', 'success');
+
+              setTimeout(function() {
+  //your code to be executed after 1 second
+  location.reload();
+}, 1000);
+            },
+          });
+        } else {
+          swal("Delete is canceled");
+        }
+      });
+  }
+  function reset_password(url) { // clear error string
+    var token = $("meta[name='csrf-token']").attr("content");
+    swal({
+      title: "Password Reset?",
+      text: "Are you sure to reset the password?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+          // swal("Poof! Your imaginary file has been deleted!", {
+          //   icon: "success",
+          // });
+          $.ajax({
+            url : url,
+            type: 'GET',
+            headers: {
+              'X-CSRF-TOKEN': token
+            },
+            success:function(){
+              swal('Password Berhasil Direset', ' ', 'success');
+
+              setTimeout(function() {
+  //your code to be executed after 1 second
+  location.reload();
+}, 1000);
+            },
+          });
+        } else {
+          swal("Reset is canceled");
+        }
+      });
+  }
 </script>
 
-  @yield('js')  
-    @stack('js')
-</body>
+@yield('js')  
+@stack('js')
+    </body>
 </html>

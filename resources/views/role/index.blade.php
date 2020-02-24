@@ -1,83 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- {{dd('aaaa')}} --}}
-{{-- <div class="container"> --}}
-  <style>
-    .panel-heading h3 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: normal;
-    width: 75%;
-    padding-top: 8px;
-}
-
-  .ajax-loader{
-    position:fixed;
-    top:0px;
-    right:0px;
-    width:100%;
-    height:auto;
-    background-color:#A9A9A9;
-    background-repeat:no-repeat;
-    background-position:center;
-    z-index:10000000;
-    opacity: 0.7;
-    filter: alpha(opacity=40); /* For IE8 and earlier */
-  }
-
-  </style>
-  <div class="ajax-loader" style="display: none">
-    <div class="col-md-12">
-      <div class="progress progress-striped active">
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-          {{-- <span class="sr-only">40% Complete (success)</span> --}}
-        </div>
-      </div> 
-      <div id="status" style="font-size:8pt;font-family: sans-serif;color: white">Loading...Please Wait</div>  
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="panel panel-gradient" data-collapsed="0">
-        <div class="panel-heading">
-          <div class="panel-title pull-left">Role
-          </div>  
-          <div class="panel-options">
-            {{-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> --}}
-            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-            {{-- <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> --}}
-            {{-- <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> --}}
-          </div>
-        </div>
-
-        <div class="panel-body">        
-          <div class="panel-body">
-            <div class="table-responsive">
-           <table class="table table-bordered datatable" id="table-1">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Action</th>
-                <th>Name</th>
-                <th>Display Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            
-          </table>
-        </div>
-        </div>
-      </div>
+<div class="bg-primary-dark">
+<div class="content content-top">
+<div class="row push">
+<div class="col-md py-10 d-md-flex align-items-md-center text-center">
+<h1 class="text-white mb-0">
+<span class="font-w300">Roles</span>
+<span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
+</h1>
+</div>
+  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
+        <button type="button" class="btn btn-alt-primary">
+            <i class="fa fa-user-plus mr-5"></i> New Account
+        </button>
+      </div> --}}
     </div>
   </div>
 </div>
- <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
+<!-- END Header -->
+
+<!-- Page Content -->
+<div class="bg-white">
+  <!-- Breadcrumb -->
+  <div class="content">
+    <nav class="breadcrumb mb-0">
+      <a class="breadcrumb-item" href="javascript:void(0)">Master ACL</a>
+      <span class="breadcrumb-item active">Roles</span>
+    </nav>
+  </div>
+  <!-- END Breadcrumb -->
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Icon Navigation -->
+     <!-- Dynamic Table Full Pagination -->
+                    <div class="block">
+                        {{-- <div class="block-header block-header-default"> --}}
+                         {{-- <a class="btn btn-sm btn-primary data-modal pull-left" style="color: white" id="data-modal" href="#" onclick="show_modal('{{ route('user.create') }}')" ><i class='si si-plus' style="color: white" aria-hidden='true'></i> Add</a> --}}
+                            {{-- <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3> --}}
+                        {{-- </div> --}}
+                        <div class="block-content block-content-full">
+                            <!-- DataTables functionality is initialized with .js-dataTable-full-pagination class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+                            <table class="table table-bordered table-striped table-vcenter" id="table-1">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Action</th>
+                                  <th>Name</th>
+                                  <th>Display Name</th>
+                                  <th>Description</th>
+                                </tr>
+                              </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END Dynamic Table Full Pagination -->
+    
+  </div>
+  <!-- END Content -->
+</div>
+ <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1">
  </div>
- <div class="modal fade" id="formModal1" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
+ <div class="modal fade" id="formModal1" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1">
  </div>
-{{-- </div> --}}
+<!-- END Page Content -->
 @endsection
 
 @push('js')
@@ -136,7 +123,6 @@ function reload_table()
 {
     role.ajax.reload(null,false); //reload datatable ajax 
 }
-
 
 </script>
 @endpush

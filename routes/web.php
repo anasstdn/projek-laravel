@@ -66,17 +66,21 @@ Route::resource('peramalan', 'PeramalanController');
 
 
 
+Route::get('penjualan/load-data', 'PenjualanController@loadData');
+Route::resource('penjualan', 'PenjualanController');
+
+
 Route::get('user/load-data','UserController@loadData');
 Route::get('user/json','UserController@json');
 Route::get('user/activate/{id}','UserController@activate');
 Route::get('user/update/{id}','UserController@update');
 Route::get('user/deactivate/{id}','UserController@deactivate');
 Route::get('user/{id}/reset','UserController@reset');
-Route::get('user/{id}/destroy','UserController@destroy');
+// Route::get('user/{id}/destroy','UserController@destroy');
 Route::match(['get','post'],'user/cek-username','UserController@cekUsername');
 Route::match(['get','post'],'user/cek-email','UserController@cekEmail');
 Route::match(['get','post'],'user/send-data','UserController@sendData');
-Route::match(['get','post'],'user/delete','UserController@delete');
+// Route::match(['get','post'],'user/delete','UserController@delete');
 Route::resource('user','UserController');
 Route::delete('user/{id}/restore','UserController@restore');
 

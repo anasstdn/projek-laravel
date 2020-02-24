@@ -55,24 +55,38 @@ class HomeController extends Controller
           ->whereYear('tgl_transaksi',date('Y'))
           ->first();
 
+
+
+
           Carbon::setWeekStartsAt(Carbon::MONDAY);
           Carbon::setWeekEndsAt(Carbon::SATURDAY);
           // dd(Carbon::now()->startOfWeek()->addWeeks('-1')->format('Y-m-d'));
 
-           $pasir_minggu_ini=RawDatum::select(\DB::raw('sum(pasir) as total'))
+           $total_transaksi_minggu_ini=RawDatum::select(\DB::raw('count(id) as total'))
           ->whereBetween('tgl_transaksi', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])
           ->first();
 
-          $pasir_minggu_lalu=RawDatum::select(\DB::raw('sum(pasir) as total'))
-          ->whereBetween('tgl_transaksi', [Carbon::now()->startOfWeek()->addWeeks('-1')->format('Y-m-d'), Carbon::now()->endOfWeek()->addWeeks('-1')->format('Y-m-d')])
+          $total_transaksi_hari_ini=RawDatum::select(\DB::raw('count(id) as total'))
+          ->whereDate('tgl_transaksi',date('Y-m-d'))
           ->first();
+
+
+          //  $pasir_minggu_ini=RawDatum::select(\DB::raw('sum(pasir) as total'))
+          // ->whereBetween('tgl_transaksi', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])
+          // ->first();
+
+          // $pasir_minggu_lalu=RawDatum::select(\DB::raw('sum(pasir) as total'))
+          // ->whereBetween('tgl_transaksi', [Carbon::now()->startOfWeek()->addWeeks('-1')->format('Y-m-d'), Carbon::now()->endOfWeek()->addWeeks('-1')->format('Y-m-d')])
+          // ->first();
 
 
           $data=array(
             'total_transaksi'=>isset($total_transaksi)?$total_transaksi->total:0,
             'total_transaksi_bulan_ini'=>isset($total_transaksi_bulan_ini)?$total_transaksi_bulan_ini->total:0,
-            'pasir_minggu_ini'=>isset($pasir_minggu_ini) && $pasir_minggu_ini->total!==null?$pasir_minggu_ini->total:0,
-            'pasir_minggu_lalu'=>isset($pasir_minggu_lalu) && $pasir_minggu_lalu->total!==null?$pasir_minggu_lalu->total:0
+            'total_transaksi_minggu_ini'=>isset($total_transaksi_minggu_ini)?$total_transaksi_minggu_ini->total:0,
+            'total_transaksi_hari_ini'=>isset($total_transaksi_hari_ini)?$total_transaksi_hari_ini->total:0,
+            // 'pasir_minggu_ini'=>isset($pasir_minggu_ini) && $pasir_minggu_ini->total!==null?$pasir_minggu_ini->total:0,
+            // 'pasir_minggu_lalu'=>isset($pasir_minggu_lalu) && $pasir_minggu_lalu->total!==null?$pasir_minggu_lalu->total:0
           );
         }
 

@@ -107,7 +107,7 @@ class RoleController extends Controller
     	->addColumn('action', function ($data) {
 
     		$content = '';
-    		$content .= "<a href='permission-role/get/".$data->id."/menu' class='btn btn-sm btn-primary' ><span class='btn btn-success btn-sm ' id='edit'>Access Permission</span></a>";
+    		$content .= "<a href='permission-role/get/".$data->id."/menu' class='btn btn-sm btn-primary' >Access Permission</a>";
 
     		return $content;
     	})
