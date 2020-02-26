@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Excel;
 use Carbon\Carbon;
-date_default_timezone_set("Asia/Jakarta");
+date_default_timezone_set(setting('timezone'));
 
 class DataController extends Controller
 {
@@ -54,6 +54,7 @@ class DataController extends Controller
 
     public function importData(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'import_file' => 'required'
         ]);

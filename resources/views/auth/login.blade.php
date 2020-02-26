@@ -108,7 +108,7 @@
                                         <span class="font-size-xl text-primary-dark">Laravel</span><span class="font-size-xl">Forecast</span>
                                     </a>
                                     <!-- <h1 class="h3 font-w700 mt-30 mb-10">Welcome to Your Dashboard</h1> -->
-                                    <h2 class="h5 font-w400 text-muted mb-0">Please sign in</h2>
+                                    {{-- <h2 class="h5 font-w400 text-muted mb-0">Please sign in</h2> --}}
                                 </div>
                                 <!-- END Header -->
 

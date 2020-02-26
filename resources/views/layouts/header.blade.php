@@ -38,6 +38,7 @@
                                 <a class="" href="{{url('/home')}}"><i class="si si-home"></i>Dashboard</a>
                             </li>
                             @endif
+                            @if(\Auth::user()->can('read-acl-menu'))
                             <li>
                                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i>Master ACL</a>
                                 <ul>
@@ -52,6 +53,8 @@
                                     </li>
                                 </ul>
                             </li>
+                            @endif
+                            @if(\Auth::user()->can('read-data-menu'))
                             <li>
                                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i>Tools</a>
                                 <ul>
@@ -60,8 +63,9 @@
                                     </li>
                                 </ul>
                             </li>
+                            @endif
                             <li>
-                                <a href=""><i class="si si-basket"></i>Sales</a>
+                                <a href="{{url('/penjualan')}}"><i class="si si-basket"></i>Sales</a>
                             </li>
                             <li>
                                 <a href=""><i class="si si-pie-chart"></i>Chart</a>
@@ -92,6 +96,9 @@
                             <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
                                 <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
                                 <div class="dropdown-divider"></div>
+                                 <a class="dropdown-item" href="{{ url('settings') }}">
+                                <i class="si si-settings mr-5"></i> Settings
+                            </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 <i class="si si-logout mr-5"></i> Sign Out

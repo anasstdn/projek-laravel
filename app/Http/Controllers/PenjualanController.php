@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-date_default_timezone_set("Asia/Jakarta");
+date_default_timezone_set(setting('timezone'));
 
 class PenjualanController extends Controller
 {
@@ -46,6 +46,7 @@ class PenjualanController extends Controller
     {
        $GLOBALS['nomor']=\Request::input('start',1)+1;
        $tahun=\Request::input('tahun');
+       // dd($tahun);
        // $dataList = RawDatum::select(\DB::raw('MONTH(tgl_transaksi) as bulan,sum(pasir) as pasir, sum(gendol) as gendol, sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
        // ->whereYear('tgl_transaksi',date('2019'))
        // ->groupBy('bulan')
@@ -260,5 +261,90 @@ class PenjualanController extends Controller
 
      ->make(true);
  }
+
+ public function loadDataMingguan()
+ {
+    $GLOBALS['nomor']=\Request::input('start',1)+1;
+    $minggu=date('Y-m-d',strtotime(\Request::input('week_input')));
+    $tahun=date('Y',strtotime(\Request::input('week_input')));
+    $minggu=strftime('%V', strtotime($minggu))-1;
+
+    $dataList=RawDatum::select(DB::raw('tgl_transaksi,COALESCE(sum(pasir),0) as pasir,COALESCE(sum(gendol),0) as gendol,COALESCE(sum(abu),0) as abu, COALESCE(sum(split2_3),0) as split2_3, COALESCE(sum(split1_2),0) as split1_2, COALESCE(sum(lpa),0) as lpa'))
+    ->where(\DB::raw('date_format(tgl_transaksi,"%V")'),'=',$minggu)
+    ->whereYear('tgl_transaksi',$tahun)
+    ->groupBy(DB::raw('tgl_transaksi'))
+    ->orderBy('tgl_transaksi','asc');
+
+    if (request()->get('status') == 'trash') {
+         $dataList->onlyTrashed();
+     }
+     return DataTables::of($dataList)
+     ->addColumn('nomor',function($kategori){
+         return $GLOBALS['nomor']++;
+     })
+
+     ->addColumn('tgl_transaksi',function($data){
+      if(isset($data->tgl_transaksi)){
+        return date_indo(date('Y-m-d',strtotime($data->tgl_transaksi)));
+      }else{
+        return null;
+      }
+    })
+
+     ->addColumn('pasir',function($data){
+      if(isset($data->pasir)){
+        return $data->pasir!==null?$data->pasir:'0';
+      }else{
+        return null;
+      }
+    })
+
+     ->addColumn('gendol',function($data){
+      if(isset($data->gendol)){
+        return $data->gendol!==null?$data->gendol:'0';
+      }else{
+        return null;
+      }
+    })
+
+      ->addColumn('abu',function($data){
+      if(isset($data->abu)){
+        return $data->abu!==null?$data->abu:'0';
+      }else{
+        return null;
+      }
+    })
+
+       ->addColumn('split2_3',function($data){
+      if(isset($data->split2_3)){
+        return $data->split2_3!==null?$data->split2_3:'0';
+      }else{
+        return null;
+      }
+    })
+
+         ->addColumn('split1_2',function($data){
+      if(isset($data->split1_2)){
+        return $data->split1_2!==null?$data->split1_2:'0';
+      }else{
+        return null;
+      }
+    })
+
+            ->addColumn('lpa',function($data){
+      if(isset($data->lpa)){
+        return $data->lpa!==null?$data->lpa:'0';
+      }else{
+        return null;
+      }
+    })
+
+       ->make(true);
+
+
+
+ }
+
+
 
 }

@@ -263,7 +263,8 @@ footer.main{
           </a>
           </li>
         `;
-        notifications.html(newNotificationHtml + existingNotifications);
+        $('ul.dropdown-menu-list').append(newNotificationHtml);
+        // notifications.html(newNotificationHtml + existingNotifications);
 
         notificationsCount += 1;
         notificationsCountElem.attr('data-count', notificationsCount);

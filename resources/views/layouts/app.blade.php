@@ -37,6 +37,8 @@
         <link rel="stylesheet" id="css-theme" href="{{asset('codebase/')}}/src/assets/css/themes/corporate.min.css">
         <link href="{{asset('codebase/')}}/build/toastr.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('codebase/')}}/src/assets/js/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="{{asset('codebase/')}}/src/assets/js/plugins/flatpickr/flatpickr.min.css">
+        <link rel="stylesheet" href="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.css">
         <!-- END Stylesheets -->
     </head>
     <body>
@@ -157,7 +159,10 @@
         <script src="{{asset('codebase/')}}/src/assets/js/pages/be_tables_datatables.min.js"></script>
         
         <script src="{{asset('codebase/')}}/src/assets/js/pages/db_corporate.min.js"></script>
+        <script src="{{asset('codebase/')}}/src/assets/js/plugins/flatpickr/flatpickr.min.js"></script>
+        <script src="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.js"></script>
         <script src="{{asset('js/')}}/moment.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data.min.js"></script>
         <script src="{{asset('js/')}}/echo.js"></script>
         <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
@@ -392,11 +397,14 @@ function uploadProgressHandler(event) {
     $("#status").html("Send Data Aborted");
   }
 
+
+
 var tday=["Sun","Mon","Tue","Wed","Thru","Fri","Sat"];
 var tmonth=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   function GetClock(){
-    var d=new Date();
+    var d=new Date("<?php echo date("Y-m-d H:i:s");?>");
+    // console.log(moment().tz(''));
     var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
     var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds();
     if(nmin<=9) nmin="0"+nmin;

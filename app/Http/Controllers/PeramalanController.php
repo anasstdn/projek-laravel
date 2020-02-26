@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-date_default_timezone_set("Asia/Jakarta");
+date_default_timezone_set(setting('timezone'));
 
 class PeramalanController extends Controller
 {

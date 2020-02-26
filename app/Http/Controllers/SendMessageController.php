@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Pusher\Laravel\Facades\Pusher;
 use App\Models\Notification;
-date_default_timezone_set("Asia/Jakarta");
+date_default_timezone_set(setting('timezone'));
 
 class SendMessageController extends Controller
 {

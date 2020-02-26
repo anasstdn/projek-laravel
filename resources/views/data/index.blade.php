@@ -1,29 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- {{dd('aaaa')}} --}}
-{{-- <div class="container"> --}}
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-gradient" data-collapsed="0">
-                <div class="panel-heading">
-                    <div class="panel-title">Import / Export to Database</div>
+<div class="bg-primary-dark">
+<div class="content content-top">
+<div class="row push">
+<div class="col-md py-10 d-md-flex align-items-md-center text-center">
+<h1 class="text-white mb-0">
+<span class="font-w300">Import / Export to DB</span>
+<span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
+</h1>
+</div>
+  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
+        <button type="button" class="btn btn-alt-primary">
+            <i class="fa fa-user-plus mr-5"></i> New Account
+        </button>
+      </div> --}}
+    </div>
+  </div>
+</div>
+<!-- END Header -->
 
-                    <div class="panel-options">
-                        <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
-                        <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                        <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                        <a href="#" data-rel="close"><i class="entypo-cancel"></i></a>
-                    </div>
-                </div>
+<!-- Page Content -->
+<div class="bg-white">
+  <!-- Breadcrumb -->
+  <div class="content">
+    <nav class="breadcrumb mb-0">
+      <a class="breadcrumb-item" href="javascript:void(0)">Tools</a>
+      <span class="breadcrumb-item active">Import / Export to DB</span>
+    </nav>
+  </div>
+  <!-- END Breadcrumb -->
 
-                <div class="panel-body">
-                    <p><h4><b>Import to DB (xlsx)</b></h4></p>
-                    <form action="{{ url('data-importData') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+  <!-- Content -->
+  <div class="content">
+    <!-- Icon Navigation -->
+     <!-- Dynamic Table Full Pagination -->
+                    <div class="block">
+                        <div class="block-content block-content-full">
+                            <!-- DataTables functionality is initialized with .js-dataTable-full-pagination class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
+                             <form action="{{ url('data-importData') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                             {{-- <label class="col-sm-2 control-label">Import to DB</label> --}}
-                            <div class="col-sm-4">
+                            <div class="col-sm-12">
 
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <span class="btn btn-info btn-file">
@@ -44,14 +63,22 @@
                     </div>
 
                 </form>
-                <hr/>
-                 <p><h4><b>Export from DB</b></h4></p>
-                <a href="{{ url('downloadData/xlsx') }}"><button class="btn btn-dark">Download Excel xlsx</button></a>
-                <a href="{{ url('downloadData/xls') }}"><button class="btn btn-success">Download Excel xls</button></a>
-                <a href="{{ url('downloadData/csv') }}"><button class="btn btn-info">Download CSV</button></a>
-            </div>
-        </div>
-    </div>
+                        </div>
+                    </div>
+                    <!-- END Dynamic Table Full Pagination -->
+    
+  </div>
+  <!-- END Content -->
 </div>
-{{-- </div> --}}
+ <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1">
+ </div>
+<!-- END Page Content -->
 @endsection
+
+@push('js')
+<script>
+
+
+
+</script>
+@endpush

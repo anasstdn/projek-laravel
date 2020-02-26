@@ -67,6 +67,7 @@ Route::resource('peramalan', 'PeramalanController');
 
 
 Route::get('penjualan/load-data', 'PenjualanController@loadData');
+Route::get('penjualan/load-data-mingguan', 'PenjualanController@loadDataMingguan');
 Route::resource('penjualan', 'PenjualanController');
 
 
@@ -96,4 +97,10 @@ Route::get('permission-role/get/{id}/menu', 'RoleController@hakmenus');
 Route::get('role/permission-role/get/{id}/menu', 'RoleController@hakmenus');
 Route::resource('role', 'RoleController');
 Route::delete('role/{id}/restore', 'RoleController@restore');
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/settings', 'SettingController@index')->name('settings');
+    Route::post('/settings', 'SettingController@store')->name('settings.store');
+});
 
