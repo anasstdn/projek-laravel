@@ -68,7 +68,7 @@
                                 <a href="{{url('/penjualan')}}"><i class="si si-basket"></i>Sales</a>
                             </li>
                             <li>
-                                <a href=""><i class="si si-pie-chart"></i>Chart</a>
+                                <a href="{{url('/penjualan/chart')}}"><i class="si si-pie-chart"></i>Chart</a>
                             </li>
                             <li>
                                 <a href=""><i class="si si-graph"></i>Forecasting</a>

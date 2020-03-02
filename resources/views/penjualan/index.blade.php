@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<?php
+$arr_bulan=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+?>
 <div class="bg-primary-dark">
 <div class="content content-top">
 <div class="row push">
@@ -61,19 +64,40 @@
                           <div class="col-md-12 row" style="margin-bottom: 1em" id="hari">
                             <label class="col-md-2">Date</label>
                             <div class="col-lg-4">
-                              <div class="input-daterange input-group" data-date-format="dd-mm-yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                <input type="text" class="form-control" id="start_date" name="start_date" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true" value="{{date('d-m-Y')}}">
-                                <div class="input-group-prepend input-group-append">
-                                  <span class="input-group-text font-w600">to</span>
-                                </div>
-                                <input type="text" class="form-control" id="end_date" name="end_date" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true" value="{{date('d-m-Y')}}">
-                              </div>
+                              <input type="text" class="calendar form-control" id="date_input" name="example-date_input" data-week-start="1" data-autoclose="true" data-today-highlight="true" placeholder="Date" value="{{date(setting('date_format'))}}">
                             </div>
                           </div>
                            <div class="col-md-12 row" style="margin-bottom: 1em;display:none" id="week">
                             <label class="col-md-2">Week</label>
                             <div class="col-lg-4">
-                              <input type="text" class="calendar form-control" id="week_input" name="example-week_input" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd-mm-yyyy" placeholder="Week">
+                              <input type="text" class="calendar form-control" id="week_input" name="example-week_input" data-week-start="1" data-autoclose="true" data-today-highlight="true" placeholder="Week" value="{{date(setting('date_format'))}}">
+                            </div>
+                          </div>
+                          <div class="col-md-12 row" style="margin-bottom: 1em;display:none" id="month">
+                            <label class="col-md-2">Month</label>
+                            <div class="col-lg-2">
+                              <select class="form-control" id="bulan">
+                                @foreach($arr_bulan as $key=>$val)
+                                @if($key+1 == date('m'))
+                                <option value="{{$key+1}}" selected>{{$val}}</option>
+                                @else
+                                <option value="{{$key+1}}">{{$val}}</option>
+                                @endif
+                                @endforeach
+                              </select>
+                            </div>
+                            <div class="col-lg-2">
+                              <select class="form-control" id="tahun1">
+                                <?php $start=2017?>
+                                <?php for($start;$start<=date('Y');$start++)
+                                {?>
+                                  @if($start==date('Y'))
+                                  <option value="{{$start}}" selected="">{{$start}}</option>
+                                  @else
+                                  <option value="{{$start}}">{{$start}}</option>
+                                  @endif
+                                  <?php }?>                
+                                </select>
                             </div>
                           </div>
                           <div class="col-md-12 row" style="margin-bottom: 1em;display: none" id="tahun_a">
@@ -128,12 +152,60 @@
                     </tbody>
                 </table>
               </div>
+
+               <div id="bulan-table" style="display:none">
+              <table width="100%" class="table table-bordered datatable" id="table-bulan">
+                        <thead>
+                          <tr>
+                            <th rowspan="2" style="vertical-align: middle">No</th>
+                            <th rowspan="2" style="vertical-align: middle">Tanggal Transaksi</th>
+                            <th colspan="6" style="text-align: center">Jumlah (Meter Kubik)</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Pasir</th>
+                            <th style="text-align: center">Gendol</th>
+                            <th style="text-align: center">Abu</th>
+                            <th style="text-align: center">Split 1/2</th>
+                            <th style="text-align: center">Split 2/3</th>
+                            <th style="text-align: center">LPA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+              </div>
+
               <div id="minggu-table" style="display:none">
               <table width="100%" class="table table-bordered datatable" id="table-minggu">
                         <thead>
                           <tr>
                             <th rowspan="2" style="vertical-align: middle">No</th>
                             <th rowspan="2" style="vertical-align: middle">Tanggal Transaksi</th>
+                            <th colspan="6" style="text-align: center">Jumlah (Meter Kubik)</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Pasir</th>
+                            <th style="text-align: center">Gendol</th>
+                            <th style="text-align: center">Abu</th>
+                            <th style="text-align: center">Split 1/2</th>
+                            <th style="text-align: center">Split 2/3</th>
+                            <th style="text-align: center">LPA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+              </div>
+
+               <div id="hari-table" style="display: none">
+              <table width="100%" class="table table-bordered datatable" id="table-hari">
+                        <thead>
+                          <tr>
+                            <th rowspan="2" style="vertical-align: middle">No</th>
+                            <th rowspan="2" style="vertical-align: middle">Tanggal Transaksi</th>
+                            <th rowspan="2" style="vertical-align: middle">No Nota</th>
                             <th colspan="6" style="text-align: center">Jumlah (Meter Kubik)</th>
                         </tr>
                         <tr>
@@ -168,6 +240,8 @@
 var pilih=$('input[name="pilih"]:checked').val();
 var tahun;
 var minggu;
+var hari;
+var bulan;
 $(document).ready(function(){
 
 tahun=$('#table-1').DataTable({
@@ -282,16 +356,126 @@ minggu=$('#table-minggu').DataTable({
         // sDom: '<"dt-panelmenu clearfix"Bfr>t<"dt-panelfooter clearfix"ip>',
         // buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
       });
+
+bulan=$('#table-bulan').DataTable({
+      stateSave: true,
+      processing : true,
+      serverSide : true,
+        pageLength:20,
+        bFilter:false,
+        ajax : {
+          url:"{{ url('penjualan/load-data-bulanan') }}",
+          data: function (d) {
+            return $.extend( {}, d, {
+                tahun:$('#tahun1').val(),
+                bulan:$('#bulan').val(),
+            } );
+          }
+        },
+        columns: [
+        { data: 'nomor', name: 'nomor',searchable:false,orderable:false },
+        { data: 'tgl_transaksi', name: 'tgl_transaksi' },
+        { data: 'pasir', name: 'pasir' },
+        { data: 'gendol', name: 'gendol' },
+        { data: 'abu', name: 'abu' },
+        { data: 'split2_3', name: 'split2_3' },
+        { data: 'split1_2', name: 'split1_2' },
+        { data: 'lpa', name: 'lpa' },
+       
+        // { data: 'action', name: 'action', orderable: false, searchable: false },
+        ],
+        language: {
+          lengthMenu : '{{ "Menampilkan _MENU_ data" }}',
+          zeroRecords : '{{ "Data tidak ditemukan" }}' ,
+          info : '{{ "_PAGE_ dari _PAGES_ halaman" }}',
+          infoEmpty : '{{ "Data tidak ditemukan" }}',
+          infoFiltered : '{{ "(Penyaringan dari _MAX_ data)" }}',
+          loadingRecords : '{{ "Memuat data dari server" }}' ,
+          processing :    '{{ "Memuat data data" }}',
+          sSearchPlaceholder: "Pencarian..",
+          lengthMenu: "_MENU_",
+          search: "_INPUT_",
+          paginate : {
+            first :     '{{ "<" }}' ,
+            last :      '{{ ">" }}' ,
+            next :      '{{ ">>" }}',
+            previous :  '{{ "<<" }}'
+          }
+        },
+        aoColumnDefs: [{
+          bSortable: false,
+          aTargets: [-1]
+        }],
+        iDisplayLength: 5,
+        aLengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        // sDom: '<"dt-panelmenu clearfix"Bfr>t<"dt-panelfooter clearfix"ip>',
+        // buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+      });
+
+hari=$('#table-hari').DataTable({
+      stateSave: true,
+      processing : true,
+      serverSide : true,
+        pageLength:20,
+        bFilter:false,
+        ajax : {
+          url:"{{ url('penjualan/load-data-harian') }}",
+          data: function (d) {
+            return $.extend( {}, d, {
+                date_input:$('#date_input').val(),
+            } );
+          }
+        },
+        columns: [
+        { data: 'nomor', name: 'nomor',searchable:false,orderable:false },
+        { data: 'tgl_transaksi', name: 'tgl_transaksi' },
+        { data: 'no_nota', name: 'no_nota' },
+        { data: 'pasir', name: 'pasir' },
+        { data: 'gendol', name: 'gendol' },
+        { data: 'abu', name: 'abu' },
+        { data: 'split2_3', name: 'split2_3' },
+        { data: 'split1_2', name: 'split1_2' },
+        { data: 'lpa', name: 'lpa' },
+       
+        // { data: 'action', name: 'action', orderable: false, searchable: false },
+        ],
+        language: {
+          lengthMenu : '{{ "Menampilkan _MENU_ data" }}',
+          zeroRecords : '{{ "Data tidak ditemukan" }}' ,
+          info : '{{ "_PAGE_ dari _PAGES_ halaman" }}',
+          infoEmpty : '{{ "Data tidak ditemukan" }}',
+          infoFiltered : '{{ "(Penyaringan dari _MAX_ data)" }}',
+          loadingRecords : '{{ "Memuat data dari server" }}' ,
+          processing :    '{{ "Memuat data data" }}',
+          sSearchPlaceholder: "Pencarian..",
+          lengthMenu: "_MENU_",
+          search: "_INPUT_",
+          paginate : {
+            first :     '{{ "<" }}' ,
+            last :      '{{ ">" }}' ,
+            next :      '{{ ">>" }}',
+            previous :  '{{ "<<" }}'
+          }
+        },
+        aoColumnDefs: [{
+          bSortable: false,
+          aTargets: [-1]
+        }],
+        iDisplayLength: 5,
+        aLengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        // sDom: '<"dt-panelmenu clearfix"Bfr>t<"dt-panelfooter clearfix"ip>',
+        // buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+      });
   
   $('input[type=radio][name=pilih]').change(function() {
     pilih=$('input[name="pilih"]:checked').val();
-    set();
+    set(pilih);
   });
 
      $('.input-daterange').datepicker({format: "dd-mm-yyyy"}); 
 
      $(".calendar").datepicker({
-      format: "dd-mm-yyyy"
+      format: "{{setting('datepicker_date_format')}}"
     });
 
     //  $(".check").change(function() {
@@ -299,16 +483,28 @@ minggu=$('#table-minggu').DataTable({
     //   $(this).prop('checked', true);
     // });
 
-    function set()
+   
+    
+  });
+
+ function set(pilih)
 {
       switch(pilih)
     {
       case 'harian':
+      reload_days();
       $('#tahunan').fadeOut();
       $('#hari').fadeIn();
       $('#tahun_a').fadeOut();
+      $('#hari-table').fadeIn();
       $('#minggu-table').fadeOut();
       $('#week').fadeOut();
+      $('#bulan-table').fadeOut();
+      $('#month').fadeOut();
+      $('#cari').click(function(){
+        reload_days();
+        // graph();
+    })
       break;
       case 'mingguan':
       reload_week();
@@ -317,6 +513,9 @@ minggu=$('#table-minggu').DataTable({
       $('#tahun_a').fadeOut();
       $('#minggu-table').fadeIn();
       $('#week').fadeIn();
+      $('#bulan-table').fadeOut();
+      $('#hari-table').fadeOut();
+      $('#month').fadeOut();
        $('#cari').click(function(){
         reload_week();
         // graph();
@@ -325,9 +524,16 @@ minggu=$('#table-minggu').DataTable({
       case 'bulanan':
       $('#tahunan').fadeOut();
       $('#hari').fadeOut();
+      $('#month').fadeIn();
       $('#tahun_a').fadeOut();
       $('#minggu-table').fadeOut();
+      $('#bulan-table').fadeIn();
+      $('#hari-table').fadeOut();
       $('#week').fadeOut();
+       $('#cari').click(function(){
+        reload_month();
+        // graph();
+    })
       break;
       case 'tahunan':
       reload();
@@ -335,7 +541,10 @@ minggu=$('#table-minggu').DataTable({
       $('#hari').fadeOut();
       $('#tahun_a').fadeIn();
       $('#minggu-table').fadeOut();
+      $('#bulan-table').fadeOut();
+      $('#hari-table').fadeOut();
       $('#week').fadeOut();
+      $('#month').fadeOut();
     $('#cari').click(function(){
         reload();
         // graph();
@@ -343,8 +552,6 @@ minggu=$('#table-minggu').DataTable({
       break;
     }
 }
-    
-  });
 
 function reload()
 {
@@ -355,6 +562,20 @@ function reload_week()
 {
   minggu.ajax.reload(null,false);
 }
+
+function reload_days()
+{
+  hari.ajax.reload(null,false);
+}
+
+function reload_month()
+{
+  bulan.ajax.reload(null,false);
+}
+
+$(window).on('load',function(){
+  set(pilih);
+})
 
 </script>
 @endpush

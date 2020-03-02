@@ -6,7 +6,7 @@
 <div class="row push">
 <div class="col-md py-10 d-md-flex align-items-md-center text-center">
 <h1 class="text-white mb-0">
-<span class="font-w300">Users</span>
+<span class="font-w300">Settings</span>
 <span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
 </h1>
 </div>
@@ -22,8 +22,7 @@
 <div class="bg-white">
      <div class="content">
     <nav class="breadcrumb mb-0">
-      <a class="breadcrumb-item" href="javascript:void(0)">Master ACL</a>
-      <span class="breadcrumb-item active">Users</span>
+      <a class="breadcrumb-item" href="javascript:void(0)">Settings</a>
     </nav>
   </div>
  <div class="content">

@@ -82,12 +82,32 @@ return [
             [
                 'type' => 'select',
                 'data' => 'string',
+                'name' => 'datepicker_date_format',
+                'label' => 'Datepicker Date format',
+                'rules' => 'required',
+                'class' => 'w-auto px-2',
+                'options' => [
+                    'dd-mm-yyyy' => 'dd-mm-yyyy',
+                    'mm-dd-yyyy' => 'mm-dd-yyyy',
+                    'yyyy-mm-dd' => 'yyyy-mm-dd',
+                    'dd/mm/yyyy' => 'dd/mm/yyyy',
+                    'mm/dd/yyyy' => 'mm/dd/yyyy',
+                    'yyyy/mm/dd' => 'yyyy/mm/dd',
+                ],
+                'value' => 'mm/dd/yyyy'
+            ],
+            [
+                'type' => 'select',
+                'data' => 'string',
                 'name' => 'date_format',
                 'label' => 'Date format',
                 'rules' => 'required',
                 'class' => 'w-auto px-2',
                 'options' => [
+                    'Y-m-d' => date('Y-m-d'),
+                    'd-m-Y' => date('d-m-Y'),
                     'm/d/Y' => date('m/d/Y'),
+                    'd/m/Y' => date('d/m/Y'),
                     'm.d.y' => date("m.d.y"),
                     'j, n, Y' => date("j, n, Y"),
                     'M j, Y' => date("M j, Y"),

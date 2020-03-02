@@ -67,7 +67,11 @@ Route::resource('peramalan', 'PeramalanController');
 
 
 Route::get('penjualan/load-data', 'PenjualanController@loadData');
+Route::get('penjualan/chart', 'PenjualanController@chart');
 Route::get('penjualan/load-data-mingguan', 'PenjualanController@loadDataMingguan');
+Route::get('penjualan/load-data-harian', 'PenjualanController@loadDataHarian');
+Route::get('penjualan/load-data-bulanan', 'PenjualanController@loadDataBulanan');
+Route::match(['get','post'],'penjualan/get-chart','PenjualanController@getChart');
 Route::resource('penjualan', 'PenjualanController');
 
 

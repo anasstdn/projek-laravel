@@ -110,7 +110,7 @@
                         by Anas Setyadin</a>
                     </div>
                     <div class="float-left">
-                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Laravel Forecast v.1.0.5</a> &copy; <span class="">2020</span>
+                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Laravel Forecast v.1.9.0</a> &copy; <span class="">2020</span>
                     </div>
                 </div>
             </footer>
@@ -161,6 +161,10 @@
         <script src="{{asset('codebase/')}}/src/assets/js/pages/db_corporate.min.js"></script>
         <script src="{{asset('codebase/')}}/src/assets/js/plugins/flatpickr/flatpickr.min.js"></script>
         <script src="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+        <script src="{{asset('codebase/')}}/src/assets/apexcharts/apexcharts.js"></script>
+        <script src="{{asset('codebase/')}}/src/assets/apexcharts/apex-custom-script.js"></script>
+
         <script src="{{asset('js/')}}/moment.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data.min.js"></script>
         <script src="{{asset('js/')}}/echo.js"></script>
@@ -403,7 +407,7 @@ var tday=["Sun","Mon","Tue","Wed","Thru","Fri","Sat"];
 var tmonth=["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   function GetClock(){
-    var d=new Date("<?php echo date("Y-m-d H:i:s");?>");
+    var d=new Date();
     // console.log(moment().tz(''));
     var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
     var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds();
