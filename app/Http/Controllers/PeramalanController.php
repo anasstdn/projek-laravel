@@ -59,7 +59,6 @@ class PeramalanController extends Controller
            $date_to=date('Y-m-d',strtotime($all_data['date_end']));  
         }
 
-        // dd($date_from);
 
     	$data_penjualan=RawDatum::select(DB::raw('WEEK(tgl_transaksi) as minggu,sum(pasir) as pasir,sum(gendol) as gendol,sum(abu) as abu, sum(split2_3) as split2_3, sum(split1_2) as split1_2, sum(lpa) as lpa'))
     	->where('tgl_transaksi','>=',$date_from)
@@ -266,6 +265,7 @@ class PeramalanController extends Controller
             $s2lalu = $s2;
         }
     }
+
     $MAPE[$alp] = array_sum($PE[$alp])/(count($raw) - 1);
     }
     // dd($MAPE);

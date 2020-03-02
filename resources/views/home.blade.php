@@ -37,7 +37,7 @@
     <!-- Icon Navigation -->
     <div class="row gutters-tiny push">
       <div class="col-6 col-md-4 col-xl-3">
-        <a class="block block-rounded block-bordered block-link-shadow text-center" href="javascript:void(0)">
+        <a class="block block-rounded block-bordered block-link-shadow text-center" href="{{url('/')}}">
           <div class="block-content">
             <p class="mt-5">
               <i class="si si-home fa-3x text-muted"></i>
@@ -47,7 +47,7 @@
         </a>
       </div>
       <div class="col-6 col-md-4 col-xl-3">
-        <a class="block block-rounded block-bordered block-link-shadow ribbon ribbon-primary text-center" href="javascript:void(0)">
+        <a class="block block-rounded block-bordered block-link-shadow ribbon ribbon-primary text-center" href="{{url('/penjualan')}}">
           <div class="block-content">
             <p class="mt-5">
               <i class="si si-basket fa-3x text-muted"></i>
@@ -57,7 +57,7 @@
         </a>
       </div>
       <div class="col-6 col-md-4 col-xl-3">
-        <a class="block block-rounded block-bordered block-link-shadow text-center" href="javascript:void(0)">
+        <a class="block block-rounded block-bordered block-link-shadow text-center" href="{{url('/penjualan/chart')}}">
           <div class="block-content">
             <p class="mt-5">
               <i class="si si-pie-chart fa-3x text-muted"></i>
@@ -67,7 +67,7 @@
         </a>
       </div>
       <div class="col-6 col-md-4 col-xl-3">
-        <a class="block block-rounded block-bordered block-link-shadow text-center" href="javascript:void(0)">
+        <a class="block block-rounded block-bordered block-link-shadow text-center" href="{{url('/peramalan')}}">
           <div class="block-content">
             <p class="mt-5">
               <i class="si si-graph fa-3x text-muted"></i>

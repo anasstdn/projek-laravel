@@ -44,46 +44,22 @@
       <div id="status" style="font-size:8pt;font-family: sans-serif;color: white">Loading...Please Wait</div>  
     </div>
   </div>
-  <div class="bg-primary-dark">
-  <div class="content content-top">
-    <div class="row push">
-      <div class="col-md py-10 d-md-flex align-items-md-center text-center">
-        <h1 class="text-white mb-0">
-          <span class="font-w300">Forecasting</span>
-          <span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
-        </h1>
-      </div>
-  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
-        <button type="button" class="btn btn-alt-primary">
-            <i class="fa fa-user-plus mr-5"></i> New Account
-        </button>
-    </div> --}}
-</div>
-</div>
-</div>
-<!-- END Header -->
-
-<div class="bg-white">
-  <!-- Breadcrumb -->
-  <div class="content">
-    <nav class="breadcrumb mb-0">
-      <a class="breadcrumb-item" href="javascript:void(0)">Forecasting</a>
-      <span class="breadcrumb-item active">Forecasting</span>
-    </nav>
-  </div>
-  <!-- END Breadcrumb -->
-
-  <!-- Content -->
-  <div class="content">
-    <div class="block">
-      <div class="block-content block-content-full">
-
-    <div class="row" style="margin-bottom: 3em">
+    <div class="row">
     <div class="col-lg-12">
-           <div class="card">
-              <div class="card-header text-uppercase">FILTER PENCARIAN</div>
-              <div class="card-body">
-                <br>
+      <div class="panel panel-gradient" data-collapsed="0">
+        <div class="panel-heading">
+          <div class="panel-title pull-left">Filter Pencarian <span><i class="entypo-search"></i></span>
+          </div>  
+          <div class="panel-options">
+            {{-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> --}}
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+            {{-- <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> --}}
+            {{-- <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> --}}
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel-body">
             <div class="col-md-12 row" style="margin-bottom: 1em">
               <label class="col-md-2">Select By</label>
               <div class="col-md-2">
@@ -133,13 +109,25 @@
       </div>
     </div>
   </div>
-  <div class="row" style="margin-bottom: 3em">
+</div>
+  <div class="row">
     <div class="col-lg-12">
-      <div class="card">
-              <div class="card-header text-uppercase">PERAMALAN MENGGUNAKAN METODE ARRSES</div>
-              <div class="card-body">
+      <div class="panel panel-gradient" data-collapsed="0">
+        <div class="panel-heading">
+          <div class="panel-title pull-left">Peramalan Adaptive Response Rate Single Exponential Smoothing (ARRSES)
+          </div>  
+          <div class="panel-options">
+            {{-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> --}}
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+            {{-- <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> --}}
+            {{-- <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> --}}
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel-body">
           <div class="table-responsive">
-           <table class="table table-striped table-vcenter datatable">
+           <table class="table table-bordered datatable" id="arrses">
             <thead>
               <tr>
                 <th>Minggu</th>
@@ -151,23 +139,32 @@
                 <th>Prosentase Error</th>
                 <th>Nilai Peramalan</th>
               </tr>
-            </thead> 
-            <tbody id="arrses">
-            </tbody> 
+            </thead>  
           </table>
+        </div>
         </div>
       </div>
     </div>
-      </div>
-    {{-- </div> --}}
   </div>
-  <div class="row" style="margin-bottom: 3em">
+</div>
+  <div class="row">
     <div class="col-lg-12">
-      <div class="card">
-              <div class="card-header text-uppercase">PERAMALAN MENGGUNAKAN DES METODE BROWN</div>
-              <div class="card-body">
+      <div class="panel panel-gradient" data-collapsed="0">
+        <div class="panel-heading">
+          <div class="panel-title pull-left">Peramalan Double Exponential Smoothing Metode Brown
+          </div>  
+          <div class="panel-options">
+            {{-- <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a> --}}
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+            {{-- <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a> --}}
+            {{-- <a href="#" data-rel="close"><i class="entypo-cancel"></i></a> --}}
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel-body">
           <div class="table-responsive">
-           <table class="table table-striped table-vcenter datatable" >
+           <table class="table table-bordered datatable" id="des">
             <thead>
               <tr>
                 <th>Minggu</th>
@@ -180,35 +177,18 @@
                 <th>Prosentase Error</th>
                 <th>Nilai Peramalan (at + bt)</th>
               </tr>
-            </thead>
-            <tbody id="des">
-            </tbody>  
+            </thead>  
           </table>
+        </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-lg-12 col-xl-12">
-    <div class="card">
-      <div class="card-header text-uppercase">FORECASTING GRAPH</div>
-      <div class="card-body">
-       <div id="grafik_penjualan"></div>
-     </div>
-   </div>
- </div>
-</div>
-
  <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
  </div>
  <div class="modal fade" id="formModal1" aria-hidden="true" aria-labelledby="formModalLabel" role="dialog" tabindex="-1">
  </div>
-</div>
-</div>
-</div>
-
 {{-- </div> --}}
 @endsection
 
@@ -216,10 +196,6 @@
 <script>
   var html;
   var mode;
-  var aktual_arrses=[];
-  var peramalan_arrses=[];
-  var peramalan_des=[];
-  var label=[];
   $(document).ready(function(){
      $('.input-daterange').datepicker({format: "dd-mm-yyyy"}); 
     
@@ -280,9 +256,6 @@
 
   function arrses(mode)
   {
-        aktual_arrses.length = 0
-          peramalan_arrses.length = 0
-          label.length = 0
     $('.ajax-loader').fadeIn();
     $("#status").html("Loading...Please Wait!");
     $.ajax({
@@ -303,14 +276,8 @@
       },
       success:function(data){
         // console.log(data);
-        $('#arrses').empty();
+        $('#arrses tbody').empty();
         $.each(data,function(index,value){
-      
-
-          aktual_arrses.push(value.aktual);
-          peramalan_arrses.push(value.peramalan);
-          label.push(value.periode);
-
           html='<tr><td>'+value.periode+'</td>\n\
           <td>'+value.aktual+'</td>\n\
           <td>'+value.galat+'</td>\n\
@@ -323,8 +290,6 @@
           $('#arrses').append(html);
           // console.log(value);
         })
-
-        chart_total();
       },
       error:function (xhr, status, error){
         toastr_notif(xhr.responseText,'gagal');
@@ -334,7 +299,6 @@
 
   function des(mode)
   {
-      peramalan_des.length = 0
     $('.ajax-loader').fadeIn();
     $("#status").html("Loading...Please Wait!");
     $.ajax({
@@ -355,13 +319,8 @@
       },
       success:function(data){
         // console.log(data);
-        $('#des').empty();
+        $('#des tbody').empty();
         $.each(data,function(index,value){
-          // aktual_des.push(value.aktual);
-
-
-          peramalan_des.push(value.prediksi);
-
           html='<tr><td>'+value.minggu+'</td>\n\
           <td>'+value.aktual+'</td>\n\
           <td>'+value.s1+'</td>\n\
@@ -381,95 +340,5 @@
       },
     });
   }
-
-  function chart_total()
-{
-    var options = {
-            chart: {
-                height: 500,
-                type: 'area',
-                stacked: false,
-                zoom: {
-                      enabled: false
-                    },
-                foreColor: '#4e4e4e',
-                toolbar: {
-                      show: false
-                    },
-                shadow: {
-                    enabled: false,
-                    color: '#000',
-                    top: 3,
-                    left: 2,
-                    blur: 3,
-                    opacity: 1
-                },
-            },
-            stroke: {
-                width: 4,   
-                curve: 'smooth',
-            },
-            series: [
-            {
-                name: 'Data Aktual',
-                data: aktual_arrses,
-            },
-            {
-                name: 'ARRSES',
-                data: peramalan_arrses,
-            },
-            {
-                name: 'DES',
-                data: peramalan_des,
-            },
-            ],
-
-            tooltip: {
-                enabled: true,
-                theme: 'dark',
-            },
-            markers:{
-                size:3
-            },
-
-            xaxis: {
-                labels: {
-                    format: 'dd/MM',
-                },
-                categories: label,
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    // shade: 'dark',
-                    // gradientToColors: [ '#00dbde'],
-                    // shadeIntensity: 1,
-                    // type: 'horizontal',
-                    shadeIntensity: 1,
-                    inverseColors: false,
-                    opacityFrom: 0.45,
-                    opacityTo: 0.05,
-                    stops: [20, 100, 100, 100]
-                },
-            },
-            colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
-            grid:{
-                show: true,
-                borderColor: 'rgba(66, 59, 116, 0.15)',
-            },
-            yaxis: {
-                // min: -10,
-                // max: 3000,                
-            }
-        }
-
-       var chart = new ApexCharts(
-            document.querySelector("#grafik_penjualan"),
-            options
-        );
-        
-        chart.render();
-}
-
 </script>
 @endpush
