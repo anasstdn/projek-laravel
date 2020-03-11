@@ -117,7 +117,7 @@
               <div class="col-md-4">
                 <select class="form-control" id="produk">
                   <option value="abu">Abu</option>
-                  <option value="split1_2">Split 1/2</option>
+                  <option value="gendol">Pasir Gendol</option>
                   <option value="pasir">Pasir</option>
                 </select>
               </div>
@@ -144,16 +144,33 @@
               <tr>
                 <th>Minggu</th>
                 <th>Nilai Aktual</th>
+                <th>Nilai Peramalan</th>
                 <th>Galat</th>
                 <th>Galat Pemulusan</th>
                 <th>Galat Pemulusan Absolut</th>
                 <th>Alpha</th>
-                <th>Prosentase Error</th>
-                <th>Nilai Peramalan</th>
+                <th>Deviasi Absolut (MAD)</th>
+                <th>Prosentase Error (MAPE)</th>
               </tr>
             </thead> 
             <tbody id="arrses">
-            </tbody> 
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="7">Jumlah</td>
+                <td id="jumlah_mad_arrses" style="font-weight: bold"></td>
+                <td id="jumlah_mape_arrses" style="font-weight: bold"></td>
+              </tr>
+              <tr>
+                <td colspan="7">Nilai</td>
+                <td id="nilai_mad_arrses" style="font-weight: bold"></td>
+                <td id="nilai_mape_arrses" style="font-weight: bold"></td>
+              </tr>
+              <tr>
+                <td colspan="7">Kriteria Nilai MAPE</td>
+                <td id="kriteria_mape_arrses" style="font-weight: bold"></td>
+              </tr>
+            </tfoot> 
           </table>
         </div>
       </div>
@@ -172,17 +189,34 @@
               <tr>
                 <th>Minggu</th>
                 <th>Nilai Aktual</th>
+                <th>Nilai Peramalan (at + bt)</th>
                 <th>Smoothing Pertama (St')</th>
                 <th>Smoothing Kedua (St'')</th>
                 <th>Konstanta (at)</th>
                 <th>Slope (bt)</th>
                 <th>Alpha</th>
-                <th>Prosentase Error</th>
-                <th>Nilai Peramalan (at + bt)</th>
+                <th>Deviasi Absolut (MAD)</th>
+                <th>Prosentase Error (MAPE)</th>
               </tr>
             </thead>
             <tbody id="des">
-            </tbody>  
+            </tbody>
+                <tfoot>
+              <tr>
+                <td colspan="8">Jumlah</td>
+                <td id="jumlah_mad_des" style="font-weight: bold"></td>
+                <td id="jumlah_mape_des" style="font-weight: bold"></td>
+              </tr>
+              <tr>
+                <td colspan="8">Nilai</td>
+                <td id="nilai_mad_des" style="font-weight: bold"></td>
+                <td id="nilai_mape_des" style="font-weight: bold"></td>
+              </tr>
+              <tr>
+                <td colspan="8">Kriteria Nilai MAPE</td>
+                <td id="kriteria_mape_des" style="font-weight: bold"></td>
+              </tr>
+            </tfoot>   
           </table>
         </div>
       </div>
@@ -224,7 +258,7 @@
      $('.input-daterange').datepicker({format: "dd-mm-yyyy"}); 
     
    
-    checkbox();
+    // checkbox();
     $(".check").change(function() {
       $(".check").prop('checked', false);
       $(this).prop('checked', true);
@@ -283,6 +317,8 @@
         aktual_arrses.length = 0
           peramalan_arrses.length = 0
           label.length = 0
+          var sum_mad=0;
+          var sum_per=0;
     $('.ajax-loader').fadeIn();
     $("#status").html("Loading...Please Wait!");
     $.ajax({
@@ -304,25 +340,56 @@
       success:function(data){
         // console.log(data);
         $('#arrses').empty();
+        $('#jumlah_mad_arrses').empty();
+        $('#jumlah_mape_arrses').empty();
+        $('#nilai_mad_arrses').empty();
+        $('#nilai_mape_arrses').empty();
         $.each(data,function(index,value){
       
 
-          aktual_arrses.push(value.aktual);
-          peramalan_arrses.push(value.peramalan);
+          aktual_arrses.push(Math.floor(value.aktual,-3));
+          peramalan_arrses.push(Math.floor(value.peramalan,-3));
           label.push(value.periode);
+
+          
 
           html='<tr><td>'+value.periode+'</td>\n\
           <td>'+value.aktual+'</td>\n\
+          <td>'+value.peramalan+'</td>\n\
           <td>'+value.galat+'</td>\n\
           <td>'+value.galat_pemulusan+'</td>\n\
           <td>'+value.galat_pemulusan_absolut+'</td>\n\
           <td>'+value.alpha+'</td>\n\
+          <td>'+value.MAD+'</td>\n\
           <td>'+value.percentage_error+' %</td>\n\
-          <td>'+value.peramalan+'</td>\n\
           </tr>';
           $('#arrses').append(html);
+
+          sum_mad+=value.MAD;
+          sum_per+=value.percentage_error;
           // console.log(value);
         })
+        $('#jumlah_mad_arrses').html(sum_mad);
+        $('#jumlah_mape_arrses').html(sum_per);
+        $('#nilai_mad_arrses').html((sum_mad/data.length));
+        $('#nilai_mape_arrses').html((sum_per/data.length)+' %');
+
+        if(sum_per/data.length < 10)
+        {
+          $('#kriteria_mape_arrses').html('SANGAT BAIK');
+        }
+        else if(sum_per/data.length >= 10 && sum_per/data.length <= 20)
+        {
+          $('#kriteria_mape_arrses').html('BAIK');
+        }
+        else if(sum_per/data.length > 20 && sum_per/data.length <= 50)
+        {
+          $('#kriteria_mape_arrses').html('CUKUP');
+        }
+        else if(sum_per/data.length > 50)
+        {
+          $('#kriteria_mape_arrses').html('BURUK');
+        }
 
         chart_total();
       },
@@ -335,6 +402,8 @@
   function des(mode)
   {
       peramalan_des.length = 0
+      var sum_mad=0;
+          var sum_per=0;
     $('.ajax-loader').fadeIn();
     $("#status").html("Loading...Please Wait!");
     $.ajax({
@@ -354,27 +423,53 @@
         return xhr;
       },
       success:function(data){
-        // console.log(data);
+        console.log(data.length);
         $('#des').empty();
         $.each(data,function(index,value){
           // aktual_des.push(value.aktual);
 
 
-          peramalan_des.push(value.prediksi);
+          peramalan_des.push(Math.floor(value.peramalan,-3));
 
-          html='<tr><td>'+value.minggu+'</td>\n\
+          html='<tr><td>'+value.periode+'</td>\n\
           <td>'+value.aktual+'</td>\n\
+           <td>'+value.peramalan+'</td>\n\
           <td>'+value.s1+'</td>\n\
           <td>'+value.s2+'</td>\n\
-          <td>'+value.nilaiA+'</td>\n\
-          <td>'+value.nilaiB+' %</td>\n\
+          <td>'+value.at+'</td>\n\
+          <td>'+value.bt+' %</td>\n\
             <td>'+value.alpha+'</td>\n\
-           <td>'+value.error+' %</td>\n\
-          <td>'+value.prediksi+'</td>\n\
+            <td>'+value.MAD+'</td>\n\
+           <td>'+value.PE+' %</td>\n\
           </tr>';
           $('#des').append(html);
-          // console.log(value);
+          // console.log(value)
+          sum_mad+=value.MAD;
+          sum_per+=value.PE;
         })
+
+        $('#jumlah_mad_des').html(sum_mad);
+        $('#jumlah_mape_des').html(sum_per);
+        $('#nilai_mad_des').html((sum_mad/data.length));
+        $('#nilai_mape_des').html((sum_per/data.length)+' %');
+
+        if(sum_per/data.length < 10)
+        {
+          $('#kriteria_mape_des').html('SANGAT BAIK');
+        }
+        else if(sum_per/data.length >= 10 && sum_per/data.length <= 20)
+        {
+          $('#kriteria_mape_des').html('BAIK');
+        }
+        else if(sum_per/data.length > 20 && sum_per/data.length <= 50)
+        {
+          $('#kriteria_mape_des').html('CUKUP');
+        }
+        else if(sum_per/data.length > 50)
+        {
+          $('#kriteria_mape_des').html('BURUK');
+        }
+
       },
       error:function (xhr, status, error){
         toastr_notif(xhr.responseText,'gagal');
