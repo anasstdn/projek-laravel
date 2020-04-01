@@ -43,6 +43,7 @@ class ContentSeeder extends Seeder
     					'split2_3'=>$value['split2_3'],
     					'split1_2'=>$value['split1_2'],
     					'lpa'=>$value['lpa'],
+                        'campur'=>$value['campur'],
     					'created_at'=>date('Y-m-d H:i:s')
     				));
 

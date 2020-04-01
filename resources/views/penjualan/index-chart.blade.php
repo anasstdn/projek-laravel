@@ -130,7 +130,7 @@ function chart_penjualan(label,total)
             },
             stroke: {
                 width: 4,   
-                curve: 'smooth',
+                curve: 'straight',
             },
             series: [
             {
@@ -296,7 +296,7 @@ function chart_total(label,pasir,abu,gendol,split1,split2,lpa)
 
 function chart_pie(label,data)
 {
-
+    // console.log(data);
     var options = {
       series: data,
       chart: {

@@ -29,6 +29,7 @@ class PenjualanController extends Controller
         // $this->middleware('permission:home-create', ['only' => ['create','store']]);
         // $this->middleware('permission:home-update', ['only' => ['edit','update']]);
         // $this->middleware('permission:home-delete', ['only' => ['delete']]);
+         $this->middleware('permission:read-penjualan');
     }
 
 
@@ -106,35 +107,47 @@ class PenjualanController extends Controller
 
       $total_pasir_pie=RawDatum::select(DB::raw('count(id) as pasir'))
       ->whereNotNull('pasir')
-      ->whereYear('tgl_transaksi',date('2019'))->first();
+      ->where('campur','N')
+      ->whereYear('tgl_transaksi',date('2019'))
+      ->first();
       array_push($graph_pie, $total_pasir_pie->pasir);
 
       $total_abu_pie=RawDatum::select(DB::raw('count(id) as abu'))
       ->whereNotNull('abu')
+      ->where('campur','N')
       ->whereYear('tgl_transaksi',date('2019'))->first();
       array_push($graph_pie, $total_abu_pie->abu);
 
       $total_gendol_pie=RawDatum::select(DB::raw('count(id) as gendol'))
       ->whereNotNull('gendol')
+      ->where('campur','N')
       ->whereYear('tgl_transaksi',date('2019'))->first();
        array_push($graph_pie, $total_gendol_pie->gendol);
 
       $total_split_1_pie=RawDatum::select(DB::raw('count(id) as split1_2'))
       ->whereNotNull('split1_2')
+      ->where('campur','N')
       ->whereYear('tgl_transaksi',date('2019'))->first();
       array_push($graph_pie, $total_split_1_pie->split1_2);
 
       $total_split_2_pie=RawDatum::select(DB::raw('count(id) as split2_3'))
       ->whereNotNull('split2_3')
+      ->where('campur','N')
       ->whereYear('tgl_transaksi',date('2019'))->first();
       array_push($graph_pie, $total_split_2_pie->split2_3);
 
       $total_lpa_pie=RawDatum::select(DB::raw('count(id) as lpa'))
       ->whereNotNull('lpa')
+      ->where('campur','N')
       ->whereYear('tgl_transaksi',date('2019'))->first();
       array_push($graph_pie, $total_lpa_pie->lpa);
 
-      $label_pie=['Pasir','Abu','Pasir Gendol','Split 1/2','Split 2/3','LPA'];
+      $total_campur_pie=RawDatum::select(DB::raw('count(id) as campur'))
+      ->where('campur','Y')
+      ->whereYear('tgl_transaksi',date('2019'))->first();
+      array_push($graph_pie, $total_campur_pie->campur);
+
+      $label_pie=['Pasir','Abu','Pasir Gendol','Split 1/2','Split 2/3','LPA','Campur'];
 
       $data=array(
         'bulan'=>$bulan,

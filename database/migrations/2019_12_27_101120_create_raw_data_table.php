@@ -23,6 +23,7 @@ class CreateRawDataTable extends Migration
             $table->float('split2_3')->nullable();
             $table->float('split1_2')->nullable();
             $table->float('lpa')->nullable();
+            $table->string('campur',1)->nullable();
             $table->timestamps();
         });
     }

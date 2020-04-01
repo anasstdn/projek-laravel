@@ -1,0 +1,238 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Menu;
+use App\Permission;
+
+class MenuSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+    	$this->command->info('Delete semua tabel menu');
+    	Model::unguard();
+    	Menu::truncate();
+    	$this->menuHome();
+    	$this->menuAcl();
+    	$this->menuTools();
+    	$this->menuPenjualan();
+    	$this->menuPeramalan();
+    }
+
+    private function menuHome()
+    {
+    	$this->command->info('Menu Home Seeder');
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-home-menu'
+    	));
+    	$permission->display_name = 'Read Home Menus';
+    	$permission->save();
+    	$menu = Menu::firstOrNew(array(
+    		'name'=>'Home',
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>1,
+    		'parent_status'=>'N',
+    		'url'=>'home',
+    	));
+    	$menu->icon = 'si-home';
+    	$menu->save();
+    }
+
+    private function menuAcl(){
+    	$this->command->info('Menu ACL Seeder');
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-acl-menu'
+    	));
+    	$permission->display_name = 'Read ACL Menus';
+    	$permission->save();
+    	$menu = Menu::firstOrNew(array(
+    		'name'=>'Master ACL',
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>1,
+    		'parent_status'=>'Y'
+    	));
+    	$menu->icon = 'si-settings';
+    	$menu->save();
+
+          //create SUBMENU master
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-user',
+    	));
+    	$permission->display_name = 'Read Users';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name'=>'Users Management',
+    		'parent_id'=>$menu->id,
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>2,
+    		'parent_status'=>'N',
+    		'url'=>'user',
+    	)
+    );
+    	$submenu->save();
+
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-permission',
+    	));
+    	$permission->display_name = 'Read Permissions';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name'=>'Permissions Management',
+    		'parent_id'=>$menu->id,
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>2,
+    		'parent_status'=>'N',
+    		'url'=>'permission',
+    	)
+    );
+    	$submenu->save();
+
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-menus',
+    	));
+    	$permission->display_name = 'Read Menus';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name'=>'Menus Management',
+    		'parent_id'=>$menu->id,
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>2,
+    		'parent_status'=>'N',
+    		'url'=>'menu',
+    	)
+    );
+    	$submenu->save();
+
+    	$permission = Permission::firstOrNew(array(
+    		'name' => 'read-role',
+    	));
+    	$permission->display_name = 'Read Roles';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name' => 'Roles Management',
+    		'parent_id' => $menu->id,
+    		'permission_id' => $permission->id,
+    		'ordinal' => 2,
+    		'parent_status' => 'N',
+    		'url' => 'role',
+    	)
+    );
+    	$submenu->save();
+    }
+
+     private function menuTools(){
+    	$this->command->info('Menu Tools Seeder');
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-data-menu'
+    	));
+    	$permission->display_name = 'Read Data Menus';
+    	$permission->save();
+    	$menu = Menu::firstOrNew(array(
+    		'name'=>'Tools',
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>1,
+    		'parent_status'=>'Y'
+    	));
+    	$menu->icon = 'si-wrench';
+    	$menu->save();
+
+          //create SUBMENU master
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-data',
+    	));
+    	$permission->display_name = 'Read Data';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name'=>'Import / Export to DB',
+    		'parent_id'=>$menu->id,
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>2,
+    		'parent_status'=>'N',
+    		'url'=>'data',
+    	)
+    );
+    	$submenu->save();
+    }
+
+     private function menuPenjualan(){
+    	$this->command->info('Menu Penjualan Seeder');
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-penjualan-menu'
+    	));
+    	$permission->display_name = 'Read Penjualan Menus';
+    	$permission->save();
+    	$menu = Menu::firstOrNew(array(
+    		'name'=>'Sales',
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>1,
+    		'parent_status'=>'Y'
+    	));
+    	$menu->icon = 'si-basket';
+    	$menu->save();
+
+          //create SUBMENU master
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-penjualan',
+    	));
+    	$permission->display_name = 'Read Penjualan';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name'=>'Sales Report',
+    		'parent_id'=>$menu->id,
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>2,
+    		'parent_status'=>'N',
+    		'url'=>'penjualan',
+    	)
+    );
+    	$submenu->save();
+
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-chart',
+    	));
+    	$permission->display_name = 'Read Chart';
+    	$permission->save();
+
+    	$submenu = Menu::firstOrNew(array(
+    		'name'=>'Sales Chart',
+    		'parent_id'=>$menu->id,
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>2,
+    		'parent_status'=>'N',
+    		'url'=>'penjualan/chart',
+    	)
+    );
+    	$submenu->save();
+    }
+
+    private function menuPeramalan()
+    {
+    	$this->command->info('Menu Peramalan Seeder');
+    	$permission = Permission::firstOrNew(array(
+    		'name'=>'read-peramalan-menu'
+    	));
+    	$permission->display_name = 'Read Peramalan Menus';
+    	$permission->save();
+    	$menu = Menu::firstOrNew(array(
+    		'name'=>'Forecasting',
+    		'permission_id'=>$permission->id,
+    		'ordinal'=>1,
+    		'parent_status'=>'N',
+    		'url'=>'peramalan',
+    	));
+    	$menu->icon = 'si-graph';
+    	$menu->save();
+    }
+}

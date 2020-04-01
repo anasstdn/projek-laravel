@@ -108,3 +108,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/settings', 'SettingController@store')->name('settings.store');
 });
 
+Route::get('menu','MenuController@index')->name('menu.get');

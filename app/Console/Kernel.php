@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use app\Console\Commands\TraitMakeCommand;
 
 class Kernel extends ConsoleKernel
 {

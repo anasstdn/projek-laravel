@@ -30,6 +30,7 @@ class PeramalanController extends Controller
         // $this->middleware('permission:home-create', ['only' => ['create','store']]);
         // $this->middleware('permission:home-update', ['only' => ['edit','update']]);
         // $this->middleware('permission:home-delete', ['only' => ['delete']]);
+         $this->middleware('permission:read-peramalan');
     }
 
     public $viewDir = "forecast";

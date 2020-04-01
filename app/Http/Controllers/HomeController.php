@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 date_default_timezone_set(setting('timezone'));
+use App\Traits\ActivityTraits;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,8 @@ class HomeController extends Controller
      *
      * @return void
      */
+    use ActivityTraits;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -41,6 +44,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->menuAccess(Auth::user(),'Home');
         return view('home');
     }
 

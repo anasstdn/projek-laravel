@@ -21,10 +21,10 @@
                         <!-- END Open Search Section -->
                     </div>
                     <!-- END Left Section -->
-
                     <!-- Right Section -->
                     <div class="content-header-section d-none d-lg-block">
                         <!-- Header Navigation -->
+
                         <!--
                         Desktop Navigation, mobile navigation can be found in #sidebar
 
@@ -32,13 +32,15 @@
                         If your sidebar menu includes headings, they won't be visible in your header navigation by default
                         If your sidebar menu includes icons and you would like to hide them, you can add the class 'nav-main-header-no-icons'
                         -->
-                        <ul class="nav-main-header">
-                        	@if(\Auth::user()->can('read-home-menu'))
+                        {{-- <ul class="nav-main-header mr-auto"> --}}
+                            <ul class="nav-main-header">
+                             {!! App\ShowMenu::menu()->render() !!}
+                        	{{-- @if(\Auth::user()->can('read-home-menu'))
                             <li>
                                 <a class="" href="{{url('/home')}}"><i class="si si-home"></i>Dashboard</a>
                             </li>
-                            @endif
-                            @if(\Auth::user()->can('read-acl-menu'))
+                            @endif --}}
+                          {{--   @if(\Auth::user()->can('read-acl-menu'))
                             <li>
                                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i>Master ACL</a>
                                 <ul>
@@ -53,8 +55,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            @endif
-                            @if(\Auth::user()->can('read-data-menu'))
+                            @endif --}}
+         {{--                    @if(\Auth::user()->can('read-data-menu'))
                             <li>
                                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i>Tools</a>
                                 <ul>
@@ -63,16 +65,16 @@
                                     </li>
                                 </ul>
                             </li>
-                            @endif
-                            <li>
+                            @endif --}}
+                           {{--  <li>
                                 <a href="{{url('/penjualan')}}"><i class="si si-basket"></i>Sales</a>
                             </li>
                             <li>
                                 <a href="{{url('/penjualan/chart')}}"><i class="si si-pie-chart"></i>Chart</a>
-                            </li>
-                            <li>
+                            </li> --}}
+                           {{--  <li>
                                 <a href=""><i class="si si-graph"></i>Forecasting</a>
-                            </li>
+                            </li> --}}
                         </ul>
 
 
