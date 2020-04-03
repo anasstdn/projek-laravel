@@ -48,6 +48,7 @@ Route::group( ['prefix'=>'home','middleware' => ['role:superadministrator|admini
 	Route::get('/get-chart','HomeController@getChart');
 	Route::get('/get-notif', 'HomeController@getNotif');
     Route::get('/card', 'HomeController@card');
+    Route::get('/weather', 'HomeController@weather');
 	Route::resource('home', 'HomeController');
 });
 
@@ -101,6 +102,11 @@ Route::get('permission-role/get/{id}/menu', 'RoleController@hakmenus');
 Route::get('role/permission-role/get/{id}/menu', 'RoleController@hakmenus');
 Route::resource('role', 'RoleController');
 Route::delete('role/{id}/restore', 'RoleController@restore');
+
+Route::get('activity/load-data', 'ActivityLogController@loadData');
+Route::get('activity/get-data', 'ActivityLogController@getData');
+Route::resource('activity', 'ActivityLogController');
+Route::delete('activity/{id}/restore', 'ActivityLogController@restore');
 
 
 Route::group(['middleware' => 'auth'], function () {

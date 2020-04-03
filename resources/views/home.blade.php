@@ -144,6 +144,17 @@ var admin="{{\Auth::user()->can('read-card-admin')}}";
 var manager="{{\Auth::user()->can('read-card-manager')}}";
 
 $(document).ready(function(){
+  // $.ajax({
+  //   url: '{{url('home/weather/')}}',
+  //   type: 'GET',
+  //   success:function(data){
+  //     console.log(data);
+  //   },
+  //   error:function (xhr, status, error){
+  //     toastr.warning(xhr.responseText,'');
+  //   },
+
+  // })
 
     if(admin==true)
     {

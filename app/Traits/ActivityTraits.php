@@ -1,32 +1,42 @@
 <?php
 
 namespace App\Traits;
-use App\Models\Activity;
+use App\Activity;
 use carbon\carbon;
-date_default_timezone_set(setting('timezone'));
+date_default_timezone_set("Asia/Jakarta");
 
 trait ActivityTraits
 {
     //
-	public function logCreatedActivity($logModel,$changes,$request)
+	public function logCreatedActivity($logModel,$list_data,$menu,$table_name)
 	{
+		$changes='Insert data '.implode(', ',array_values($list_data));
+		$updated_at = Carbon::now()->format('d/m/Y H:i:s');
+		$request['type']='Create';
+		$request['description']='Create data '.$menu.' pada '.$updated_at.'';
+		$request['menu']=$menu;
+		$request['data']=$list_data;
+		$request['table']=$table_name;
+		// array_push($request,'type'=>'Create');
 		$activity = activity()
 		->causedBy(\Auth::user())
 		->performedOn($logModel)
 		->withProperties(['attributes'=>$request])
-		->log($changes);
+		->log($changes.' oleh '.\Auth::user()->name);
 		$lastActivity = Activity::all()->last();
 
 		return true;
 	}
 
-	public function logUpdatedActivity($list,$before,$list_changes)
+	public function logUpdatedActivity($list,$before,$list_changes,$menu,$table_name)
 	{
+		// dd($before);
+		$updated_at = Carbon::now()->format('d/m/Y H:i:s');
 		unset($list_changes['updated_at']);
 		$old_keys = [];
 		$old_value_array = [];
 		if(empty($list_changes)){
-			$changes = 'No attribute changed';
+			$changes = 'Tidak ada atribut / nilai yang dirubah';
 
 		}else{
 
@@ -40,35 +50,51 @@ trait ActivityTraits
 				}
 			}
 			$old_value_array = $old_keys;
-			$changes = 'Updated with attributes '.implode(', ',array_keys($old_keys)).' with '.implode(', ',array_values($old_keys)).' to '.implode(', ',array_values($list_changes));
+			$changes = 'Update nilai '.implode(', ',array_keys($old_value_array)).' dengan '.implode(', ',array_values($old_value_array)).' ke '.implode(', ',array_values($list_changes));
 		}
 
-		$properties = [
-			'attributes'=>$list_changes,
-			'old' =>$old_value_array
-		];
+		$request['data']=$list_changes;
+		$request['old']=$old_value_array;
+		$request['type']='Update';
+		$request['description']='Update data '.$menu.' pada '.$updated_at.'';
+		$request['menu']=$menu;
+		$request['table']=$table_name;
+		// $properties = [
+		// 	'attributes'=>$list_changes,
+		// 	'old' =>$old_value_array,
+		// 	'type'=>'Delete',
+		// 	'description'=>'Update data '.$menu.' pada '.$updated_at.'',
+		// ];
 
 		$activity = activity()
 		->causedBy(\Auth::user())
 		->performedOn($list)
-		->withProperties($properties)
-		->log($changes.' made by '.\Auth::user()->name);
+		->withProperties(['attributes'=>$request])
+		->log($changes.' oleh '.\Auth::user()->name);
 
 		return true;
 	}
 
-	public function logDeletedActivity($list,$changeLogs)
+	public function logDeletedActivity($list,$changeLogs,$menu,$table_name)
 	{
+		$updated_at = Carbon::now()->format('d/m/Y H:i:s');
 		$attributes = $this->unsetAttributes($list);
 
-		$properties = [
-			'attributes' => $attributes->toArray()
-		];
+		// $properties = [
+		// 	'attributes' => $attributes->toArray(),
+		// 	'type'=>'Delete',
+		// 	'description'=>'Hapus data '.$menu.' pada '.$updated_at.'',
+		// ];
+		$request['data']=$attributes->toArray();
+		$request['type']='Delete';
+		$request['description']='Hapus data '.$menu.' pada '.$updated_at.'';
+		$request['menu']=$menu;
+		$request['table']=$table_name;
 
 		$activity = activity()
 		->causedBy(\Auth::user())
 		->performedOn($list)
-		->withProperties($properties)
+		->withProperties(['attributes'=>$request])
 		->log($changeLogs);
 
 		return true;
@@ -78,10 +104,10 @@ trait ActivityTraits
 	{
 		$updated_at = Carbon::now()->format('d/m/Y H:i:s');
 		$properties = [
-			'attributes' =>['name'=>$user->username,'description'=>'Login ke sistem pada '.$updated_at,'type'=>'Login']
+			'attributes' =>['description'=>''.$user->name.' melakukan login ke sistem pada '.$updated_at,'type'=>'Login']
 		];
 
-		$changes = 'User '.$user->username.' melakukan login';
+		$changes = 'User '.$user->name.' melakukan login';
 
 		$activity = activity()
 		->causedBy(\Auth::user())
@@ -96,10 +122,10 @@ trait ActivityTraits
 	{
 		$updated_at = Carbon::now()->format('d/m/Y H:i:s');
 		$properties = [
-			'attributes' =>['name'=>$user->username,'description'=>'Logout dari sistem pada '.$updated_at,'type'=>'Logout']
+			'attributes' =>['description'=>''.$user->name.' melakukan logout dari sistem pada '.$updated_at,'type'=>'Logout']
 		];
 
-		$changes = 'User '.$user->username.' melakukan logout';
+		$changes = 'User '.$user->name.' melakukan logout';
 
 		$activity = activity()
 		->causedBy(\Auth::user())
@@ -114,10 +140,10 @@ trait ActivityTraits
 	{
 		$updated_at = Carbon::now()->format('d/m/Y H:i:s');
 		$properties = [
-			'attributes' =>['name'=>$user->username,'description'=>'Akses ke menu '.$menu.' pada '.$updated_at,'type'=>'Access']
+			'attributes' =>['description'=>''.$user->name.' mengakses menu '.$menu.' pada '.$updated_at,'type'=>'Access','menu'=>$menu]
 		];
 
-		$changes = 'User '.$user->username.' mengakses menu '.$menu.'';
+		$changes = 'User '.$user->name.' telah mengakses ke menu '.$menu.'';
 
 		$activity = activity()
 		->causedBy(\Auth::user())

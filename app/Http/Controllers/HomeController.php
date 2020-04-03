@@ -18,6 +18,7 @@ use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 date_default_timezone_set(setting('timezone'));
 use App\Traits\ActivityTraits;
+use Gmopx\LaravelOWM\LaravelOWM;
 
 class HomeController extends Controller
 {
@@ -46,6 +47,19 @@ class HomeController extends Controller
     {
         $this->menuAccess(Auth::user(),'Home');
         return view('home');
+    }
+
+    public function weather()
+    {
+       $lowm = new LaravelOWM();
+       $current_weather = $lowm->getCurrentWeather('daerah istimewa yogyakarta');
+       $data=array(
+        'now'=>$current_weather->temperature->now->getValue()!==null?$current_weather->temperature->now->getValue():0,
+        'min'=>$current_weather->temperature->min->getValue()!==null?$current_weather->temperature->min->getValue():0,
+        'max'=>$current_weather->temperature->max->getValue()!==null?$current_weather->temperature->max->getValue():0,
+        'country'=>($current_weather->city->name!==null?$current_weather->city->name:'').', '.($current_weather->city->country!==null?$current_weather->city->country:'')
+       );
+       return \Response::json($data);
     }
 
     public function card(Request $request)

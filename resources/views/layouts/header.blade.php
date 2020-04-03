@@ -15,14 +15,38 @@
 
                         <!-- Open Search Section -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                    {{--     <button type="button" class="btn btn-rounded btn-dual-secondary" data-toggle="layout" data-action="header_search_on">
+                       {{--  <button type="button" class="btn btn-rounded btn-dual-secondary" data-toggle="layout" data-action="header_search_on">
                             <i class="fa fa-search mr-5"></i> Search
                         </button> --}}
+                            {{-- <div class="content-header-section"> --}}
+                         <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user d-sm-none"></i>
+                                <span class="d-none d-sm-inline-block">{{ Auth::user()->name }}</span>
+                                <i class="fa fa-angle-down ml-5"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
+                                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
+                                <div class="dropdown-divider"></div>
+                                 <a class="dropdown-item" href="{{ url('settings') }}">
+                                <i class="si si-settings mr-5"></i> Settings
+                            </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="si si-logout mr-5"></i> Sign Out
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </a>
+                            </div>
+                        </div>
+                    {{-- </div> --}}
                         <!-- END Open Search Section -->
                     </div>
                     <!-- END Left Section -->
                     <!-- Right Section -->
-                    <div class="content-header-section d-none d-lg-block">
+                    {{-- <div class="content-header-section d-none d-lg-block"> --}}
+                         <div class="content-header-section">
                         <!-- Header Navigation -->
 
                         <!--
@@ -88,29 +112,7 @@
                         </button>
                         <!-- END Toggle Sidebar -->
                     </div>
-                    <div class="content-header-section">
-                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user d-sm-none"></i>
-                                <span class="d-none d-sm-inline-block">{{ Auth::user()->name }}</span>
-                                <i class="fa fa-angle-down ml-5"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
-                                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
-                                <div class="dropdown-divider"></div>
-                                 <a class="dropdown-item" href="{{ url('settings') }}">
-                                <i class="si si-settings mr-5"></i> Settings
-                            </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                <i class="si si-logout mr-5"></i> Sign Out
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </a>
-                            </div>
-                        </div>
-                    </div>
+                
                     <!-- END Right Section -->
                 </div>
                 <!-- END Header Content -->

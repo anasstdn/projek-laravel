@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Gmopx\LaravelOWM\LaravelOWM;
 use App\Models\User;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use Spatie\Activitylog\Models\Activity;
+date_default_timezone_set(setting('timezone'));
+use Illuminate\Support\Facades\Auth;
+use App\Traits\ActivityTraits;
 
 class UserController extends Controller
 {
@@ -19,6 +24,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public $viewDir = "user";
+    use ActivityTraits;
+
 
     protected function view($view, $data = [])
     {
@@ -37,7 +44,8 @@ class UserController extends Controller
    public function index()
    {
         //
-    return $this->view('index');
+    $this->menuAccess(Auth::user(),'User');
+     return $this->view('index');
 }
 
     /**
@@ -49,6 +57,7 @@ class UserController extends Controller
     {
         //
       $role=\App\Role::select(\DB::raw("*"))->get();
+      $this->menuAccess(Auth::user(),'User (Create)');
       return $this->view('form',compact('role'));
     }
 
@@ -85,6 +94,7 @@ class UserController extends Controller
         //
         $user=User::find($id);
         $role=\App\Role::select(\DB::raw("*"))->get();
+        $this->menuAccess(Auth::user(),'User (Edit)');
         return $this->view('form',compact('user','role'));
     }
 
@@ -119,6 +129,7 @@ class UserController extends Controller
      public function destroy(Request $request, $kode)
        {
            $user=User::find($kode);
+           $this->logDeletedActivity($user,'Delete data id='.$kode.'','Users','users');
            $act=false;
            try {
                $act=$user->forceDelete();
@@ -167,18 +178,19 @@ class UserController extends Controller
    public function reset(Request $request, $kode)
    {
       $user=User::find($kode);
+      $this->menuAccess(Auth::user(),'User (Reset Password)');
       $act=false;
       try {
        $dat=array(
         'password'=>bcrypt('12345678'),
       );
-
+       $this->logUpdatedActivity(Auth::user(),$user->getAttributes(),$dat,'Users','users');
       $reset=$user->update($dat);
      } catch (\Exception $e) {
        $dat=array(
         'password'=>bcrypt('12345678'),
       );
-
+       $this->logUpdatedActivity(Auth::user(),$user->getAttributes(),$dat,'Users','users');
       $reset=$user->update($dat);
      }
    }
@@ -335,7 +347,7 @@ class UserController extends Controller
       switch($all_data['mode'])
       {
         case 'add':
-            $user  = array(
+            $data  = array(
              'name' =>$all_data['nama'] ,
              'username' =>$all_data['username'] ,
              'email' =>$all_data['email'] ,
@@ -345,7 +357,8 @@ class UserController extends Controller
              'verified'=>$all_data['verified'],
            );
 
-            $user=User::create($user);
+            $this->logCreatedActivity(Auth::user(),$data,'Users','users');
+            $user=User::create($data);
 
             $role=array(
              'role_id'=>intval($all_data['roles']),
@@ -354,7 +367,7 @@ class UserController extends Controller
             );
 
             // dd($role);
-
+            $this->logCreatedActivity(Auth::user(),$role,'Users','role_user');
             $roleUser = DB::table('role_user')->insert($role);
 
             if($user==true && $roleUser==true)
@@ -399,8 +412,11 @@ class UserController extends Controller
                  'verified'=>$all_data['verified'],
                );
             }
+            $this->logUpdatedActivity(Auth::user(),$user->getAttributes(),$dataUser,'Users','users');
+
             $act=$user->update($dataUser);
 
+            $this->logDeletedActivity(RoleUser::where('user_id',$all_data['id'])->first(),'Delete data id='.$all_data['id'].' di menu Users','Users','role_user');
             $delRoleUser=RoleUser::where('user_id',$all_data['id'])->forceDelete();
 
             $role=array(
@@ -410,7 +426,7 @@ class UserController extends Controller
             );
 
             // dd($role);
-
+            $this->logCreatedActivity(Auth::user(),$role,'Users','role_user');
             $roleUser = DB::table('role_user')->insert($role);
 
             if($user==true && $roleUser==true)

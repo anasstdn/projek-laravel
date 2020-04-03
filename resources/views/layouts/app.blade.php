@@ -110,7 +110,7 @@
                         by Anas Setyadin</a>
                     </div>
                     <div class="float-left">
-                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Laravel Forecast v.1.9.5</a> &copy; <span class="">2020</span>
+                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Laravel Forecast v.2.0.0</a> &copy; <span class="">2020</span>
                     </div>
                 </div>
             </footer>

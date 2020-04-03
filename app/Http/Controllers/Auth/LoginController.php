@@ -65,4 +65,14 @@ class LoginController extends Controller
         }
         return redirect()->intended($this->redirectPath());
     }
+
+    public function logout(Request $request)
+    {
+        $this->logLogoutDetails(Auth::user());
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/');
+    }
 }
