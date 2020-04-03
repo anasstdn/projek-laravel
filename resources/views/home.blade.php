@@ -87,7 +87,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Total Penjualan</div>
+              <div class="font-size-sm font-w600 text-uppercase">Total Sales</div>
             </div>
           </div>
         </a>
@@ -97,7 +97,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_bulan_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Penjualan Bulan Ini</div>
+              <div class="font-size-sm font-w600 text-uppercase">Sales this month</div>
             </div>
           </div>
         </a>
@@ -107,7 +107,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_minggu_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Penjualan Minggu Ini</div>
+              <div class="font-size-sm font-w600 text-uppercase">Sales this week</div>
             </div>
           </div>
         </a>
@@ -117,7 +117,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_hari_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Penjualan Hari Ini</div>
+              <div class="font-size-sm font-w600 text-uppercase">Sales today</div>
             </div>
           </div>
         </a>

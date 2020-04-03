@@ -181,93 +181,93 @@ class MenuSeeder extends Seeder
     );
         $submenu->save();
 
-        $permission = Permission::firstOrNew(array(
-            'name'=>'read-wilayah-menu',
-          ));
-             $permission->display_name = 'Read Menu Wilayah';
-             $permission->save();
+        // $permission = Permission::firstOrNew(array(
+        //     'name'=>'read-wilayah-menu',
+        //   ));
+        //      $permission->display_name = 'Read Menu Wilayah';
+        //      $permission->save();
 
-             $submenu = Menu::firstOrNew(
-               array(
-              'name'=>'Wilayah',
-              'parent_id'=>$menu->id,
-              'permission_id'=>$permission->id,
-              'ordinal'=>2,
-              'parent_status'=>'Y',
-            )
-          );
-             $submenu->save();
-             $permission = Permission::firstOrNew(array(
-              'name'=>'read-provinsi',
-            ));
-             $permission->display_name = 'Read Provinsi';
-             $permission->save();
+        //      $submenu = Menu::firstOrNew(
+        //        array(
+        //       'name'=>'Wilayah',
+        //       'parent_id'=>$menu->id,
+        //       'permission_id'=>$permission->id,
+        //       'ordinal'=>2,
+        //       'parent_status'=>'Y',
+        //     )
+        //   );
+        //      $submenu->save();
+        //      $permission = Permission::firstOrNew(array(
+        //       'name'=>'read-provinsi',
+        //     ));
+        //      $permission->display_name = 'Read Provinsi';
+        //      $permission->save();
 
-             $subsubmenu = Menu::firstOrNew(
-               array(
-              'name'=>'Provinsi',
-              'parent_id'=>$submenu->id,
-              'permission_id'=>$permission->id,
-              'ordinal'=>3,
-              'parent_status'=>'N',
-              'url'=>'provinsi',
-            )
-          );
-             $subsubmenu->save();
+        //      $subsubmenu = Menu::firstOrNew(
+        //        array(
+        //       'name'=>'Provinsi',
+        //       'parent_id'=>$submenu->id,
+        //       'permission_id'=>$permission->id,
+        //       'ordinal'=>3,
+        //       'parent_status'=>'N',
+        //       'url'=>'provinsi',
+        //     )
+        //   );
+        //      $subsubmenu->save();
 
-             $permission = Permission::firstOrNew(array(
-            'name'=>'read-kabupaten',
-          ));
-             $permission->display_name = 'Read Kabupaten';
-             $permission->save();
+        //      $permission = Permission::firstOrNew(array(
+        //     'name'=>'read-kabupaten',
+        //   ));
+        //      $permission->display_name = 'Read Kabupaten';
+        //      $permission->save();
 
-             $subsubmenu = Menu::firstOrNew(
-               array(
-              'name'=>'Kabupaten',
-              'parent_id'=>$submenu->id,
-              'permission_id'=>$permission->id,
-              'ordinal'=>3,
-              'parent_status'=>'N',
-              'url'=>'kabupaten',
-            )
-          );
-             $subsubmenu->save();
+        //      $subsubmenu = Menu::firstOrNew(
+        //        array(
+        //       'name'=>'Kabupaten',
+        //       'parent_id'=>$submenu->id,
+        //       'permission_id'=>$permission->id,
+        //       'ordinal'=>3,
+        //       'parent_status'=>'N',
+        //       'url'=>'kabupaten',
+        //     )
+        //   );
+        //      $subsubmenu->save();
 
-             $permission = Permission::firstOrNew(array(
-            'name'=>'read-kecamatan',
-          ));
-             $permission->display_name = 'Read Kecamatan';
-             $permission->save();
+        //      $permission = Permission::firstOrNew(array(
+        //     'name'=>'read-kecamatan',
+        //   ));
+        //      $permission->display_name = 'Read Kecamatan';
+        //      $permission->save();
 
-             $subsubmenu = Menu::firstOrNew(
-               array(
-              'name'=>'Kecamatan',
-              'parent_id'=>$submenu->id,
-              'permission_id'=>$permission->id,
-              'ordinal'=>3,
-              'parent_status'=>'N',
-              'url'=>'kecamatan',
-            )
-          );
-             $subsubmenu->save();
+        //      $subsubmenu = Menu::firstOrNew(
+        //        array(
+        //       'name'=>'Kecamatan',
+        //       'parent_id'=>$submenu->id,
+        //       'permission_id'=>$permission->id,
+        //       'ordinal'=>3,
+        //       'parent_status'=>'N',
+        //       'url'=>'kecamatan',
+        //     )
+        //   );
+        //      $subsubmenu->save();
 
-             $permission = Permission::firstOrNew(array(
-            'name'=>'read-kelurahan',
-          ));
-             $permission->display_name = 'Read Kelurahan';
-             $permission->save();
+        //      $permission = Permission::firstOrNew(array(
+        //     'name'=>'read-kelurahan',
+        //   ));
+        //      $permission->display_name = 'Read Kelurahan';
+        //      $permission->save();
 
-             $subsubmenu = Menu::firstOrNew(
-               array(
-              'name'=>'Kelurahan',
-              'parent_id'=>$submenu->id,
-              'permission_id'=>$permission->id,
-              'ordinal'=>3,
-              'parent_status'=>'N',
-              'url'=>'kelurahan',
-            )
-          );
-          $subsubmenu->save();
+        //      $subsubmenu = Menu::firstOrNew(
+        //        array(
+        //       'name'=>'Kelurahan',
+        //       'parent_id'=>$submenu->id,
+        //       'permission_id'=>$permission->id,
+        //       'ordinal'=>3,
+        //       'parent_status'=>'N',
+        //       'url'=>'kelurahan',
+        //     )
+        //   );
+        //   $subsubmenu->save();
     }
 
      private function menuPenjualan(){

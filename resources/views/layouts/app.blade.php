@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>Laravel Forecast</title>
+        <title>POS MS</title>
 
         <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
@@ -110,7 +110,7 @@
                         by Anas Setyadin</a>
                     </div>
                     <div class="float-left">
-                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Laravel Forecast v.2.0.0</a> &copy; <span class="">2020</span>
+                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">POS Management System v.1.0.0</a> &copy; <span class="">2020</span>
                     </div>
                 </div>
             </footer>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>Laravel Forecast</title>
+        <title>POS MS</title>
 
         <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
@@ -95,7 +95,7 @@
                                     Made by Anas Setyadin
                                 </p>
                                 <p class="font-italic text-white-op">
-                                    Laravel Forecast Copyright &copy; <span class="">2020</span>
+                                    POS Management System Copyright &copy; <span class="">2020</span>
                                 </p>
                             </div>
                         </div>
@@ -103,9 +103,9 @@
                             <div class="content content-full">
                                 <!-- Header -->
                                 <div class="px-30 py-10">
-                                    <a class="link-effect font-w700" href="index.html">
-                                        <i class="si si-graph"></i>
-                                        <span class="font-size-xl text-primary-dark">Laravel</span><span class="font-size-xl">Forecast</span>
+                                    <a class="link-effect font-w600 font-size-xl" href="index.html">
+                                        <i class="si si-basket"></i>
+                                        <span class="font-size-xl text-primary-dark">POS</span><span class="font-size-xl">MS</span>
                                     </a>
                                     <!-- <h1 class="h3 font-w700 mt-30 mb-10">Welcome to Your Dashboard</h1> -->
                                     {{-- <h2 class="h5 font-w400 text-muted mb-0">Please sign in</h2> --}}

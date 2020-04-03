@@ -157,7 +157,7 @@
 				<div class="row col-lg-12" style="margin-bottom:1em;font-family: sans-serif;">
 					<div class="col-lg-6">
 						<div class="text-right">
-							<button class="btn btn-primary btn-sm" id="cari">Cari</button>
+							<button class="btn btn-primary btn-sm" id="cari">Find</button>
 							<button class="btn btn-outline-success btn-sm" id="reset">Reset</button>
 						</div>
 					</div>

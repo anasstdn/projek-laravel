@@ -7,8 +7,8 @@
                         <!-- Logo -->
                         <div class="content-header-item mr-5">
                             <a class="link-effect font-w600 font-size-xl" href="{{url('/')}}">
-                              <i class="si si-graph text-primary"></i>
-                                <span class="text-dual-primary-dark">Laravel</span><span class="text-primary">Forecast</span>
+                              <i class="si si-basket text-primary"></i>
+                                <span class="text-dual-primary-dark">POS</span><span class="text-primary">MS</span>
                             </a>
                         </div>
                         <!-- END Logo -->
