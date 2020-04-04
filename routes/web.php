@@ -115,3 +115,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('menu','MenuController@index')->name('menu.get');
+
+Route::get('barang-golongan/get-data', 'BarangGolonganController@getData');
+Route::match(['get','post'],'barang-golongan/send-data','BarangGolonganController@sendData');
+Route::resource('barang-golongan', 'BarangGolonganController');
+Route::delete('barang-golongan/{id}/restore', 'BarangGolonganController@restore');

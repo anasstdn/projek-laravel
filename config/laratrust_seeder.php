@@ -12,6 +12,8 @@ return [
             'data-menu'=>'r',
                 'data' => 'c,r,u,d',
                 'activity'=>'r',
+                'barang-menu'=>'r',
+                    'barang-golongan'=>'c,r,u,d',
                 // 'wilayah-menu'=>'r',
                 //     'provinsi'=>'r',
                 //     'kabupaten'=>'r',

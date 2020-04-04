@@ -52,7 +52,7 @@
             <p class="mt-5">
               <i class="si si-basket fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Sales</p>
+            <p class="font-w600">Transaksi</p>
           </div>
         </a>
       </div>
@@ -62,7 +62,7 @@
             <p class="mt-5">
               <i class="si si-pie-chart fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Chart</p>
+            <p class="font-w600">Grafik</p>
           </div>
         </a>
       </div>
@@ -72,7 +72,7 @@
             <p class="mt-5">
               <i class="si si-graph fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Forecasting</p>
+            <p class="font-w600">Peramalan</p>
           </div>
         </a>
       </div>
@@ -87,7 +87,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Total Sales</div>
+              <div class="font-size-sm font-w600 text-uppercase">Total Transaksi</div>
             </div>
           </div>
         </a>
@@ -97,7 +97,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_bulan_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Sales this month</div>
+              <div class="font-size-sm font-w600 text-uppercase">Transaksi Bulan Ini</div>
             </div>
           </div>
         </a>
@@ -107,7 +107,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_minggu_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Sales this week</div>
+              <div class="font-size-sm font-w600 text-uppercase">Transaksi Minggu Ini</div>
             </div>
           </div>
         </a>
@@ -117,7 +117,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_hari_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Sales today</div>
+              <div class="font-size-sm font-w600 text-uppercase">Transaksi Hari Ini</div>
             </div>
           </div>
         </a>
