@@ -2,40 +2,27 @@
 					<table class="table table-bordered table-striped table-vcenter">
 						<tr>
 							<th width="5%">No</th>
-							<th>Aksi</th>
-							<th>Barcode</th>
-							<th>Nama Barang</th>
-							<th>Golongan Barang</th>
-							<th>Satuan</th>
-							<th>Harga Beli</th>
-							<th>Harga Jual</th>
-							<th>Diskon</th>
+							<th>Barang Golongan</th>
 							<th>Created At</th>
 							<th>Updated At</th>
-							
+							<th>Aksi</th>
 						</tr>
 						<tbody>
 							@if(isset($data) && !$data->isEmpty())
 							@foreach($data as $key=>$row)
 							<tr>
 								<td>{{ $data->firstItem() + $key }}</td>
-								<td style="text-align:center"><a onclick='show_modal("<?php echo url("barang/".$row->id)."/edit"?>")' style='color:white' class='btn btn-sm btn-primary' data-toggle='click-ripple' data-original-title='Edit' title='Edit'><i class='fa fa-edit' aria-hidden='true'></i> Edit</a>
-								<a onclick='hapus("<?php echo url("barang/".$row->id)?>")' style='color:white' class='btn btn-sm btn-danger' data-toggle='click-ripple' data-original-title='Remove' title='Remove'><i class='fa fa-trash-o' aria-hidden='true'></i> Delete</a>
-								</td>
-								<td>{{$row->barcode}}</td>
-								<td>{{$row->nama_barang}}</td>
-								<td>{{$row->barang_golongan}}</td>
 								<td>{{$row->satuan}}</td>
-								<td>{{$row->harga_beli}}</td>
-								<td>{{$row->harga_jual}}</td>
-								<td>{{$row->diskon}}</td>
 								<td>{{$row->created_at}}</td>
 								<td>{{$row->updated_at}}</td>
+								<td style="text-align:center"><a onclick='show_modal("<?php echo url("satuan/".$row->id)."/edit"?>")' style='color:white' class='btn btn-sm btn-primary' data-toggle='click-ripple' data-original-title='Edit' title='Edit'><i class='fa fa-edit' aria-hidden='true'></i> Edit</a>
+								<a onclick='hapus("<?php echo url("satuan/".$row->id)?>")' style='color:white' class='btn btn-sm btn-danger' data-toggle='click-ripple' data-original-title='Remove' title='Remove'><i class='fa fa-trash-o' aria-hidden='true'></i> Delete</a>
+								</td>
 							</tr>
 							@endforeach
 							@else
 							<tr>
-								<td colspan="11" style="text-align: center">Data Kosong</td>
+								<td colspan="5" style="text-align: center">Data Kosong</td>
 							</tr>
 							@endif
 						</tbody>

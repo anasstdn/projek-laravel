@@ -15,6 +15,7 @@ return [
                 'barang-menu'=>'r',
                     'barang-golongan'=>'c,r,u,d',
                     'barang'=>'c,r,u,d',
+                    'satuan-unit'=>'r',
                 // 'wilayah-menu'=>'r',
                 //     'provinsi'=>'r',
                 //     'kabupaten'=>'r',

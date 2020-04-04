@@ -216,6 +216,23 @@ class MenuSeeder extends Seeder
           );
              $subsubmenu->save();
 
+             $permission = Permission::firstOrNew(array(
+              'name'=>'read-satuan-unit',
+            ));
+             $permission->display_name = 'Read Satuan';
+             $permission->save();
+
+             $subsubmenu = Menu::firstOrNew(
+               array(
+              'name'=>'Satuan',
+              'parent_id'=>$submenu->id,
+              'permission_id'=>$permission->id,
+              'ordinal'=>3,
+              'parent_status'=>'N',
+              'url'=>'satuan',
+            )
+          );
+             $subsubmenu->save();
 
              $permission = Permission::firstOrNew(array(
               'name'=>'read-barang',

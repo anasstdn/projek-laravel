@@ -116,6 +116,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('menu','MenuController@index')->name('menu.get');
 
+Route::get('satuan/get-data', 'SatuanController@getData');
+Route::match(['get','post'],'satuan/send-data','SatuanController@sendData');
+Route::resource('satuan', 'SatuanController');
+Route::delete('satuan/{id}/restore', 'SatuanController@restore');
+
 Route::get('barang-golongan/get-data', 'BarangGolonganController@getData');
 Route::match(['get','post'],'barang-golongan/send-data','BarangGolonganController@sendData');
 Route::resource('barang-golongan', 'BarangGolonganController');
@@ -125,3 +130,5 @@ Route::get('barang/get-data', 'BarangController@getData');
 Route::match(['get','post'],'barang/send-data','BarangController@sendData');
 Route::resource('barang', 'BarangController');
 Route::delete('barang/{id}/restore', 'BarangController@restore');
+
+
