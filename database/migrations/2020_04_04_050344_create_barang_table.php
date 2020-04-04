@@ -15,12 +15,14 @@ class CreateBarangTable extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('id_barang_golongan');
             $table->string('barcode',100)->nullable();
             $table->string('nama_barang',100)->nullable();
             $table->string('satuan',100)->nullable();
             $table->float('harga_beli',14,2)->nullable();
             $table->float('harga_jual',14,2)->nullable();
             $table->float('diskon')->nullable();
+            $table->foreign('id_barang_golongan')->references('id')->on('barang_golongan')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
