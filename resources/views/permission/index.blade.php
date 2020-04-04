@@ -1,24 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-primary-dark">
-<div class="content content-top">
-<div class="row push">
-<div class="col-md py-10 d-md-flex align-items-md-center text-center">
-<h1 class="text-white mb-0">
-<span class="font-w300">Permission</span>
-<span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
-</h1>
-</div>
-  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
-        <button type="button" class="btn btn-alt-primary">
-            <i class="fa fa-user-plus mr-5"></i> New Account
-        </button>
-      </div> --}}
+<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo8@2x.jpg');">
+  <div class="content content-top">
+    <div class="row push">
+      <div class="col-md py-10 d-md-flex align-items-md-center text-center">
+        <h1 class="text-white mb-0">
+          <span class="font-w300">Permission</span>
+        </h1>
+      </div>
     </div>
   </div>
 </div>
-<!-- END Header -->
 
 <!-- Page Content -->
 <div class="bg-white">
@@ -62,7 +55,7 @@
  <div class="modal fade" id="formModal" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1">
  </div>
  {{-- <div class="modal fade" id="formModal1" aria-hidden="true" aria-labelledby="modal-normal" role="dialog" tabindex="-1"> --}}
- </div>
+
 <!-- END Page Content -->
 @endsection
 

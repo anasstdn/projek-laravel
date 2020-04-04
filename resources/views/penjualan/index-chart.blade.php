@@ -1,33 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> --}}
-<div class="bg-primary-dark">
-	<div class="content content-top">
-		<div class="row push">
-			<div class="col-md py-10 d-md-flex align-items-md-center text-center">
-				<h1 class="text-white mb-0">
-					<span class="font-w300">Chart</span>
-					<span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
-				</h1>
-			</div>
-  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
-        <button type="button" class="btn btn-alt-primary">
-            <i class="fa fa-user-plus mr-5"></i> New Account
-        </button>
-    </div> --}}
+<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo8@2x.jpg');">
+  <div class="content content-top">
+    <div class="row push">
+      <div class="col-md py-10 d-md-flex align-items-md-center text-center">
+        <h1 class="text-white mb-0">
+          <span class="font-w300">Grafik Penjualan</span>
+        </h1>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<!-- END Header -->
 
 <!-- Page Content -->
 <div class="bg-white">
 	<!-- Breadcrumb -->
 	<div class="content">
 		<nav class="breadcrumb mb-0">
-			<a class="breadcrumb-item" href="javascript:void(0)">Sales</a>
-			<span class="breadcrumb-item active">Chart</span>
+			<a class="breadcrumb-item" href="javascript:void(0)">Transaksi</a>
+			<span class="breadcrumb-item active">Grafik Penjualan</span>
 		</nav>
 	</div>
 	<!-- END Breadcrumb -->

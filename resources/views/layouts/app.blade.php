@@ -87,7 +87,8 @@
             'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
-        <div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed">
+        {{-- <div id="page-container" class="sidebar-inverse side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed"> --}}
+           <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-glass page-header-inverse main-content-boxed">
 
 
          @include('layouts.header')
@@ -104,13 +105,13 @@
             <!-- END Main Container -->
 
             <!-- Footer -->
-            <footer id="page-footer" class="bg-white opacity-0">
+              <footer id="page-footer" class="opacity-0">
                 <div class="content py-20 font-size-sm clearfix">
                     <div class="float-right">
-                        by Anas Setyadin</a>
+                       by Anas Setyadin</a>
                     </div>
                     <div class="float-left">
-                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">POS Management System v.1.0.0</a> &copy; <span class="">2020</span>
+                       <a class="font-w600" href="https://1.envato.market/95j" target="_blank">POS Management System v.1.0.0</a> &copy; <span class="">2020</span>
                     </div>
                 </div>
             </footer>
