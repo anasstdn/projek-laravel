@@ -14,6 +14,7 @@ return [
                 'activity'=>'r',
                 'barang-menu'=>'r',
                     'barang-golongan'=>'c,r,u,d',
+                    'barang'=>'c,r,u,d',
                 // 'wilayah-menu'=>'r',
                 //     'provinsi'=>'r',
                 //     'kabupaten'=>'r',

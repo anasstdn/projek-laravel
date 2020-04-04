@@ -120,3 +120,8 @@ Route::get('barang-golongan/get-data', 'BarangGolonganController@getData');
 Route::match(['get','post'],'barang-golongan/send-data','BarangGolonganController@sendData');
 Route::resource('barang-golongan', 'BarangGolonganController');
 Route::delete('barang-golongan/{id}/restore', 'BarangGolonganController@restore');
+
+Route::get('barang/get-data', 'BarangController@getData');
+Route::match(['get','post'],'barang/send-data','BarangController@sendData');
+Route::resource('barang', 'BarangController');
+Route::delete('barang/{id}/restore', 'BarangController@restore');

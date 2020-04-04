@@ -35,7 +35,9 @@ class BarangGolonganController extends Controller
        {
            $this->middleware('auth');
            $this->middleware('permission:read-barang-golongan', ['only' => ['index','getData']]);
-           $this->middleware('permission:create-barang-golongan', ['only' => ['create','create','store']]);
+           $this->middleware('permission:create-barang-golongan', ['only' => ['create','sendData']]);
+           $this->middleware('permission:edit-barang-golongan', ['only' => ['edit','sendData']]);
+           $this->middleware('permission:delete-barang-golongan', ['only' => ['destroy']]);
            // $this->middleware('permission:read-barang-golongan');
        }
 
