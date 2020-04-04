@@ -2,7 +2,7 @@
 					<table class="table table-bordered table-striped table-vcenter">
 						<tr>
 							<th width="5%">No</th>
-							<th>Barang Golongan</th>
+							<th>Satuan</th>
 							<th>Created At</th>
 							<th>Updated At</th>
 							<th>Aksi</th>

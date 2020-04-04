@@ -23,6 +23,7 @@ return [
                 //     'kelurahan'=>'r',
             'inventory-menu'=>'r',
                 'stok'=>'r',
+                'purchase-order'=>'r',
             'acl-menu'=>'r',
                 'user' => 'c,r,u,d',
                 'permission' => 'r',

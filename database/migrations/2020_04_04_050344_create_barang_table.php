@@ -15,10 +15,10 @@ class CreateBarangTable extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_barang_golongan');
+            $table->unsignedInteger('id_barang_golongan')->nullable();
             $table->string('barcode',100)->nullable();
             $table->string('nama_barang',100)->nullable();
-            $table->unsignedInteger('id_satuan');
+            $table->unsignedInteger('id_satuan')->nullable();
             $table->float('harga_beli',14,2)->nullable();
             $table->float('harga_jual',14,2)->nullable();
             $table->float('diskon')->nullable();

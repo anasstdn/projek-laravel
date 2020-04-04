@@ -94,88 +94,88 @@ class ContentSeeder extends Seeder
         });
         echo "\n\n";
 
-        $this->command->info("Hapus Kabupaten");
-        DB::table('kabupaten')->delete();
-        $fileName = 'data/kabupaten.xlsx';
-        $this->command->info("Seeding Kabupaten");
-        \Excel::load($fileName,function($reader){
-        // $reader->dump();
-            $reader->each(function($row){
-              $bar = $this->command->getOutput()->createProgressBar($row->count());
-              $row->each(function($kabupaten) use ($bar){
-            // echo ($kabupaten['kode']."\n");
-                if(isset($kabupaten['id'])){
+        // $this->command->info("Hapus Kabupaten");
+        // DB::table('kabupaten')->delete();
+        // $fileName = 'data/kabupaten.xlsx';
+        // $this->command->info("Seeding Kabupaten");
+        // \Excel::load($fileName,function($reader){
+        // // $reader->dump();
+        //     $reader->each(function($row){
+        //       $bar = $this->command->getOutput()->createProgressBar($row->count());
+        //       $row->each(function($kabupaten) use ($bar){
+        //     // echo ($kabupaten['kode']."\n");
+        //         if(isset($kabupaten['id'])){
 
-                  $data = Kabupaten::firstOrNew(array(
-                    'kd_kabupaten'=>$kabupaten['kd_kabupaten'],
-                    'id'=>$kabupaten['id']
+        //           $data = Kabupaten::firstOrNew(array(
+        //             'kd_kabupaten'=>$kabupaten['kd_kabupaten'],
+        //             'id'=>$kabupaten['id']
 
-                ));
-                  $data->id_provinsi=$kabupaten['id_provinsi'];
-                  $data->kabupaten=$kabupaten['kabupaten'];
-                  $data->save();
+        //         ));
+        //           $data->id_provinsi=$kabupaten['id_provinsi'];
+        //           $data->kabupaten=$kabupaten['kabupaten'];
+        //           $data->save();
 
-              }
-              $bar->advance();
-          });
-              $bar->finish();
-          });
-        });
-        echo "\n\n";
+        //       }
+        //       $bar->advance();
+        //   });
+        //       $bar->finish();
+        //   });
+        // });
+        // echo "\n\n";
 
-        $this->command->info("Hapus Kecamatan");
-        DB::table('kecamatan')->delete();
-        $fileName = 'data/kecamatan.xlsx';
-        $this->command->info("Seeding Kecamatan");
-        \Excel::load($fileName,function($reader){
-            $reader->each(function($row){
-              $bar = $this->command->getOutput()->createProgressBar($row->count());
-              $row->each(function($kecamatan) use ($bar){
-                if(isset($kecamatan['id'])){
+        // $this->command->info("Hapus Kecamatan");
+        // DB::table('kecamatan')->delete();
+        // $fileName = 'data/kecamatan.xlsx';
+        // $this->command->info("Seeding Kecamatan");
+        // \Excel::load($fileName,function($reader){
+        //     $reader->each(function($row){
+        //       $bar = $this->command->getOutput()->createProgressBar($row->count());
+        //       $row->each(function($kecamatan) use ($bar){
+        //         if(isset($kecamatan['id'])){
 
-                  $data = Kecamatan::firstOrNew(array(
-                    'kd_kecamatan'=>$kecamatan['kd_kecamatan'],
-                    'id'=>$kecamatan['id']
+        //           $data = Kecamatan::firstOrNew(array(
+        //             'kd_kecamatan'=>$kecamatan['kd_kecamatan'],
+        //             'id'=>$kecamatan['id']
 
-                ));
-                  $data->id_kabupaten=$kecamatan['id_kabupaten'];
-                  $data->kecamatan=$kecamatan['kecamatan'];
-                  $data->save();
+        //         ));
+        //           $data->id_kabupaten=$kecamatan['id_kabupaten'];
+        //           $data->kecamatan=$kecamatan['kecamatan'];
+        //           $data->save();
 
-              }
-              $bar->advance();
-          });
-              $bar->finish();
-          });
-        });
-        echo "\n\n";
+        //       }
+        //       $bar->advance();
+        //   });
+        //       $bar->finish();
+        //   });
+        // });
+        // echo "\n\n";
 
-        $this->command->info("Hapus Kelurahan");
-        DB::table('kelurahan')->delete();
-        $fileName = 'data/kelurahan.xlsx';
-        $this->command->info("Seeding kelurahan");
-        \Excel::load($fileName,function($reader){
-            $reader->each(function($row){
-              $bar = $this->command->getOutput()->createProgressBar($row->count());
-              $row->each(function($kelurahan) use ($bar){
-                if(isset($kelurahan['id'])){
+        // $this->command->info("Hapus Kelurahan");
+        // DB::table('kelurahan')->delete();
+        // $fileName = 'data/kelurahan.xlsx';
+        // $this->command->info("Seeding kelurahan");
+        // \Excel::load($fileName,function($reader){
+        //     $reader->each(function($row){
+        //       $bar = $this->command->getOutput()->createProgressBar($row->count());
+        //       $row->each(function($kelurahan) use ($bar){
+        //         if(isset($kelurahan['id'])){
 
-                  $data = Kelurahan::firstOrNew(array(
-                    'kd_kelurahan'=>$kelurahan['kd_kelurahan'],
-                    'id'=>$kelurahan['id']
+        //           $data = Kelurahan::firstOrNew(array(
+        //             'kd_kelurahan'=>$kelurahan['kd_kelurahan'],
+        //             'id'=>$kelurahan['id']
 
-                ));
-                  $data->id_kecamatan=$kelurahan['id_kecamatan'];
-                  $data->kelurahan=$kelurahan['kelurahan'];
-                  $data->kodepos=$kelurahan['kode_pos'];
-                  $data->save();
+        //         ));
+        //           $data->id_kecamatan=$kelurahan['id_kecamatan'];
+        //           $data->kelurahan=$kelurahan['kelurahan'];
+        //           $data->kodepos=$kelurahan['kode_pos'];
+        //           $data->save();
 
-              }
-              $bar->advance();
-          });
-              $bar->finish();
-          });
-        });
-        echo "\n\n";
+        //       }
+        //       $bar->advance();
+        //   });
+        //       $bar->finish();
+        //   });
+        // });
+        // echo "\n\n";
     }
 }

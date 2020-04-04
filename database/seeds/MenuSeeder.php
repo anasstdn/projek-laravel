@@ -341,6 +341,23 @@ class MenuSeeder extends Seeder
       )
     );
       $submenu->save();
+
+      $permission = Permission::firstOrNew(array(
+        'name'=>'read-purchase-order',
+      ));
+      $permission->display_name = 'Read Purchase Order';
+      $permission->save();
+
+      $submenu = Menu::firstOrNew(array(
+        'name'=>'Purchase Order',
+        'parent_id'=>$menu->id,
+        'permission_id'=>$permission->id,
+        'ordinal'=>2,
+        'parent_status'=>'N',
+        'url'=>'purchase-order',
+      )
+    );
+      $submenu->save();
     }
 
      private function menuPenjualan(){
