@@ -21,6 +21,7 @@ class MenuSeeder extends Seeder
     	$this->menuHome();
     	$this->menuAcl();
     	$this->menuTools();
+      $this->menuInventory();
     	$this->menuPenjualan();
     	$this->menuPeramalan();
     }
@@ -305,6 +306,41 @@ class MenuSeeder extends Seeder
           //   )
           // );
           // $subsubmenu->save();
+    }
+
+    private function menuInventory(){
+      $this->command->info('Menu Inventory Seeder');
+      $permission = Permission::firstOrNew(array(
+        'name'=>'read-inventory-menu'
+      ));
+      $permission->display_name = 'Read Inventory';
+      $permission->save();
+      $menu = Menu::firstOrNew(array(
+        'name'=>'Inventory',
+        'permission_id'=>$permission->id,
+        'ordinal'=>1,
+        'parent_status'=>'Y'
+      ));
+      $menu->icon = 'si-social-dropbox';
+      $menu->save();
+
+          //create SUBMENU master
+      $permission = Permission::firstOrNew(array(
+        'name'=>'read-stok',
+      ));
+      $permission->display_name = 'Read Stok';
+      $permission->save();
+
+      $submenu = Menu::firstOrNew(array(
+        'name'=>'Stok Barang',
+        'parent_id'=>$menu->id,
+        'permission_id'=>$permission->id,
+        'ordinal'=>2,
+        'parent_status'=>'N',
+        'url'=>'stok',
+      )
+    );
+      $submenu->save();
     }
 
      private function menuPenjualan(){

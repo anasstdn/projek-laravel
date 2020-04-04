@@ -1,6 +1,6 @@
 <!-- Modal 7 (Ajax Modal)-->
 
-<div class="modal-dialog modal-lg" role="document" style="font-family: sans-serif;">
+<div class="modal-dialog modal-md" role="document" style="font-family: sans-serif;">
 	<div class="modal-content">
 		<form method="post" id="form" action="#" enctype="multipart/form-data">
 			{{ csrf_field() }}
@@ -53,17 +53,10 @@
 
 		$('#form').submit('#simpan',function(e){
 			e.preventDefault();
-			$('#form').find('.form-group').each(function(index,ele){
-				if($(this).hasClass('is-invalid'))
-				{
-					initValidationBootstrap();
-				}
-				else
-				{
-					initValidationBootstrap();
-					post_data();
-				}
-			});
+			if($(e.currentTarget).valid()==true)
+			{
+				post_data();
+			}
 		})
 
 		});
