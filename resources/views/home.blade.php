@@ -52,7 +52,7 @@
             <p class="mt-5">
               <i class="si si-basket fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Sales</p>
+            <p class="font-w600">Penjualan</p>
           </div>
         </a>
       </div>
@@ -62,7 +62,7 @@
             <p class="mt-5">
               <i class="si si-pie-chart fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Chart</p>
+            <p class="font-w600">Grafik</p>
           </div>
         </a>
       </div>
@@ -72,7 +72,7 @@
             <p class="mt-5">
               <i class="si si-graph fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Forecasting</p>
+            <p class="font-w600">Peramalan</p>
           </div>
         </a>
       </div>
