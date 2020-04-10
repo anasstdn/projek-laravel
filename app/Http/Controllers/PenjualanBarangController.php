@@ -105,7 +105,7 @@ class PenjualanBarangController extends Controller
                 case 'add':
                 $data=array(
                     'no_nota'=>$input['no_nota'],
-                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['no_nota'])),
+                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['tgl_transaksi'])),
                     'pasir'=>$input['pasir']==''?null:$input['pasir'],
                     'abu'=>$input['abu']==''?null:$input['abu'],
                     'gendol'=>$input['gendol']==''?null:$input['gendol'],
@@ -122,7 +122,7 @@ class PenjualanBarangController extends Controller
                 $list=RawDatum::find($input['id']);
                 $data=array(
                     'no_nota'=>$input['no_nota'],
-                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['no_nota'])),
+                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['tgl_transaksi'])),
                     'pasir'=>$input['pasir']==''?null:$input['pasir'],
                     'abu'=>$input['abu']==''?null:$input['abu'],
                     'gendol'=>$input['gendol']==''?null:$input['gendol'],

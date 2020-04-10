@@ -96,7 +96,7 @@
 		})
 
 		$('#tgl_transaksi').datepicker({
-			format: "dd-mm-yy",
+			format: "dd-mm-yyyy",
 			changeMonth:true,
 			changeYear:true
 		}).on('change', function() {

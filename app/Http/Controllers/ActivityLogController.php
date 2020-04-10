@@ -43,11 +43,15 @@ class ActivityLogController extends Controller
 		$roles=Auth::user()->roles[0]->name;
 		switch($roles)
 		{
-			case 'superadministrator' || 'manager':
+			case 'superadministrator':
 				$data = Activity::orderby('id','desc')->paginate(10);
 			break;
-			default:
+			case 'manager':
+				$data = Activity::orderby('id','desc')->paginate(10);
+			break;
+			case 'front_office':
 				$data = Activity::where('causer_id',Auth::user()->id)->orderby('id','desc')->paginate(10);
+			break;
 		}
 		return $this->view('index',compact('data','roles'));
 	}
@@ -66,13 +70,18 @@ class ActivityLogController extends Controller
 				case 'all':
 				switch($roles)
 				{
-					case 'superadministrator' || 'manager':
+					case 'superadministrator':
 					$data=Activity::orderby('id','desc')
 					->paginate(10);
 					break;
-					default:
+					case 'manager':
+					$data=Activity::orderby('id','desc')
+					->paginate(10);
+					break;
+					case 'front_office':
 					$data=Activity::where('causer_id',Auth::user()->id)
 					->orderby('id','desc')->paginate(10);
+					break;
 				}
 				break;
 				case 'by_date':
@@ -81,17 +90,24 @@ class ActivityLogController extends Controller
 
 				switch($roles)
 				{
-					case 'superadministrator' || 'manager':
+					case 'superadministrator':
 					$data=Activity::whereDate('created_at','>=',$date_from)
 					->whereDate('created_at','<=',$date_to)
 					->orderby('id','desc')
 					->paginate(10);
 					break;
-					default:
+					case 'manager':
+					$data=Activity::whereDate('created_at','>=',$date_from)
+					->whereDate('created_at','<=',$date_to)
+					->orderby('id','desc')
+					->paginate(10);
+					break;
+					case 'front_office':
 					$data=Activity::where('causer_id',Auth::user()->id)
 					->whereDate('created_at','>=',$date_from)
 					->whereDate('created_at','<=',$date_to)
 					->orderby('id','desc')->paginate(10);
+					break;
 				}
 				break;
 			}
