@@ -35,6 +35,7 @@
   <!-- Content -->
   <div class="content">
     <!-- Icon Navigation -->
+    @if(\Auth::user()->can('read-card-admin') || \Auth::user()->can('read-card-manager'))
     <div class="row gutters-tiny push">
       <div class="col-6 col-md-4 col-xl-3">
         <a class="block block-rounded block-bordered block-link-shadow text-center" href="{{url('/')}}">
@@ -80,7 +81,7 @@
     <!-- END Icon Navigation -->
 
     <!-- Mini Stats -->
-    @if(\Auth::user()->can('read-card-admin') || \Auth::user()->can('read-card-manager'))
+    
     <div class="row">
       <div class="col-md-6 col-xl-3">
         <a class="block block-rounded block-bordered" href="javascript:void(0)">
@@ -125,7 +126,86 @@
     </div>
     @endif
     <!-- END Mini Stats -->
+@if(\Auth::user()->can('read-card-front'))
+    <div class="row gutters-tiny push">
+      <div class="col-6 col-md-4 col-xl-4">
+        <a class="block block-rounded block-bordered block-link-shadow text-center" href="{{url('/')}}">
+          <div class="block-content">
+            <p class="mt-5">
+              <i class="si si-home fa-3x text-muted"></i>
+            </p>
+            <p class="font-w600">Dashboard</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-xl-4">
+        <a class="block block-rounded block-bordered block-link-shadow ribbon ribbon-primary text-center" href="{{url('/penjualan-barang')}}">
+          <div class="block-content">
+            <p class="mt-5">
+              <i class="si si-basket fa-3x text-muted"></i>
+            </p>
+            <p class="font-w600">Penjualan Barang</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-xl-4">
+        <a class="block block-rounded block-bordered block-link-shadow text-center" href="{{url('/data')}}">
+          <div class="block-content">
+            <p class="mt-5">
+              <i class="si si-pie-chart fa-3x text-muted"></i>
+            </p>
+            <p class="font-w600">Import ke DB</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- END Icon Navigation -->
 
+    <!-- Mini Stats -->
+    
+    <div class="row">
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-bordered" href="javascript:void(0)">
+          <div class="block-content p-5">
+            <div class="py-30 text-center bg-body-light rounded">
+              <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi">0</div>
+              <div class="font-size-sm font-w600 text-uppercase">Total Penjualan</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-bordered" href="javascript:void(0)">
+          <div class="block-content p-5">
+            <div class="py-30 text-center bg-body-light rounded">
+              <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_bulan_ini">0</div>
+              <div class="font-size-sm font-w600 text-uppercase">Penjualan Bulan Ini</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-bordered" href="javascript:void(0)">
+          <div class="block-content p-5">
+            <div class="py-30 text-center bg-body-light rounded">
+              <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_minggu_ini">0</div>
+              <div class="font-size-sm font-w600 text-uppercase">Penjualan Minggu Ini</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-bordered" href="javascript:void(0)">
+          <div class="block-content p-5">
+            <div class="py-30 text-center bg-body-light rounded">
+              <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_hari_ini">0</div>
+              <div class="font-size-sm font-w600 text-uppercase">Penjualan Hari Ini</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    @endif
     <!-- Charts -->
     
 

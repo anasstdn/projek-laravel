@@ -84,7 +84,7 @@
               <div class="card-header text-uppercase">FILTER PENCARIAN</div>
               <div class="card-body">
                 <br>
-            <div class="col-md-12 row" style="margin-bottom: 1em">
+        {{--     <div class="col-md-12 row" style="margin-bottom: 1em">
               <label class="col-md-2">Select By</label>
               <div class="col-md-2">
                 <div class="boxes">    
@@ -98,7 +98,7 @@
                   <label id="date_notif" for="date">Range Tanggal</label>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <div class="col-md-12 row" style="margin-bottom: 1em">
               <label class="col-md-2">Tanggal</label>
               <div class="col-md-4">
@@ -259,58 +259,87 @@
     
    
     // checkbox();
-    $(".check").change(function() {
-      $(".check").prop('checked', false);
-      $(this).prop('checked', true);
+    // $(".check").change(function() {
+    //   $(".check").prop('checked', false);
+    //   $(this).prop('checked', true);
+    // });
 
-      
-    });
-
-    $('.check').on('change',function(){
-      checkbox1();
-    })
+    // $('.check').on('change',function(){
+    //   checkbox1();
+    // })
 
     $('#cari').click(function(){
-      checkbox();
+      // checkbox();
+      arrses('date');
+      des('date');
+
+    })
+
+    $('#reset').click(function(){
+      $('#date_start').val('{{date('d-m-Y')}}');
+      $('#date_end').val('{{date('d-m-Y', strtotime("+1 month"))}}');
+      $('#arrses').empty();
+      $('#des').empty();
+      $('#jumlah_mad_arrses').empty();
+        $('#jumlah_mape_arrses').empty();
+        $('#nilai_mad_arrses').empty();
+        $('#nilai_mape_arrses').empty();
+
+        $('#jumlah_mad_des').empty();
+        $('#jumlah_mape_des').empty();
+        $('#nilai_mad_des').empty();
+        $('#nilai_mape_des').empty();
+
+         $('#kriteria_mape_des').empty();
+
+          $('#kriteria_mape_arrses').empty();
+
+      aktual_arrses.length = 0
+          peramalan_arrses.length = 0
+          label.length = 0
+          peramalan_des.length = 0
+
+          chart_total();
+
     })
 
   })
 
-  function checkbox()
-  {
-    if($('#year').is(':checked'))
-    {
-     $('#date_start').attr('readonly',true);
-     $('#date_end').attr('readonly',true);
-     mode='year';
-    }
-    else
-    {
-      $('#date_start').attr('readonly',false);
-     $('#date_end').attr('readonly',false);
-      mode='date';
-    }
-    arrses(mode);
-    des(mode);
-  }
+  // function checkbox()
+  // {
+  //   if($('#year').is(':checked'))
+  //   {
+  //    $('#date_start').attr('readonly',true);
+  //    $('#date_end').attr('readonly',true);
+  //    mode='year';
+  //   }
+  //   else
+  //   {
+  //     $('#date_start').attr('readonly',false);
+  //    $('#date_end').attr('readonly',false);
+  //     mode='date';
+  //   }
+  //   arrses(mode);
+  //   des(mode);
+  // }
 
-    function checkbox1()
-  {
-    if($('#year').is(':checked'))
-    {
-     $('#date_start').attr('readonly',true);
-     $('#date_end').attr('readonly',true);
-     // mode='year';
-    }
-    else
-    {
-      $('#date_start').attr('readonly',false);
-     $('#date_end').attr('readonly',false);
-      // mode='date';
-    }
-    // arrses(mode);
-    // des(mode);
-  }
+  //   function checkbox1()
+  // {
+  //   if($('#year').is(':checked'))
+  //   {
+  //    $('#date_start').attr('readonly',true);
+  //    $('#date_end').attr('readonly',true);
+  //    // mode='year';
+  //   }
+  //   else
+  //   {
+  //     $('#date_start').attr('readonly',false);
+  //    $('#date_end').attr('readonly',false);
+  //     // mode='date';
+  //   }
+  //   // arrses(mode);
+  //   // des(mode);
+  // }
 
   function arrses(mode)
   {
@@ -425,6 +454,10 @@
       success:function(data){
         console.log(data.length);
         $('#des').empty();
+        $('#jumlah_mad_des').empty();
+        $('#jumlah_mape_des').empty();
+        $('#nilai_mad_des').empty();
+        $('#nilai_mape_des').empty();
         $.each(data,function(index,value){
           // aktual_des.push(value.aktual);
 

@@ -43,7 +43,7 @@ class ActivityLogController extends Controller
 		$roles=Auth::user()->roles[0]->name;
 		switch($roles)
 		{
-			case 'superadministrator':
+			case 'superadministrator' || 'manager':
 				$data = Activity::orderby('id','desc')->paginate(10);
 			break;
 			default:
@@ -66,7 +66,7 @@ class ActivityLogController extends Controller
 				case 'all':
 				switch($roles)
 				{
-					case 'superadministrator':
+					case 'superadministrator' || 'manager':
 					$data=Activity::orderby('id','desc')
 					->paginate(10);
 					break;
@@ -81,7 +81,7 @@ class ActivityLogController extends Controller
 
 				switch($roles)
 				{
-					case 'superadministrator':
+					case 'superadministrator' || 'manager':
 					$data=Activity::whereDate('created_at','>=',$date_from)
 					->whereDate('created_at','<=',$date_to)
 					->orderby('id','desc')

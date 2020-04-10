@@ -42,7 +42,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group( ['prefix'=>'home','middleware' => ['role:superadministrator|administrator|manager']], function() {
+Route::group( ['prefix'=>'home','middleware' => ['role:superadministrator|administrator|manager|front_office']], function() {
 	Route::get('/', 'HomeController@index');
 	Route::get('/load-data','HomeController@loadData');
 	Route::get('/get-chart','HomeController@getChart');
