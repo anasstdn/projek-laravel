@@ -63,6 +63,8 @@ Route::resource('data', 'DataController');
 
 Route::get('peramalan/forecast', 'PeramalanController@forecastingArrses');
 Route::get('peramalan/forecast-des', 'PeramalanController@forecastingDes');
+Route::get('detail-arrses/{id}/{tgl_awal}/{tgl_akhir}', 'PeramalanController@detailArrses');
+Route::get('detail-des/{id}/{tgl_awal}/{tgl_akhir}', 'PeramalanController@detailDes');
 Route::resource('peramalan', 'PeramalanController');
 
 

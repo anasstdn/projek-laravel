@@ -49,7 +49,7 @@
     <div class="row push">
       <div class="col-md py-10 d-md-flex align-items-md-center text-center">
         <h1 class="text-white mb-0">
-          <span class="font-w300">Forecasting</span>
+          <span class="font-w300">Peramalan</span>
           <span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
         </h1>
       </div>
@@ -67,8 +67,8 @@
   <!-- Breadcrumb -->
   <div class="content">
     <nav class="breadcrumb mb-0">
-      <a class="breadcrumb-item" href="javascript:void(0)">Forecasting</a>
-      <span class="breadcrumb-item active">Forecasting</span>
+      <a class="breadcrumb-item" href="javascript:void(0)">Peramalan</a>
+      <span class="breadcrumb-item active">Peramalan</span>
     </nav>
   </div>
   <!-- END Breadcrumb -->
@@ -118,7 +118,10 @@
                 <select class="form-control" id="produk">
                   <option value="abu">Abu</option>
                   <option value="gendol">Pasir Gendol</option>
-                  <option value="pasir">Pasir</option>
+                  <option value="pasir">Pasir Biasa</option>
+                   <option value="split1_2">Split 1/2</option>
+                  <option value="split2_3">Split 2/3</option>
+                  <option value="lpa">LPA</option>
                 </select>
               </div>
             </div>
@@ -133,6 +136,7 @@
       </div>
     </div>
   </div>
+  
   <div class="row" style="margin-bottom: 3em">
     <div class="col-lg-12">
       <div class="card">
@@ -169,6 +173,9 @@
               <tr>
                 <td colspan="7">Kriteria Nilai MAPE</td>
                 <td id="kriteria_mape_arrses" style="font-weight: bold"></td>
+                <td>
+                  <a href="#" id="arrses_detail" style="display: none" target="_blank" class="btn btn-sm btn-info">DETAIL</a>
+                </td>
               </tr>
             </tfoot> 
           </table>
@@ -215,6 +222,9 @@
               <tr>
                 <td colspan="8">Kriteria Nilai MAPE</td>
                 <td id="kriteria_mape_des" style="font-weight: bold"></td>
+                 <td>
+                  <a href="#" id="des_detail" style="display: none" target="_blank" class="btn btn-sm btn-info">DETAIL</a>
+                </td>
               </tr>
             </tfoot>   
           </table>
@@ -294,6 +304,12 @@
 
           $('#kriteria_mape_arrses').empty();
 
+          $('#arrses_detail').fadeOut();
+          $("a#arrses_detail").prop("href", "#");
+
+          $('#des_detail').fadeOut();
+          $("a#des_detail").prop("href", "#");
+
       aktual_arrses.length = 0
           peramalan_arrses.length = 0
           label.length = 0
@@ -367,60 +383,71 @@
         return xhr;
       },
       success:function(data){
-        // console.log(data);
-        $('#arrses').empty();
-        $('#jumlah_mad_arrses').empty();
-        $('#jumlah_mape_arrses').empty();
-        $('#nilai_mad_arrses').empty();
-        $('#nilai_mape_arrses').empty();
-        $.each(data,function(index,value){
-      
+        if(data.length==0)
+        {
+          toastr_notif('Tidak ditemukan data penjualan','gagal');
+        }
+        else
+        {
+        $('#arrses_detail').fadeIn();
+       $("a#arrses_detail").prop("href", "{{url('detail-arrses/')}}/"+$('#produk').val()+"/"+$('#date_start').val()+"/"+$('#date_end').val()+"");
+          $('#arrses').empty();
+          $('#jumlah_mad_arrses').empty();
+          $('#jumlah_mape_arrses').empty();
+          $('#nilai_mad_arrses').empty();
+          $('#nilai_mape_arrses').empty();
+          $.each(data,function(index,value){
 
-          aktual_arrses.push(Math.floor(value.aktual,-3));
-          peramalan_arrses.push(Math.floor(value.peramalan,-3));
-          label.push(value.periode);
 
-          
+            aktual_arrses.push(Math.floor(value.aktual,-3));
+            peramalan_arrses.push(Math.floor(value.peramalan,-3));
+            label.push(value.periode);
 
-          html='<tr><td>'+value.periode+'</td>\n\
-          <td>'+value.aktual+'</td>\n\
-          <td>'+value.peramalan+'</td>\n\
-          <td>'+value.galat+'</td>\n\
-          <td>'+value.galat_pemulusan+'</td>\n\
-          <td>'+value.galat_pemulusan_absolut+'</td>\n\
-          <td>'+value.alpha+'</td>\n\
-          <td>'+value.MAD+'</td>\n\
-          <td>'+value.percentage_error+' %</td>\n\
-          </tr>';
-          $('#arrses').append(html);
 
-          sum_mad+=value.MAD;
-          sum_per+=value.percentage_error;
+
+            html='<tr><td>'+value.periode+'</td>\n\
+            <td>'+value.aktual+'</td>\n\
+            <td>'+value.peramalan+'</td>\n\
+            <td>'+value.galat+'</td>\n\
+            <td>'+value.galat_pemulusan+'</td>\n\
+            <td>'+value.galat_pemulusan_absolut+'</td>\n\
+            <td>'+value.alpha+'</td>\n\
+            <td>'+value.MAD+'</td>\n\
+            <td>'+value.percentage_error+' %</td>\n\
+            </tr>';
+            $('#arrses').append(html);
+
+            if(index<data.length)
+            {
+              sum_mad+=value.MAD;
+              sum_per+=value.percentage_error;
+            }
           // console.log(value);
         })
-        $('#jumlah_mad_arrses').html(sum_mad);
-        $('#jumlah_mape_arrses').html(sum_per);
-        $('#nilai_mad_arrses').html((sum_mad/data.length));
-        $('#nilai_mape_arrses').html((sum_per/data.length)+' %');
+          $('#jumlah_mad_arrses').html(sum_mad);
+          $('#jumlah_mape_arrses').html(sum_per);
+          $('#nilai_mad_arrses').html((sum_mad/(data.length-1)));
+          $('#nilai_mape_arrses').html((sum_per/(data.length-1))+' %');
 
-        if(sum_per/data.length < 10)
-        {
-          $('#kriteria_mape_arrses').html('SANGAT BAIK');
-        }
-        else if(sum_per/data.length >= 10 && sum_per/data.length <= 20)
-        {
-          $('#kriteria_mape_arrses').html('BAIK');
-        }
-        else if(sum_per/data.length > 20 && sum_per/data.length <= 50)
-        {
-          $('#kriteria_mape_arrses').html('CUKUP');
-        }
-        else if(sum_per/data.length > 50)
-        {
-          $('#kriteria_mape_arrses').html('BURUK');
-        }
+          if(sum_per/(data.length-1) < 10)
+          {
+            $('#kriteria_mape_arrses').html('SANGAT BAIK');
+          }
+          else if(sum_per/(data.length-1) >= 10 && sum_per/(data.length-1) <= 20)
+          {
+            $('#kriteria_mape_arrses').html('BAIK');
+          }
+          else if(sum_per/(data.length-1) > 20 && sum_per/(data.length-1) <= 50)
+          {
+            $('#kriteria_mape_arrses').html('CUKUP');
+          }
+          else if(sum_per/(data.length-1) > 50)
+          {
+            $('#kriteria_mape_arrses').html('BURUK');
+          }
 
-        chart_total();
+          chart_total();
+        }
       },
       error:function (xhr, status, error){
         toastr_notif(xhr.responseText,'gagal');
@@ -452,13 +479,21 @@
         return xhr;
       },
       success:function(data){
-        console.log(data.length);
-        $('#des').empty();
-        $('#jumlah_mad_des').empty();
-        $('#jumlah_mape_des').empty();
-        $('#nilai_mad_des').empty();
-        $('#nilai_mape_des').empty();
-        $.each(data,function(index,value){
+        // console.log(data.length);
+        if(data.length==0)
+        {
+          toastr_notif('Tidak ditemukan data penjualan','gagal');
+        }
+        else
+        {
+          $('#des_detail').fadeIn();
+        $("a#des_detail").prop("href", "{{url('detail-des/')}}/"+$('#produk').val()+"/"+$('#date_start').val()+"/"+$('#date_end').val()+"");
+          $('#des').empty();
+          $('#jumlah_mad_des').empty();
+          $('#jumlah_mape_des').empty();
+          $('#nilai_mad_des').empty();
+          $('#nilai_mape_des').empty();
+          $.each(data,function(index,value){
           // aktual_des.push(value.aktual);
 
 
@@ -466,41 +501,45 @@
 
           html='<tr><td>'+value.periode+'</td>\n\
           <td>'+value.aktual+'</td>\n\
-           <td>'+value.peramalan+'</td>\n\
+          <td>'+value.peramalan+'</td>\n\
           <td>'+value.s1+'</td>\n\
           <td>'+value.s2+'</td>\n\
           <td>'+value.at+'</td>\n\
           <td>'+value.bt+' %</td>\n\
-            <td>'+value.alpha+'</td>\n\
-            <td>'+value.MAD+'</td>\n\
-           <td>'+value.PE+' %</td>\n\
+          <td>'+value.alpha+'</td>\n\
+          <td>'+value.MAD+'</td>\n\
+          <td>'+value.PE+' %</td>\n\
           </tr>';
           $('#des').append(html);
           // console.log(value)
-          sum_mad+=value.MAD;
-          sum_per+=value.PE;
+          if(index<data.length)
+          {
+            sum_mad+=value.MAD;
+            sum_per+=value.PE;
+          }
         })
 
-        $('#jumlah_mad_des').html(sum_mad);
-        $('#jumlah_mape_des').html(sum_per);
-        $('#nilai_mad_des').html((sum_mad/data.length));
-        $('#nilai_mape_des').html((sum_per/data.length)+' %');
+          $('#jumlah_mad_des').html(sum_mad);
+          $('#jumlah_mape_des').html(sum_per);
+          $('#nilai_mad_des').html((sum_mad/(data.length-1)));
+          $('#nilai_mape_des').html((sum_per/(data.length-1))+' %');
 
-        if(sum_per/data.length < 10)
-        {
-          $('#kriteria_mape_des').html('SANGAT BAIK');
-        }
-        else if(sum_per/data.length >= 10 && sum_per/data.length <= 20)
-        {
-          $('#kriteria_mape_des').html('BAIK');
-        }
-        else if(sum_per/data.length > 20 && sum_per/data.length <= 50)
-        {
-          $('#kriteria_mape_des').html('CUKUP');
-        }
-        else if(sum_per/data.length > 50)
-        {
-          $('#kriteria_mape_des').html('BURUK');
+          if(sum_per/(data.length-1) < 10)
+          {
+            $('#kriteria_mape_des').html('SANGAT BAIK');
+          }
+          else if(sum_per/(data.length-1) >= 10 && sum_per/(data.length-1) <= 20)
+          {
+            $('#kriteria_mape_des').html('BAIK');
+          }
+          else if(sum_per/(data.length-1) > 20 && sum_per/(data.length-1) <= 50)
+          {
+            $('#kriteria_mape_des').html('CUKUP');
+          }
+          else if(sum_per/(data.length-1) > 50)
+          {
+            $('#kriteria_mape_des').html('BURUK');
+          }
         }
 
       },
