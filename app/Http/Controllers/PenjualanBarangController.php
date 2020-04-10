@@ -13,7 +13,7 @@ use DatePeriod;
 use DateTime;
 use DateInterval;
 use Carbon\Carbon;
-
+use App\Traits\ActivityTraits;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 date_default_timezone_set(setting('timezone'));
@@ -21,6 +21,7 @@ date_default_timezone_set(setting('timezone'));
 class PenjualanBarangController extends Controller
 {
 //
+	use ActivityTraits;
 	public $viewDir = "penjualan_barang";
 	public function __construct()
 	{
@@ -39,6 +40,125 @@ class PenjualanBarangController extends Controller
 
 	public function index()
 	{ 
-		return $this->view('index');
+		$data = RawDatum::orderby('created_at','desc')->paginate(10);
+		return $this->view('index',compact('data'));
 	}
+
+	public function getData(Request $request)
+    {
+        if($request->ajax())
+        {
+            $per_page=$request->input('per_page',null);
+            $sort=$request->input('sort',null);
+            $search=$request->input('search',null);
+
+            $data=RawDatum::select('*')
+            ->where(function($q) use($search){
+                $q->where('no_nota','like','%'.$search.'%')
+                ->orWhere('tgl_transaksi','like','%'.$search.'%');
+            })
+            ->orderby('created_at',empty($sort) ? 'desc' : $sort=='date_desc'?'desc':'asc')
+            ->paginate(empty($per_page) ? 10 : $per_page);
+            
+            return $this->view('index-data',compact('data'))->render();
+        } 
+    }
+
+    public function create()
+    {
+        //
+        // dd('aaaaaa');
+        $this->menuAccess(\Auth::user(),'Penjualan Barang (Create)');
+        return $this->view('form');
+    }
+
+    public function edit($id)
+    {
+        //
+        $this->menuAccess(\Auth::user(),'Penjualan Barang (Edit)');
+        $data = RawDatum::find($id);
+        return $this->view("form",compact('data'));
+    }
+
+    public function destroy(Request $request, $kode)
+    {
+        //
+        $data=RawDatum::find($kode);
+           $this->logDeletedActivity($data,'Delete data id='.$kode.'','Penjualan Barang','raw_datum');
+           $act=false;
+           try {
+               $act=$data->forceDelete();
+           } catch (\Exception $e) {
+               $data=RawDatum::find($kode);
+               $act=$data->delete();
+           }
+    }
+
+    public function sendData(Request $request)
+    {
+        $input=$request->all();
+        // dd($input);
+        DB::beginTransaction();
+        try {
+            switch($input['mode'])
+            {
+                case 'add':
+                $data=array(
+                    'no_nota'=>$input['no_nota'],
+                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['no_nota'])),
+                    'pasir'=>$input['pasir']==''?null:$input['pasir'],
+                    'abu'=>$input['abu']==''?null:$input['abu'],
+                    'gendol'=>$input['gendol']==''?null:$input['gendol'],
+                    'split2_3'=>$input['split2_3']==''?null:$input['split2_3'],
+                    'split1_2'=>$input['split1_2']==''?null:$input['split1_2'],
+                    'lpa'=>$input['lpa']==''?null:$input['lpa'],
+                    'campur'=>$input['campur']=='undefined'?'N':'Y',
+                );
+                // dd($data);
+                $this->logCreatedActivity(Auth::user(),$data,'Penjualan Barang','raw_datum');
+                $act=RawDatum::create($data);
+                break;
+                case 'edit':
+                $list=RawDatum::find($input['id']);
+                $data=array(
+                    'no_nota'=>$input['no_nota'],
+                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['no_nota'])),
+                    'pasir'=>$input['pasir']==''?null:$input['pasir'],
+                    'abu'=>$input['abu']==''?null:$input['abu'],
+                    'gendol'=>$input['gendol']==''?null:$input['gendol'],
+                    'split2_3'=>$input['split2_3']==''?null:$input['split2_3'],
+                    'split1_2'=>$input['split1_2']==''?null:$input['split1_2'],
+                    'lpa'=>$input['lpa']==''?null:$input['lpa'],
+                    'campur'=>$input['campur']=='undefined'?'N':'Y',
+                );
+                $this->logUpdatedActivity(Auth::user(),$list->getAttributes(),$data,'Penjualan Barang','raw_datum');
+                // dd($data);
+                $act=$list->update($data);
+                break;
+            }
+
+            if($act==true)
+            {
+                $data=array(
+                'status'=>true,
+                'msg'=>'Data berhasil diupdate'
+              );
+            }
+            else
+            {
+                $data=array(
+                'status'=>false,
+                'msg'=>'Data gagal disimpan'
+              );
+            }
+        } catch (Exception $e) {
+            $data=array(
+                'status'=>false,
+                'msg'=>$e->getMessage(),
+              );
+          DB::rollback();
+      }
+      DB::commit();
+      return \Response::json($data);
+  }
 }

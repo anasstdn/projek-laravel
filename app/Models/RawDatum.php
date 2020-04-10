@@ -51,6 +51,7 @@ class RawDatum extends Model
 		'abu',
 		'split2_3',
 		'split1_2',
-		'lpa'
+		'lpa',
+		'campur',
 	];
 }

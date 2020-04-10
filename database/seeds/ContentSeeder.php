@@ -19,8 +19,8 @@ class ContentSeeder extends Seeder
     public function run()
     {
         //
-    	// $this->importData();
-        $this->importWilayah();
+    	$this->importData();
+        // $this->importWilayah();
     }
 
 

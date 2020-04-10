@@ -44,24 +44,30 @@
 		<div id="status" style="font-size:8pt;font-family: sans-serif;color: white">Loading...Please Wait</div>  
 	</div>
 </div>
-<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo8@2x.jpg');">
-  <div class="content content-top">
-    <div class="row push">
-      <div class="col-md py-10 d-md-flex align-items-md-center text-center">
-        <h1 class="text-white mb-0">
-          <span class="font-w300">Satuan</span>
-        </h1>
-      </div>
+<div class="bg-primary-dark">
+<div class="content content-top">
+<div class="row push">
+<div class="col-md py-10 d-md-flex align-items-md-center text-center">
+<h1 class="text-white mb-0">
+<span class="font-w300">Penjualan Barang</span>
+<span id="clockbox" class="font-w400 font-size-lg text-white-op d-none d-md-inline-block"></span>
+</h1>
+</div>
+  {{--   <div class="col-md py-10 d-md-flex align-items-md-center justify-content-md-end text-center">
+        <button type="button" class="btn btn-alt-primary">
+            <i class="fa fa-user-plus mr-5"></i> New Account
+        </button>
+      </div> --}}
     </div>
   </div>
 </div>
+<!-- END Header -->
 <div class="bg-white">
 	<!-- Breadcrumb -->
 	<div class="content">
 		<nav class="breadcrumb mb-0">
-			<a class="breadcrumb-item" href="javascript:void(0)">Alat</a>
-			<span class="breadcrumb-item active">Barang</span>
-			<span class="breadcrumb-item active">Satuan</span>
+			<a class="breadcrumb-item" href="javascript:void(0)">Penjualan</a>
+			<span class="breadcrumb-item active">Penjualan Barang</span>
 		</nav>
 	</div>
 
@@ -100,7 +106,7 @@
 						<input type="text" class="form-control form-control-sm" id="search">
 					</div>
 					<div class="col-md-2 text-right">
-							<a class="btn btn-sm btn-primary data-modal pull-left" style="color: white" id="data-modal" href="#" onclick="show_modal('{{ route('satuan.create') }}')" ><i class='si si-plus' style="color: white" aria-hidden='true'></i> Tambah Data</a>
+							<a class="btn btn-sm btn-primary data-modal pull-left" style="color: white" id="data-modal" href="#" onclick="show_modal('{{ route('penjualan-barang.create') }}')" ><i class='si si-plus' style="color: white" aria-hidden='true'></i> Tambah Data</a>
 					</div>
 				</div>
 			<div class="block-content block-content-full">
@@ -119,7 +125,7 @@
 					</tbody>
 				</table> --}}
 				<div id="table_data">
-					@include('satuan.index-data')
+					@include('penjualan_barang.index-data')
 				</div>
 			</div>
 		</div>
@@ -198,26 +204,26 @@
 function fetch_data(page)
 {
 	var data_ajax={ 'per_page':$('#per_page').val(),'sort':$('#sort').val(),'search':$('#search').val() };
-	$('.ajax-loader').fadeIn();
-    $("#status").html("Loading...Please Wait!");
+	// $('.ajax-loader').fadeIn();
+    // $("#status").html("Loading...Please Wait!");
 	$.ajax({
-		url:"{{url('satuan/get-data')}}?page="+page,
+		url:"{{url('penjualan-barang/get-data')}}?page="+page,
 		data:data_ajax,
 		headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				},
-		xhr: function () {
-		var xhr = new window.XMLHttpRequest();
-		xhr.upload.addEventListener("progress",
-			uploadProgressHandler,
-			false
-			);
-		xhr.addEventListener("load", loadHandler, false);
-		xhr.addEventListener("error", errorHandler, false);
-		xhr.addEventListener("abort", abortHandler, false);
+	// 	xhr: function () {
+	// 	var xhr = new window.XMLHttpRequest();
+	// 	xhr.upload.addEventListener("progress",
+	// 		uploadProgressHandler,
+	// 		false
+	// 		);
+	// 	xhr.addEventListener("load", loadHandler, false);
+	// 	xhr.addEventListener("error", errorHandler, false);
+	// 	xhr.addEventListener("abort", abortHandler, false);
 
-		return xhr;
-	},
+	// 	return xhr;
+	// },
 		success:function(data)
 		{
 			$('#table_data').html(data);

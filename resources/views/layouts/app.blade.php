@@ -157,7 +157,7 @@
 
         <!-- Page JS Code -->
         <script src="{{asset('codebase/')}}/src/assets/js/pages/be_tables_datatables.min.js"></script>
-        
+         <script src="{{asset('codebase/')}}/src/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
         <script src="{{asset('codebase/')}}/src/assets/js/pages/db_corporate.min.js"></script>
         <script src="{{asset('codebase/')}}/src/assets/js/plugins/flatpickr/flatpickr.min.js"></script>
         <script src="{{ asset('neon/') }}/bootstrap-datepicker/bootstrap-datepicker.js"></script>
