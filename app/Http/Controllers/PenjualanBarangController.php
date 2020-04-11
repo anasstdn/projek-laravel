@@ -9,6 +9,7 @@ use DataTables;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Schema;
 use App\Models\RawDatum;
+use App\Encryption;
 use DatePeriod;
 use DateTime;
 use DateInterval;
@@ -97,39 +98,62 @@ class PenjualanBarangController extends Controller
     public function sendData(Request $request)
     {
         $input=$request->all();
-        // dd($input);
+        $decrypt=new Encryption();
+        // dd($decrypt->decrypt($input['campur'],$input['enckey']));
         DB::beginTransaction();
         try {
-            switch($input['mode'])
+            switch($decrypt->decrypt($input['mode'],$input['enckey']))
             {
                 case 'add':
+                // $data=array(
+                //     'no_nota'=>$input['no_nota'],
+                //     'tgl_transaksi'=>date('Y-m-d',strtotime($input['tgl_transaksi'])),
+                //     'pasir'=>$input['pasir']==''?null:$input['pasir'],
+                //     'abu'=>$input['abu']==''?null:$input['abu'],
+                //     'gendol'=>$input['gendol']==''?null:$input['gendol'],
+                //     'split2_3'=>$input['split2_3']==''?null:$input['split2_3'],
+                //     'split1_2'=>$input['split1_2']==''?null:$input['split1_2'],
+                //     'lpa'=>$input['lpa']==''?null:$input['lpa'],
+                //     'campur'=>$input['campur']=='undefined'?'N':'Y',
+                // );
                 $data=array(
-                    'no_nota'=>$input['no_nota'],
-                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['tgl_transaksi'])),
-                    'pasir'=>$input['pasir']==''?null:$input['pasir'],
-                    'abu'=>$input['abu']==''?null:$input['abu'],
-                    'gendol'=>$input['gendol']==''?null:$input['gendol'],
-                    'split2_3'=>$input['split2_3']==''?null:$input['split2_3'],
-                    'split1_2'=>$input['split1_2']==''?null:$input['split1_2'],
-                    'lpa'=>$input['lpa']==''?null:$input['lpa'],
-                    'campur'=>$input['campur']=='undefined'?'N':'Y',
+                    'no_nota'=>$decrypt->decrypt($input['no_nota'],$input['enckey']),
+                    'tgl_transaksi'=>date('Y-m-d',strtotime($decrypt->decrypt($input['tgl_transaksi'],$input['enckey']))),
+                    'pasir'=>$input['pasir']==''?null:$decrypt->decrypt($input['pasir'],$input['enckey']),
+                    'abu'=>$input['abu']==''?null:$decrypt->decrypt($input['abu'],$input['enckey']),
+                    'gendol'=>$input['gendol']==''?null:$decrypt->decrypt($input['gendol'],$input['enckey']),
+                    'split2_3'=>$input['split2_3']==''?null:$decrypt->decrypt($input['split2_3'],$input['enckey']),
+                    'split1_2'=>$input['split1_2']==''?null:$decrypt->decrypt($input['split1_2'],$input['enckey']),
+                    'lpa'=>$input['lpa']==''?null:$decrypt->decrypt($input['lpa'],$input['enckey']),
+                    'campur'=>$decrypt->decrypt($input['campur'],$input['enckey'])=='undefined' || $decrypt->decrypt($input['campur'],$input['enckey'])==''?'N':'Y',
                 );
                 // dd($data);
                 $this->logCreatedActivity(Auth::user(),$data,'Penjualan Barang','raw_datum');
                 $act=RawDatum::create($data);
                 break;
                 case 'edit':
-                $list=RawDatum::find($input['id']);
+                $list=RawDatum::find($decrypt->decrypt($input['id'],$input['enckey']));
+                // $data=array(
+                //     'no_nota'=>$input['no_nota'],
+                //     'tgl_transaksi'=>date('Y-m-d',strtotime($input['tgl_transaksi'])),
+                //     'pasir'=>$input['pasir']==''?null:$input['pasir'],
+                //     'abu'=>$input['abu']==''?null:$input['abu'],
+                //     'gendol'=>$input['gendol']==''?null:$input['gendol'],
+                //     'split2_3'=>$input['split2_3']==''?null:$input['split2_3'],
+                //     'split1_2'=>$input['split1_2']==''?null:$input['split1_2'],
+                //     'lpa'=>$input['lpa']==''?null:$input['lpa'],
+                //     'campur'=>$input['campur']=='undefined'?'N':'Y',
+                // );
                 $data=array(
-                    'no_nota'=>$input['no_nota'],
-                    'tgl_transaksi'=>date('Y-m-d',strtotime($input['tgl_transaksi'])),
-                    'pasir'=>$input['pasir']==''?null:$input['pasir'],
-                    'abu'=>$input['abu']==''?null:$input['abu'],
-                    'gendol'=>$input['gendol']==''?null:$input['gendol'],
-                    'split2_3'=>$input['split2_3']==''?null:$input['split2_3'],
-                    'split1_2'=>$input['split1_2']==''?null:$input['split1_2'],
-                    'lpa'=>$input['lpa']==''?null:$input['lpa'],
-                    'campur'=>$input['campur']=='undefined'?'N':'Y',
+                    'no_nota'=>$decrypt->decrypt($input['no_nota'],$input['enckey']),
+                    'tgl_transaksi'=>date('Y-m-d',strtotime($decrypt->decrypt($input['tgl_transaksi'],$input['enckey']))),
+                    'pasir'=>$input['pasir']==''?null:$decrypt->decrypt($input['pasir'],$input['enckey']),
+                    'abu'=>$input['abu']==''?null:$decrypt->decrypt($input['abu'],$input['enckey']),
+                    'gendol'=>$input['gendol']==''?null:$decrypt->decrypt($input['gendol'],$input['enckey']),
+                    'split2_3'=>$input['split2_3']==''?null:$decrypt->decrypt($input['split2_3'],$input['enckey']),
+                    'split1_2'=>$input['split1_2']==''?null:$decrypt->decrypt($input['split1_2'],$input['enckey']),
+                    'lpa'=>$input['lpa']==''?null:$decrypt->decrypt($input['lpa'],$input['enckey']),
+                    'campur'=>$decrypt->decrypt($input['campur'],$input['enckey'])=='undefined' || $decrypt->decrypt($input['campur'],$input['enckey'])==''?'N':'Y',
                 );
                 $this->logUpdatedActivity(Auth::user(),$list->getAttributes(),$data,'Penjualan Barang','raw_datum');
                 // dd($data);

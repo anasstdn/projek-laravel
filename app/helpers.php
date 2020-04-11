@@ -123,4 +123,17 @@ if (! function_exists('setting')) {
     }
 }
 
+function random_key()
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzёйцукеншщзхъфывапролджэячмитьбю';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < 32; $i++)
+    {
+      $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+
+    return $randomString;
+}
+
 ?>

@@ -23,6 +23,7 @@
 						<span class="help-block"></span>
 					</div>
 				</div> --}}
+				<input type="hidden" class="form-control" name="enckey" id="enckey" value="<?php echo random_key()?>">
 				<table class="table table-bordered table-striped table-vcenter" style="text-align:center">
 						<tr>
 							<th rowspan="2">No Nota</th>
@@ -110,19 +111,34 @@
 
 function post_data()
 {
-
+		let encryption = new Encryption();
+		var key=$('#enckey').val();
 		var formData = new FormData();
-		formData.append('id', $('#id').val());
-		formData.append('mode', $('#mode').val());
-		formData.append('no_nota', $('#no_nota').val());
-		formData.append('tgl_transaksi', $('#tgl_transaksi').val());
-		formData.append('pasir', $('#pasir').val());
-		formData.append('gendol', $('#gendol').val());
-		formData.append('abu', $('#abu').val());
-		formData.append('split2_3', $('#split2_3').val());
-		formData.append('split1_2', $('#split1_2').val());
-		formData.append('lpa', $('#lpa').val());
-		formData.append('campur', $('#campur:checked').val());
+		formData.append('enckey',$('#enckey').val());
+
+		formData.append('id', encryption.encrypt($('#id').val(),key));
+		formData.append('mode', encryption.encrypt($('#mode').val(),key));
+		formData.append('no_nota', encryption.encrypt($('#no_nota').val(),key));
+		formData.append('tgl_transaksi', encryption.encrypt($('#tgl_transaksi').val(),key));
+		formData.append('pasir', encryption.encrypt($('#pasir').val(),key));
+		formData.append('gendol', encryption.encrypt($('#gendol').val(),key));
+		formData.append('abu', encryption.encrypt($('#abu').val(),key));
+		formData.append('split2_3', encryption.encrypt($('#split2_3').val(),key));
+		formData.append('split1_2', encryption.encrypt($('#split1_2').val(),key));
+		formData.append('lpa', encryption.encrypt($('#lpa').val(),key));
+		formData.append('campur', encryption.encrypt($('#campur:checked').val(),key));
+
+		// formData.append('mode', $('#mode').val());
+		// formData.append('no_nota', $('#no_nota').val());
+		// formData.append('tgl_transaksi', $('#tgl_transaksi').val());
+		// formData.append('pasir', $('#pasir').val());
+		// formData.append('gendol', $('#gendol').val());
+		// formData.append('abu', $('#abu').val());
+		// formData.append('split2_3', $('#split2_3').val());
+		// formData.append('split1_2', $('#split1_2').val());
+		// formData.append('lpa', $('#lpa').val());
+		// formData.append('campur', $('#campur:checked').val());
+
 		formData.append('_token', '{{csrf_token()}}');
 
 		$('.ajax-loader').fadeIn();

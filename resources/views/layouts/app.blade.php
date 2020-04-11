@@ -169,6 +169,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data.min.js"></script>
         <script src="{{asset('js/')}}/echo.js"></script>
         <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+        <script src="{{asset('js/')}}/Encryption.js"></script>
 
         <script type="text/javascript">
           var notificationsWrapper   = $('.notifications');
