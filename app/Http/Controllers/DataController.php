@@ -54,7 +54,7 @@ class DataController extends Controller
 
     public function importData(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'import_file' => 'required'
         ]);
@@ -65,7 +65,7 @@ class DataController extends Controller
         if(count($data[0])>0){
             RawDatum::truncate();
             foreach ($data[0] as $key => $value) {
-              $arr[] = ['tgl_transaksi' => Carbon::parse($value['tgl_transaksi'])->format('Y-m-d'), 'no_nota' => $value['no_nota'],'pasir'=>$value['pasir'],'gendol'=>$value['gendol'],'abu'=>$value['abu'],'split2_3'=>$value['split2_3'],'split1_2'=>$value['split1_2'],'lpa'=>$value['lpa'],'created_at'=>date('Y-m-d H:i:s')];  
+              $arr[] = ['tgl_transaksi' => Carbon::parse($value['tgl_transaksi'])->format('Y-m-d'), 'no_nota' => $value['no_nota'],'pasir'=>$value['pasir'],'gendol'=>$value['gendol'],'abu'=>$value['abu'],'split2_3'=>$value['split2_3'],'split1_2'=>$value['split1_2'],'lpa'=>$value['lpa'],'campur'=>$value['campur'],'created_at'=>date('Y-m-d H:i:s')];  
           }
 
           if(!empty($arr)){

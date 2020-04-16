@@ -164,6 +164,7 @@
 
         <script src="{{asset('codebase/')}}/src/assets/apexcharts/apexcharts.js"></script>
         <script src="{{asset('codebase/')}}/src/assets/apexcharts/apex-custom-script.js"></script>
+        
 
         <script src="{{asset('js/')}}/moment.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data.min.js"></script>
