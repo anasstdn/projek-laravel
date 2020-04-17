@@ -35,7 +35,7 @@ class MenuSeeder extends Seeder
     	$permission->display_name = 'Read Home Menus';
     	$permission->save();
     	$menu = Menu::firstOrNew(array(
-    		'name'=>'Halaman Utama',
+    		'name'=>'menu.homepage',
     		'permission_id'=>$permission->id,
     		'ordinal'=>1,
     		'parent_status'=>'N',
@@ -53,7 +53,7 @@ class MenuSeeder extends Seeder
     	$permission->display_name = 'Read ACL Menus';
     	$permission->save();
     	$menu = Menu::firstOrNew(array(
-    		'name'=>'Pengaturan ACL',
+    		'name'=>'menu.acl',
     		'permission_id'=>$permission->id,
     		'ordinal'=>1,
     		'parent_status'=>'Y'
@@ -69,7 +69,7 @@ class MenuSeeder extends Seeder
     	$permission->save();
 
     	$submenu = Menu::firstOrNew(array(
-    		'name'=>'Manajemen Pengguna',
+    		'name'=>'menu.user_management',
     		'parent_id'=>$menu->id,
     		'permission_id'=>$permission->id,
     		'ordinal'=>2,
@@ -86,7 +86,7 @@ class MenuSeeder extends Seeder
     	$permission->save();
 
     	$submenu = Menu::firstOrNew(array(
-    		'name'=>'Manajemen Permissions',
+    		'name'=>'menu.permission_management',
     		'parent_id'=>$menu->id,
     		'permission_id'=>$permission->id,
     		'ordinal'=>2,
@@ -120,7 +120,7 @@ class MenuSeeder extends Seeder
     	$permission->save();
 
     	$submenu = Menu::firstOrNew(array(
-    		'name' => 'Manajemen Roles',
+    		'name' => 'menu.roles_management',
     		'parent_id' => $menu->id,
     		'permission_id' => $permission->id,
     		'ordinal' => 2,
@@ -139,7 +139,7 @@ class MenuSeeder extends Seeder
     	$permission->display_name = 'Read Data Menus';
     	$permission->save();
     	$menu = Menu::firstOrNew(array(
-    		'name'=>'Alat',
+    		'name'=>'menu.tools',
     		'permission_id'=>$permission->id,
     		'ordinal'=>1,
     		'parent_status'=>'Y'
@@ -155,7 +155,7 @@ class MenuSeeder extends Seeder
     	$permission->save();
 
     	$submenu = Menu::firstOrNew(array(
-    		'name'=>'Import ke DB',
+    		'name'=>'menu.import',
     		'parent_id'=>$menu->id,
     		'permission_id'=>$permission->id,
     		'ordinal'=>2,
@@ -172,7 +172,7 @@ class MenuSeeder extends Seeder
         $permission->save();
 
         $submenu = Menu::firstOrNew(array(
-            'name'=>'User Activity Log',
+            'name'=>'menu.activity_log',
             'parent_id'=>$menu->id,
             'permission_id'=>$permission->id,
             'ordinal'=>2,
@@ -190,7 +190,7 @@ class MenuSeeder extends Seeder
 
              $submenu = Menu::firstOrNew(
                array(
-              'name'=>'Barang',
+              'name'=>'menu.barang',
               'parent_id'=>$menu->id,
               'permission_id'=>$permission->id,
               'ordinal'=>2,
@@ -207,7 +207,7 @@ class MenuSeeder extends Seeder
 
              $subsubmenu = Menu::firstOrNew(
                array(
-              'name'=>'Golongan Barang',
+              'name'=>'menu.golongan_barang',
               'parent_id'=>$submenu->id,
               'permission_id'=>$permission->id,
               'ordinal'=>3,
@@ -225,7 +225,7 @@ class MenuSeeder extends Seeder
 
              $subsubmenu = Menu::firstOrNew(
                array(
-              'name'=>'Satuan',
+              'name'=>'menu.satuan',
               'parent_id'=>$submenu->id,
               'permission_id'=>$permission->id,
               'ordinal'=>3,
@@ -243,7 +243,7 @@ class MenuSeeder extends Seeder
 
              $subsubmenu = Menu::firstOrNew(
                array(
-              'name'=>'Barang',
+              'name'=>'menu.produk',
               'parent_id'=>$submenu->id,
               'permission_id'=>$permission->id,
               'ordinal'=>3,
@@ -316,7 +316,7 @@ class MenuSeeder extends Seeder
       $permission->display_name = 'Read Inventory';
       $permission->save();
       $menu = Menu::firstOrNew(array(
-        'name'=>'Inventory',
+        'name'=>'menu.inventory',
         'permission_id'=>$permission->id,
         'ordinal'=>1,
         'parent_status'=>'Y'
@@ -332,7 +332,7 @@ class MenuSeeder extends Seeder
       $permission->save();
 
       $submenu = Menu::firstOrNew(array(
-        'name'=>'Stok Barang',
+        'name'=>'menu.stok_barang',
         'parent_id'=>$menu->id,
         'permission_id'=>$permission->id,
         'ordinal'=>2,
@@ -349,7 +349,7 @@ class MenuSeeder extends Seeder
       $permission->save();
 
       $submenu = Menu::firstOrNew(array(
-        'name'=>'Purchase Order',
+        'name'=>'menu.purchase_order',
         'parent_id'=>$menu->id,
         'permission_id'=>$permission->id,
         'ordinal'=>2,
@@ -368,7 +368,7 @@ class MenuSeeder extends Seeder
     	$permission->display_name = 'Read Penjualan Menus';
     	$permission->save();
     	$menu = Menu::firstOrNew(array(
-    		'name'=>'Transaksi',
+    		'name'=>'menu.transaction',
     		'permission_id'=>$permission->id,
     		'ordinal'=>1,
     		'parent_status'=>'Y'
@@ -384,7 +384,7 @@ class MenuSeeder extends Seeder
     	$permission->save();
 
     	$submenu = Menu::firstOrNew(array(
-    		'name'=>'Laporan Penjualan',
+    		'name'=>'menu.sales_report',
     		'parent_id'=>$menu->id,
     		'permission_id'=>$permission->id,
     		'ordinal'=>2,
@@ -401,7 +401,7 @@ class MenuSeeder extends Seeder
     	$permission->save();
 
     	$submenu = Menu::firstOrNew(array(
-    		'name'=>'Grafik Penjualan',
+    		'name'=>'menu.sales_graph',
     		'parent_id'=>$menu->id,
     		'permission_id'=>$permission->id,
     		'ordinal'=>2,
@@ -421,7 +421,7 @@ class MenuSeeder extends Seeder
     	$permission->display_name = 'Read Peramalan Menus';
     	$permission->save();
     	$menu = Menu::firstOrNew(array(
-    		'name'=>'Peramalan',
+    		'name'=>'menu.forecast',
     		'permission_id'=>$permission->id,
     		'ordinal'=>1,
     		'parent_status'=>'N',

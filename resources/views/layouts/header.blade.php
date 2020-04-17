@@ -93,6 +93,29 @@
                         <!-- Toggle Sidebar -->
                         <!-- Layout Options (used just for demonstration) -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user d-sm-none"></i>
+                                <span class="d-none d-sm-inline-block">{{ __('messages.language') }}</span>
+                                <i class="fa fa-angle-down ml-5"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right min-width-100" aria-labelledby="page-header-user-dropdown">
+                                <div class="dropdown-divider"></div>
+
+                                <!-- Toggle Side Overlay -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <a class="dropdown-item" href="{{ url('locale/en') }}" data-toggle="layout" data-action="side_overlay_toggle">
+                                   <img class="img-responsive" width="20px" height="auto" src="{{asset('codebase/')}}/united-kingdom.png" alt=""> English
+                                </a>
+                                <a class="dropdown-item" href="{{ url('locale/id') }}" data-toggle="layout" data-action="side_overlay_toggle">
+                                    <img class="img-responsive" width="20px" height="auto" src="{{asset('codebase/')}}/indonesia.png" alt=""> Bahasa
+                                </a>
+                                <a class="dropdown-item" href="{{ url('locale/ru') }}" data-toggle="layout" data-action="side_overlay_toggle">
+                                    <img class="img-responsive" width="20px" height="auto" src="{{asset('codebase/')}}/russia.png" alt=""> Русский
+                                </a>
+                                <!-- END Side Overlay -->
+                            </div>
+                        </div>
                        
                     </div>
                     <!-- END Left Section -->
@@ -110,7 +133,7 @@
                                 <i class="fa fa-angle-down ml-5"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
-                                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
+                                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">{{ __('navbar.user') }}</h5>
                                 {{-- <a class="dropdown-item" href="be_pages_generic_profile.html">
                                     <i class="si si-user mr-5"></i> Profile
                                 </a>
@@ -126,14 +149,14 @@
                                 <!-- Toggle Side Overlay -->
                                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
                                 <a class="dropdown-item" href="{{ url('settings') }}" data-toggle="layout" data-action="side_overlay_toggle">
-                                    <i class="si si-wrench mr-5"></i> Settings
+                                    <i class="si si-wrench mr-5"></i> {{ __('navbar.settings') }}
                                 </a>
                                 <!-- END Side Overlay -->
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                <i class="si si-logout mr-5"></i> Sign Out
+                                <i class="si si-logout mr-5"></i> {{ __('navbar.logout') }}
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>

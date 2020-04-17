@@ -407,8 +407,8 @@ function uploadProgressHandler(event) {
 
 
 
-var tday=["Sun","Mon","Tue","Wed","Thru","Fri","Sat"];
-var tmonth=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var tday=["{{ __('messages.sunday') }}","{{ __('messages.monday') }}","{{ __('messages.tuesday') }}","{{ __('messages.wednesday') }}","{{ __('messages.thursday') }}","{{ __('messages.friday') }}","{{ __('messages.saturday') }}"];
+var tmonth=["{{ __('messages.january') }}","{{ __('messages.february') }}","{{ __('messages.march') }}","{{ __('messages.april') }}","{{ __('messages.may') }}","{{ __('messages.june') }}","{{ __('messages.july') }}","{{ __('messages.august') }}","{{ __('messages.september') }}","{{ __('messages.october') }}","{{ __('messages.november') }}","{{ __('messages.december') }}"];
 
   function GetClock(){
     var d=new Date();
@@ -418,7 +418,7 @@ var tmonth=["January","February","March","April","May","June","July","August","S
     if(nmin<=9) nmin="0"+nmin;
     if(nsec<=9) nsec="0"+nsec;
 
-    var clocktext=""+tday[nday]+", "+ndate+" "+tmonth[nmonth]+" "+nyear+" "+nhour+":"+nmin+":"+nsec+"";
+    var clocktext=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+" "+nyear+" "+nhour+":"+nmin+":"+nsec+"";
     document.getElementById('clockbox').innerHTML=clocktext;
   }
 

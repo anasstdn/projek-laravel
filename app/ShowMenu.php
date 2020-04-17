@@ -83,7 +83,7 @@ class ShowMenu
     if ($menu->ordinal == 1) {
       $html .='<i class="si '.$menu->icon.'"></i>';
     }
-    $html .=$menu->name;
+    $html .=__($menu->name);
     // if ($menu->parent_status == 'Y') {
     //   $html .= '<span class="site-menu-arrow"></span>';
     // }

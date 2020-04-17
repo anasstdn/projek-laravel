@@ -40,6 +40,11 @@ Route::get('/', function () {
     }
 });
 
+Route::get('locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
 Auth::routes();
 
 Route::group( ['prefix'=>'home','middleware' => ['role:superadministrator|administrator|manager']], function() {
