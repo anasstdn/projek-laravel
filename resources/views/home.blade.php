@@ -25,8 +25,8 @@
   <!-- Breadcrumb -->
   <div class="content">
     <nav class="breadcrumb mb-0">
-      <a class="breadcrumb-item" href="javascript:void(0)">Home</a>
-      <span class="breadcrumb-item active">Dashboard</span>
+      <a class="breadcrumb-item" href="javascript:void(0)">{{ __('breadcrumb.home') }}</a>
+      <span class="breadcrumb-item active">{{ __('breadcrumb.dashboard') }}</span>
     </nav>
   </div>
   <!-- END Breadcrumb -->
@@ -41,7 +41,7 @@
             <p class="mt-5">
               <i class="si si-home fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Dashboard</p>
+            <p class="font-w600">{{ __('panel.dashboard') }}</p>
           </div>
         </a>
       </div>
@@ -51,7 +51,7 @@
             <p class="mt-5">
               <i class="si si-basket fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Transaksi</p>
+            <p class="font-w600">{{ __('panel.transaction') }}</p>
           </div>
         </a>
       </div>
@@ -61,7 +61,7 @@
             <p class="mt-5">
               <i class="si si-pie-chart fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Grafik</p>
+            <p class="font-w600">{{ __('panel.graph') }}</p>
           </div>
         </a>
       </div>
@@ -71,7 +71,7 @@
             <p class="mt-5">
               <i class="si si-graph fa-3x text-muted"></i>
             </p>
-            <p class="font-w600">Peramalan</p>
+            <p class="font-w600">{{ __('panel.forecast') }}</p>
           </div>
         </a>
       </div>
@@ -86,7 +86,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Total Transaksi</div>
+              <div class="font-size-sm font-w600 text-uppercase">{{ __('panel.total_transaction') }}</div>
             </div>
           </div>
         </a>
@@ -96,7 +96,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_bulan_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Transaksi Bulan Ini</div>
+              <div class="font-size-sm font-w600 text-uppercase">{{ __('panel.cur_month') }}</div>
             </div>
           </div>
         </a>
@@ -106,7 +106,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_minggu_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Transaksi Minggu Ini</div>
+              <div class="font-size-sm font-w600 text-uppercase">{{ __('panel.cur_week') }}</div>
             </div>
           </div>
         </a>
@@ -116,7 +116,7 @@
           <div class="block-content p-5">
             <div class="py-30 text-center bg-body-light rounded">
               <div class="font-size-h2 font-w700 mb-0 text-muted" id="total_transaksi_hari_ini">0</div>
-              <div class="font-size-sm font-w600 text-uppercase">Transaksi Hari Ini</div>
+              <div class="font-size-sm font-w600 text-uppercase">{{ __('panel.cur_day') }}</div>
             </div>
           </div>
         </a>

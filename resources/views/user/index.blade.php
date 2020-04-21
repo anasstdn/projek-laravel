@@ -1,12 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo8@2x.jpg');">
+<style>
+    .ajax-loader{
+    position:fixed;
+    top:0px;
+    right:0px;
+    width:100%;
+    height:auto;
+    background-color:#A9A9A9;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:10000000;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+  }
+</style>
+<div class="ajax-loader text-center" style="display:none">
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped active" aria-valuenow="100" aria-valuemin="1000"
+        aria-valuemax="100" style="width: 100%;" id="loader" role="progressbar">
+      </div>
+    </div>
+    <div id="" style="font-size:11pt;font-family: sans-serif;color: white">{{ __('alert.loading') }}</div>
+  </div>
+<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo12@2x.jpg');">
   <div class="content content-top">
     <div class="row push">
       <div class="col-md py-10 d-md-flex align-items-md-center text-center">
         <h1 class="text-white mb-0">
-          <span class="font-w300">Manajemen Pengguna</span>
+          <span class="font-w300">{{ __('panel.user_management') }}</span>
         </h1>
       </div>
     </div>
@@ -19,8 +42,8 @@
   <!-- Breadcrumb -->
   <div class="content">
     <nav class="breadcrumb mb-0">
-      <a class="breadcrumb-item" href="javascript:void(0)">Master ACL</a>
-      <span class="breadcrumb-item active">Manajemen Pengguna</span>
+      <a class="breadcrumb-item" href="javascript:void(0)">{{ __('breadcrumb.acl') }}</a>
+      <span class="breadcrumb-item active">{{ __('breadcrumb.user_management') }}</span>
     </nav>
   </div>
   <!-- END Breadcrumb -->
@@ -31,7 +54,7 @@
      <!-- Dynamic Table Full Pagination -->
                     <div class="block">
                         <div class="block-header block-header-default">
-                         <a class="btn btn-sm btn-primary data-modal pull-left" style="color: white" id="data-modal" href="#" onclick="show_modal('{{ route('user.create') }}')" ><i class='si si-plus' style="color: white" aria-hidden='true'></i> Add</a>
+                         <a class="btn btn-sm btn-primary data-modal pull-left" style="color: white" id="data-modal" href="#" onclick="show_modal('{{ route('user.create') }}')" ><i class='si si-plus' style="color: white" aria-hidden='true'></i> {{ __('button.add') }}</a>
                             {{-- <h3 class="block-title">Dynamic Table <small>Full pagination</small></h3> --}}
                         </div>
                         <div class="block-content block-content-full">
@@ -39,12 +62,12 @@
                             <table class="table table-bordered table-striped table-vcenter" id="table-1">
                                 <thead>
                                     <tr>
-                                      <th>No</th>
-                                      <th>Username</th>
-                                      <th>Name</th>
-                                      <th>Email</th>
-                                      <th>Verified</th>
-                                      <th>Aksi</th>
+                                      <th>{{ __('panel.no') }}</th>
+                                      <th>{{ __('panel.username') }}</th>
+                                      <th>{{ __('panel.name') }}</th>
+                                      <th>{{ __('panel.email') }}</th>
+                                      <th>{{ __('panel.verified') }}</th>
+                                      <th>{{ __('panel.action') }}</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -93,11 +116,11 @@
         { data: 'verified', name: 'verified',searchable:false,orderable:false , "render":function(data,type,row){
           if(data.status_aktif==1)
           {
-            return '<a class="btn btn-success btn-sm" href="#" data-toggle="click-ripple" style="color:white;font-family:Arial" title="Nonaktifkan User" onclick="con(\'' + data.id + '\',\'' + data.status_aktif + '\')">Verified</a>';
+            return '<a class="btn btn-success btn-sm" href="#" data-toggle="click-ripple" style="color:white;font-family:Arial" title="Nonaktifkan User" onclick="con(\'' + data.id + '\',\'' + data.status_aktif + '\')">{{ __('button.yes') }}</a>';
           }
           else
           {
-            return '<a class="btn btn-danger btn-sm" href="#" data-toggle="click-ripple" style="color:white;font-family:Arial" title="Aktifkan User" onclick="con(\'' + data.id + '\',\'' + data.status_aktif + '\')">Not Verified</a>';
+            return '<a class="btn btn-danger btn-sm" href="#" data-toggle="click-ripple" style="color:white;font-family:Arial" title="Aktifkan User" onclick="con(\'' + data.id + '\',\'' + data.status_aktif + '\')">{{ __('button.no') }}</a>';
           }
         }},
         // { data: 'verified', name: 'verified' },

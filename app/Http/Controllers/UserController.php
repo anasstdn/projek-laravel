@@ -15,6 +15,7 @@ use Spatie\Activitylog\Models\Activity;
 date_default_timezone_set(setting('timezone'));
 use Illuminate\Support\Facades\Auth;
 use App\Traits\ActivityTraits;
+use Response;
 
 class UserController extends Controller
 {
@@ -258,9 +259,9 @@ class UserController extends Controller
          $reset=url("user/".$data->id)."/reset";
          $content = '';
     
-          $content .= "<a onclick='show_modal(\"$edit\")' style='color:white' class='btn btn-sm btn-primary' data-toggle='click-ripple' data-original-title='Edit' title='Edit'><i class='fa fa-edit' aria-hidden='true'></i> Edit</a>";
-          $content .= " <a onclick='hapus(\"$delete\")' style='color:white' class='btn btn-sm btn-danger' data-toggle='click-ripple' data-original-title='Remove' title='Remove'><i class='fa fa-trash-o' aria-hidden='true'></i> Delete</a>";
-          $content .= " <a onclick='reset_password(\"$reset\")' style='color:white' class='btn btn-sm btn-warning' data-toggle='click-ripple' data-original-title='Reset Password' title='Reset Password'><i class='fa fa-refresh' aria-hidden='true'></i> Reset Password</a>";
+          $content .= "<a onclick='show_modal(\"$edit\")' style='color:white' class='btn btn-sm btn-primary' data-toggle='click-ripple' data-original-title='Edit' title='Edit'><i class='fa fa-edit' aria-hidden='true'></i>  ".__('button.edit')."</a>";
+          $content .= " <a onclick='hapus(\"$delete\")' style='color:white' class='btn btn-sm btn-danger' data-toggle='click-ripple' data-original-title='Remove' title='Remove'><i class='fa fa-trash-o' aria-hidden='true'></i> ".__('button.delete')."</a>";
+          $content .= " <a onclick='reset_password(\"$reset\")' style='color:white' class='btn btn-sm btn-warning' data-toggle='click-ripple' data-original-title='Reset Password' title='Reset Password'><i class='fa fa-refresh' aria-hidden='true'></i> ".__('button.reset')."</a>";
       
       return $content;
   })
@@ -374,14 +375,14 @@ class UserController extends Controller
             {
               $data=array(
                 'status'=>true,
-                'msg'=>'Data berhasil disimpan'
+                'msg'=>__('alert.save')
               );
             }
             else
             {
                $data=array(
                 'status'=>false,
-                'msg'=>'Data gagal disimpan'
+                'msg'=>__('alert.not_save')
               );
             }
         break;
@@ -433,14 +434,14 @@ class UserController extends Controller
             {
               $data=array(
                 'status'=>true,
-                'msg'=>'Data berhasil diupdate'
+                'msg'=>__('alert.save')
               );
             }
             else
             {
                $data=array(
                 'status'=>false,
-                'msg'=>'Data gagal disimpan'
+                'msg'=>__('alert.not_save')
               );
             }
         break;
@@ -452,6 +453,50 @@ class UserController extends Controller
     }
     DB::commit();
     return \Response::json($data);
+  }
+
+  public function checkUsername(Request $request)
+  {
+    $all_data = $request->all();
+    switch($all_data['mode'])
+    {
+      case 'add':
+      $cek=User::where('username','like','%'.$all_data['username'].'%')->first();
+      break;
+      case 'edit':
+      $cek=User::where(function($q) use ($all_data){
+        $q->where('username','like','%'.$all_data['username'].'%')
+        ->where('id','<>',$all_data['id']);
+      })
+      ->first();
+      break;
+    }
+     if($cek==true) {
+        return Response::json(array('msg' => 'true'));
+      }
+     return Response::json(array('msg' => 'false'));  
+  }
+
+    public function checkEmail(Request $request)
+  {
+    $all_data = $request->all();
+    switch($all_data['mode'])
+    {
+      case 'add':
+      $cek=User::where('email','like','%'.$all_data['email'].'%')->first();
+      break;
+      case 'edit':
+      $cek=User::where(function($q) use ($all_data){
+        $q->where('email','like','%'.$all_data['email'].'%')
+        ->where('id','<>',$all_data['id']);
+      })
+      ->first();
+      break;
+    }
+     if($cek==true) {
+        return Response::json(array('msg' => 'true'));
+      }
+     return Response::json(array('msg' => 'false'));  
   }
     
 }

@@ -356,7 +356,7 @@ function toastr_notif(message,type)
       "hideMethod": "fadeOut"
     };
 
-    toastr.success(message, "Berhasil", opts);
+    toastr.success(message, "{{ __('alert.success') }}", opts);
   }
   else
   {
@@ -375,7 +375,7 @@ function toastr_notif(message,type)
       "hideMethod": "fadeOut"
     };
 
-    toastr.warning(message, 'Peringatan', opts);
+    toastr.warning(message, '{{ __('alert.failed') }}', opts);
   }
 }
 
@@ -446,7 +446,7 @@ var tmonth=["{{ __('messages.january') }}","{{ __('messages.february') }}","{{ _
               'X-CSRF-TOKEN': token
             },
             success:function(){
-              swal('Data Berhasil Dihapus', ' ', 'success');
+              swal('{{ __('alert.success_delete') }}', ' ', 'success');
 
               setTimeout(function() {
   //your code to be executed after 1 second
@@ -455,7 +455,7 @@ var tmonth=["{{ __('messages.january') }}","{{ __('messages.february') }}","{{ _
             },
           });
         } else {
-          swal("Delete is canceled");
+          swal("{{ __('alert.cancel_delete') }}");
         }
       });
   }
@@ -480,7 +480,7 @@ var tmonth=["{{ __('messages.january') }}","{{ __('messages.february') }}","{{ _
               'X-CSRF-TOKEN': token
             },
             success:function(){
-              swal('Password Berhasil Direset', ' ', 'success');
+              swal('{{ __('alert.success_reset') }}', ' ', 'success');
 
               setTimeout(function() {
   //your code to be executed after 1 second
@@ -489,7 +489,7 @@ var tmonth=["{{ __('messages.january') }}","{{ __('messages.february') }}","{{ _
             },
           });
         } else {
-          swal("Reset is canceled");
+          swal("{{ __('alert.cancel_reset') }}");
         }
       });
   }

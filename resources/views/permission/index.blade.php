@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo8@2x.jpg');">
+<div class="bg-image" style="background-image: url('{{asset('codebase/')}}/src/assets/media/photos/photo12@2x.jpg');">
   <div class="content content-top">
     <div class="row push">
       <div class="col-md py-10 d-md-flex align-items-md-center text-center">
         <h1 class="text-white mb-0">
-          <span class="font-w300">Permission</span>
+          <span class="font-w300">{{__('panel.permission_management')}}</span>
         </h1>
       </div>
     </div>
@@ -18,8 +18,8 @@
   <!-- Breadcrumb -->
   <div class="content">
     <nav class="breadcrumb mb-0">
-      <a class="breadcrumb-item" href="javascript:void(0)">Master ACL</a>
-      <span class="breadcrumb-item active">Permission</span>
+      <a class="breadcrumb-item" href="javascript:void(0)">{{ __('breadcrumb.acl') }}</a>
+      <span class="breadcrumb-item active">{{ __('breadcrumb.permission_management') }}</span>
     </nav>
   </div>
   <!-- END Breadcrumb -->
@@ -38,10 +38,10 @@
                           <table class="table table-bordered table-striped table-vcenter" id="table-1">
                             <thead>
                               <tr>
-                               <th>No</th>
-                               <th>Name</th>
-                               <th>Display Name</th>
-                               <th>Description</th>
+                               <th>{{ __('panel.no') }}</th>
+                               <th>{{ __('panel.name') }}</th>
+                               <th>{{ __('panel.display_name') }}</th>
+                               <th>{{ __('panel.description') }}</th>
                              </tr>
                            </thead>
                          </table>
